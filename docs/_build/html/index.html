@@ -1,0 +1,422 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Welcome to MCPlas toolbox! &#8212; MATLAB Sphinx Documentation Test  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/cloud.css?v=f9ae72be" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
+    
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    
+    
+     
+        <script src="_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script src="_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script src="_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="AddFluidEquations" href="manual_rst_toolbox/AddFluidEquations.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="manual_rst_toolbox/AddFluidEquations.html" title="AddFluidEquations"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+    <li><a href="#">MATLAB Sphinx Documentation Test  documentation</a> &#187;</li>
+
+        <li class="nav-item nav-item-this"><a href="">Welcome to MCPlas toolbox!</a></li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="welcome-to-mcplas-toolbox">
+<h1>Welcome to MCPlas toolbox!<a class="headerlink" href="#welcome-to-mcplas-toolbox" title="Link to this heading">¶</a></h1>
+<a class="reference internal image-reference" href="_images/Logo.jpg"><img alt="_images/Logo.jpg" class="align-center" src="_images/Logo.jpg" style="width: 268.5px; height: 167.5px;" /></a>
+<section id="introduction">
+<h2>Introduction:<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p>The presented toolbox is developed in MATLAB for the automated build-up of an equation-based fluid-Poisson model in Comsol using linking between Matlab and Comsol provided by the Comsol Live link <em>for</em> MATLAB module.
+This Matlab-Comsol toolbox (MCPlas) aims easy and fast generation of models for the spatio-temporal modelling of non-thermal plasmas based on the input data containing all information about considered reaction kinetic model.
+The generated models are ready to be used without Comsol’s Plasma Module or any additional Comsol modules.
+Depending on the user’s needs, model equations can be solved in either Cartesian, polar or cylindrical coordinates using numerical solvers provided by Comsol.</p>
+<p>The plasma description provided by MCPlas is based on the equations of fluid-Poisson model</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\begin{split}\frac{\partial}{\partial t}n_j(\mathbf{r},t)
++ \nabla\cdot\mathbf{\Gamma}_j(\mathbf{r},t) = S_j(\mathbf{r},t),
+\label{eq:continuity}\\
+%
+\frac{\partial}{\partial t}w_\mathrm{e}(\mathbf{r},t)
++\nabla\cdot\mathbf{Q}_\mathrm{e}(\mathbf{r},t)
+= -e_0\mathbf{\Gamma}_\mathrm{e}(\mathbf{r},t) \mathbf{E}(\mathbf{r},t) - P(\mathbf{r},t),
+\label{eq:we}\\
+%
+-\nabla \cdot(\varepsilon_\mathrm{r}\varepsilon_0\nabla\phi(\mathbf{r},t))
+= \sum_j q_j n_j(\mathbf{r},t),
+\label{eq:poisson}\end{split}\]</div>
+</div></blockquote>
+<p>where the first and second relations represent balance equations for the particle number densities <span class="math notranslate nohighlight">\(n_j\)</span> of species of kind <span class="math notranslate nohighlight">\(j\)</span>
+with charge <span class="math notranslate nohighlight">\(q_j\)</span> and electron energy density <span class="math notranslate nohighlight">\(w_\mathrm{e}=n_\mathrm{e}u_\mathrm{e}\)</span> with mean electron energy <span class="math notranslate nohighlight">\(u_\mathrm{e}\)</span>, respectively.
+Third equation is Poisson’s equation for the self-consistent determination of the electric potential <span class="math notranslate nohighlight">\(\phi\)</span> and the electric field <span class="math notranslate nohighlight">\(\mathbf{E}(\mathbf{r},t)=-\nabla\phi(\mathbf{r},t)\)</span>.
+In the second equation, <span class="math notranslate nohighlight">\(e_0\)</span> and <span class="math notranslate nohighlight">\(P_\mathrm{e}\)</span> determine the elementary charge and the loss of electron energy in collision processes and in the third, <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{r}\)</span> and <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{0}\)</span> are
+the relative and vacuum permittivity.</p>
+<p>The fluxes <span class="math notranslate nohighlight">\({\mathbf{\Gamma}}_\mathrm{h}\)</span> of heavy particles (<span class="math notranslate nohighlight">\(j=\mathrm{h}\)</span>) in particel balance equation are expressed by the common drift–diffusion approximation (<em>Sigeneger, R. Winkler, IEEE Trans. Plasma Sci. 27 (5)
+(1999) 1254</em>, <em>G. K. Grubert, M. M. Becker, D. Loffhagen, Phys. Rev. E 80 (2009) 036405</em>}</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{\Gamma}_\mathrm{h}(\mathbf{r},t)
+= \mathrm{sgn}(q_\mathrm{h})n_\mathrm{h}(\mathbf{r},t) b_\mathrm{h}(\mathbf{r},t) \mathbf{E}(\mathbf{r},t)
+-\nabla(D_\mathrm{h}(\mathbf{r},t) n_\mathrm{h}(\mathbf{r},t))
+\,  \label{eq:flux_particle}\\.\end{split}\]</div>
+</div></blockquote>
+<p>Here, <span class="math notranslate nohighlight">\(b_\mathrm{h}\)</span> and <span class="math notranslate nohighlight">\(D_\mathrm{h}\)</span> stand for the  mobility and diffusion coefficient of heavy species <span class="math notranslate nohighlight">\(\mathrm{h}\)</span>, respectively, while the function <span class="math notranslate nohighlight">\(\mathrm{sgn}(q_\mathrm{h})\)</span> defines the sign of <span class="math notranslate nohighlight">\(q_\mathrm{h}\)</span>.</p>
+<p>A consistent drift-diffusion approximation for the flux <span class="math notranslate nohighlight">\({\mathbf{\Gamma}}_\mathrm{e}\)</span> of electron (<span class="math notranslate nohighlight">\(j=\mathrm{e}\)</span>) and the flux <span class="math notranslate nohighlight">\({\mathbf{Q}}_\mathrm{e}\)</span> of the electron energy has been deduced by an expansion of the electron velocity distribution function (EVDF) in Legendre polynomials and the derivation of the first four moment equations from the electron Boltzmann equation (<em>M. M. Becker, D. Loffhagen, AIP Adv. 3 (2013) 012108</em>, <em>M. M. Becker, D. Loffhagen, Adv. Pure Math. 3 (2013) 343</em>).
+It reads</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{\Gamma}_\mathrm{e}(\mathbf{r},t)
+= -\frac{1}{m_\mathrm{e}\nu_\mathrm{e}}\frac{\partial}{\partial z}
+\Bigl((\xi_0 + \xi_2)n_\mathrm{e}(\mathbf{r},t) \Bigr)
+-\frac{e_0}{m_\mathrm{e}\nu_\mathrm{e}} \mathbf{E}(\mathbf{r},t) n_\mathrm{e}(\mathbf{r},t)\,, \label{eq:JeDDAn}\\
+%
+\mathbf{Q}_\mathrm{e}(\mathbf{r},t) = -\frac{1}{m_\mathrm{e}\tilde{\nu}_\mathrm{e}}\frac{\partial}{\partial z}
+\Bigl((\tilde{\xi}_0 + \tilde{\xi}_2) w_\mathrm{e}(\mathbf{r},t) \Bigr) \label{eq:QeDDAn}\\
+\qquad\qquad\; -\frac{e_0}{m_\mathrm{e}\tilde{\nu}_\mathrm{e}}\Bigl(\frac{5}{3}
++ \frac{2}{3}\frac{\xi_2}{\xi_0}\Bigr)\mathbf{E}(\mathbf{r},t) w_\mathrm{e}(\mathbf{r},t), \nonumber\end{split}\]</div>
+</div></blockquote>
+<p>and includes the momentum and energy flux dissipation frequencies <span class="math notranslate nohighlight">\(\nu_\mathrm{e}\)</span> and <span class="math notranslate nohighlight">\(\tilde{\nu}_\mathrm{e}\)</span> as well as the transport coefficients <span class="math notranslate nohighlight">\(\xi_0\)</span>, <span class="math notranslate nohighlight">\(\xi_2\)</span>, <span class="math notranslate nohighlight">\(\tilde{\xi}_0\)</span> and <span class="math notranslate nohighlight">\(\tilde{\xi}_2\)</span>.
+These properties are given as integrals of the isotropic part <span class="math notranslate nohighlight">\(f_0\)</span> and the first two contributions <span class="math notranslate nohighlight">\(f_1\)</span> and <span class="math notranslate nohighlight">\(f_2\)</span> to the anisotropy of the EVDF over the kinetic energy <span class="math notranslate nohighlight">\(U\)</span> of the electrons with mass <span class="math notranslate nohighlight">\(m_\mathrm{e}\)</span>, respectively, according to</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\begin{split}\nu_\mathrm{e} = \frac{2}{3m_\mathrm{e}\mathit{\Gamma}_\mathrm{e}}\int\limits_0^\infty
+\frac{U^{\frac{3}{2}}}{\lambda_\mathrm{e}(U)} f_1(U)\,\mathrm{d}U\,, \label{eq:nu}\\
+%
+\tilde{\nu}_\mathrm{e} = \frac{2}{3m_\mathrm{e} Q_\mathrm{e}}\int\limits_0^\infty
+\frac{U^{\frac{5}{2}}}{\lambda_\mathrm{e}(U)} f_1(U)\,\mathrm{d}U\,, \label{eq:enu}\\
+%
+\xi_0 = \frac{2}{3 n_\mathrm{e}}\int\limits_0^\infty
+U^{\frac{3}{2}} f_0(U)\,\mathrm{d}U\,, \label{eq:transp_first}\\
+%
+\xi_2 = \frac{4}{15 n_\mathrm{e}}\int\limits_0^\infty
+U^{\frac{3}{2}} f_2(U)\,\mathrm{d}U\,, \\
+%
+\tilde{\xi}_0 = \frac{2}{3 n_\mathrm{e}}\int\limits_0^\infty
+U^{\frac{5}{2}} f_0(U)\,\mathrm{d}U\,, \\
+%
+\tilde{\xi}_2 = \frac{4}{15 n_\mathrm{e}}\int\limits_0^\infty
+U^{\frac{5}{2}} f_2(U)\,\mathrm{d}U\,. \label{eq:transp_last}\end{split}\]</div>
+</div></blockquote>
+<p>It is important to note that MCPlas also provides the option to apply a common drift-diffusion approximation for electron transport.</p>
+<p>Boundary conditions for the balance equation for electron density and mean electron energy are included in MCPlas in accordance with the study given by Hagelaar <em>et al.</em> (<em>G. J. M. Hagelaar, F. J. de Hoog, G. M. W. Kroesen, Phys. Rev. E 62 (1) (2000) 1452</em>) and read</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{\Gamma}_\mathrm{e}\cdot\boldsymbol{\nu}
+= \frac{1-r_\mathrm{e}}{1+r_\mathrm{e}}
+\Bigl(\left|n_\mathrm{e} \mathbf{v}_{\mathrm{dr},\mathrm{e}} \right|
++\frac{1}{2}n_\mathrm{e} v_{\mathrm{th},\mathrm{e}}\Bigr)
+-\frac{2}{1+r_\mathrm{e}}\gamma\sum_i\max(\mathbf{\Gamma}_i\cdot\boldsymbol{\nu},0)
+\label{eq:boundary_e}\,,\\
+%
+\mathbf{Q}_\mathrm{e}\cdot\boldsymbol{\nu}
+= \frac{1-r_\mathrm{e}}{1+r_\mathrm{e}}
+\Bigl(\left| n_\mathrm{e} \tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}} \right|
++\frac{1}{2} n_\mathrm{e} \tilde{v}_{\mathrm{th},\mathrm{e}}
+\Bigr)
+-\frac{2}{1+r_\mathrm{e}}
+\gamma u_\mathrm{e}^\gamma
+\sum_i\max(\mathbf{\Gamma}_i\cdot\boldsymbol{\nu},0)\,,
+\label{eq:boundary_eps}\end{split}\]</div>
+</div></blockquote>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\nu}\)</span> represents the normal vector pointing toward the plasma boundaries.
+The vector of electron drift velocity <span class="math notranslate nohighlight">\(\mathbf{v}_{\mathrm{dr},\mathrm{e}}\)</span>, the thermal velocity of electron <span class="math notranslate nohighlight">\(v_{\mathrm{th},\mathrm{e}}\)</span>, the vector of electron energy drift velocity <span class="math notranslate nohighlight">\(\tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}}\)</span>, and the thermal velocities of electron energy <span class="math notranslate nohighlight">\(\tilde{v}_{\mathrm{th}, \mathrm{e}}\)</span> are given by</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{v}_{\mathrm{dr},\mathrm{e}}
+= -\frac{e_0}{m_\mathrm{e}\nu_\mathrm{e}} \mathbf{E}(\mathbf{r},t)\, ,
+\qquad
+%\\
+v_{\mathrm{th},\mathrm{e}}
+= \sqrt{\frac{8 k_\mathrm{B} T_\mathrm{e}}{\pi m_\mathrm{e}}}\, ,\\
+\tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}}
+= -\frac{e_0u_\mathrm{e}}{m_\mathrm{e}\tilde{\nu}_\mathrm{e}}\Bigl(\frac{5}{3}
++ \frac{2}{3}\frac{\xi_2}{\xi_0}\Bigr) \mathbf{E}(\mathbf{r},t)\, ,
+\qquad
+%\\
+\tilde{v}_{\mathrm{th},\mathrm{e}}
+= 2 k_\mathrm{B} T_\mathrm{e}\sqrt{\frac{8 k_\mathrm{B} T_\mathrm{e}}{\pi m_\mathrm{e}}}\, ,\end{split}\]</div>
+</div></blockquote>
+<p>respectively.
+Here, <span class="math notranslate nohighlight">\(T_\mathrm{e} = 2u_\mathrm{e}/(3k_\mathrm{B})\)</span> is the temperature of electrons and <span class="math notranslate nohighlight">\(k_\mathrm{B}\)</span> is the Boltzmann constant.
+Also, <span class="math notranslate nohighlight">\(r_\mathrm{e}\)</span>, <span class="math notranslate nohighlight">\(\gamma\)</span>, <span class="math notranslate nohighlight">\(u_\mathrm{e}^\gamma\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Gamma}_i\)</span> denote the electron reflection coefficient, the secondary electron emission coefficient,  mean energy of secondary electrons and the ion fluxes at the boundaries, respectively.
+The boundary condition for heavy particles balance equation has the following form</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{\Gamma}_\mathrm{h}\cdot\boldsymbol{\nu}
+= \frac{1-r_\mathrm{h}}{1+r_\mathrm{h}}
+\Bigl(\left|\mathrm{sgn}(q_\mathrm{h})
+n_\mathrm{h} \mathbf{v}_{\mathrm{dr},\mathrm{h}}  \right|
++\frac{1}{2} n_\mathrm{h} {v}_{\mathrm{th},\mathrm{h}} \Bigr),
+\label{eq:boundary_heavy}\\\end{split}\]</div>
+</div></blockquote>
+<p>where variables and coefficients associated with heavy particles are defined in a manner analogous to that of electrons.
+It should be noted that in the case of dielectric boundaries, the accumulation of surface charges is taken into account, as described in Stankov <em>et al.</em> (<em>M. Stankov, M. M. Becker, R. Bansemer, K.-D. Weltmann, D. Loffhagen, Plasma Sources Sci. Technol. 29 (12)
+(2020) 125009</em>).</p>
+</section>
+<section id="structure">
+<h2>Structure<a class="headerlink" href="#structure" title="Link to this heading">¶</a></h2>
+<p>The code directory has the following structure:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>MCPlas
+├── MCPlas.m
+│
+├── Toolbox
+│
+├── Application
+│
+└── Plasma
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<section id="mcplas-m">
+<h3>MCPlas.m<a class="headerlink" href="#mcplas-m" title="Link to this heading">¶</a></h3>
+<p>This is the main matlab file</p>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="MCPlas.MCPlas">
+<span class="sig-prename descclassname"><span class="pre">MCPlas.</span></span><span class="sig-name descname"><span class="pre">MCPlas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MCPlas.MCPlas" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="toolbox">
+<h3>Toolbox<a class="headerlink" href="#toolbox" title="Link to this heading">¶</a></h3>
+<p>This is the folder with functions</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/AddFluidEquations.html">AddFluidEquations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/ReadInput.html">ReadInput</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetConstants.html">SetConstants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetFluxes.html">SetFluxes</a></li>
+</ul>
+</div>
+</section>
+<section id="application">
+<h3>Application<a class="headerlink" href="#application" title="Link to this heading">¶</a></h3>
+<p>This is the folder with application cases</p>
+<section id="generic1d">
+<h4>Generic1D<a class="headerlink" href="#generic1d" title="Link to this heading">¶</a></h4>
+<p>This is the folder with 1D applicationfunctions</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic1D/SetGeometry.html">SetGeometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic1D/SetMesh.html">SetMesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic1D/SetProject.html">SetProject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic1D/Generic1D.html">Generic1D</a></li>
+</ul>
+</div>
+</section>
+<section id="generic2d">
+<h4>Generic2D<a class="headerlink" href="#generic2d" title="Link to this heading">¶</a></h4>
+<p>This is the folder with 2D applicationfunctions</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic2D/SetGeometry.html">SetGeometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic2D/SetMesh.html">SetMesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic2D/SetProject.html">SetProject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic2D/Generic2D.html">Generic2D</a></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="plasma">
+<h3>Plasma<a class="headerlink" href="#plasma" title="Link to this heading">¶</a></h3>
+<p>The input data necessary for running MCPlas includes information about the RKM, transport properties of the particle species, as well as general information about the modelling geometry, operating conditions, properties of the plasma source and fluid model properties.
+These data represent a heterogeneous data set that requires a standardised schema to be verified.
+MCPlas adopts an extended version of the format proposed by the LXCat platform(open-source) (<em>E. Carbone, W. Graef, G. Hagelaar, D. Boer, M. M. Hopkins, J. C. Stephens, B. T. Yee, S. Pancheshnyi, J. van Dijk, L. Pitchford,  Atoms 9 (1) (2021) 1</em>, <em>D. Boer, S. Verhoeven, S. Ali, W. Graef, J. van Dijk, LXCat. URL https://github.com/LXCat-project/LXCat</em>).
+The basic, top-level structure of the JSON data describing an RKM is shown in figure 1.
+It comprises three main properties: <em>references</em>; an object storing the references from which included data are extracted, <em>states</em>; an object listing all the states of the particle species considered, and <em>processes</em>; an array of process objects that provide information on the reaction equations and corresponding data.
+Each individual element of the JSON document is accurately defined by a corresponding JSON schema definition.
+The exact definition of the LXCat schemas can be found in the LXCat GitHub repository (<em>D. Boer, S. Verhoeven, S. Ali, W. Graef, J. van Dijk, LXCat. URL https://github.com/LXCat-project/LXCat</em>).
+These schemas can also be used to validate incoming documents.
+The development of MCPlas has contributed to the extension of the existing electron scattering schemas to further accommodate plasma chemistry data.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="_images/File_structure.jpg"><img alt="_images/File_structure.jpg" src="_images/File_structure.jpg" style="width: 75%;" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 1, A schematic representing the top-level structure of an LXCat JSON document for LTP input data.</span><a class="headerlink" href="#id1" title="Link to this image">¶</a></p>
+<div class="legend">
+<p>Here are two JSON input data files for argon 4-species and 23-species RKM:</p>
+</div>
+</figcaption>
+</figure>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_plasma/4-species_RKM.html">4-species_RKM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_plasma/23-species_RKM.html">23-species_RKM</a></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="how-to-use-it">
+<h2>How to use it<a class="headerlink" href="#how-to-use-it" title="Link to this heading">¶</a></h2>
+<section id="mcplas-workflow">
+<h3>MCPlas workflow<a class="headerlink" href="#mcplas-workflow" title="Link to this heading">¶</a></h3>
+<p>The general concept of the MCPlas toolbox is given by the workflow presented in figure 2.
+At the beginning of the MCPlas workflow, as a first step, all input data necessary for setting up the model must be provided.
+This considers general input data and plasma chemistry prepared in JSON data format.
+In the second step of the MCPlas workflow, based on the input data, setting up the model takes place by calling the functions defined in Matlab.
+More specifically, these functions are used to automatically set up the geometry of the modelling domain (<em>SetGeometry</em>), all the included coefficients and variables (<em>SetConstants</em>, <em>SetVariables</em>, <em>SetTransportCoefficients</em>, <em>SetRateCoefficients</em>, <em>SetFluxes</em>, <em>SetSources</em>), the model equations (<em>AddPoissonEquation</em>, <em>AddFluidEquations</em>), as well as the numerical solver (<em>SetMesh</em>, <em>SetProject</em>).
+The third step considers employing Live link <em>for</em> MATLAB to compile the Comsol model.
+The second and third steps automatically execute after running the MCPlas code, and they are not the user’s concern.</p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="_images/MCPlas_workflow.jpg"><img alt="_images/MCPlas_workflow.jpg" src="_images/MCPlas_workflow.jpg" style="width: 75%;" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 2, MCPlas worklow.</span><a class="headerlink" href="#id2" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="step-by-step-tutorial">
+<h3>Step-by-step tutorial<a class="headerlink" href="#step-by-step-tutorial" title="Link to this heading">¶</a></h3>
+<p>Tetststststs</p>
+</section>
+</section>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="#">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Welcome to MCPlas toolbox!</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction:</a></li>
+<li><a class="reference internal" href="#structure">Structure</a><ul>
+<li><a class="reference internal" href="#mcplas-m">MCPlas.m</a></li>
+<li><a class="reference internal" href="#toolbox">Toolbox</a></li>
+<li><a class="reference internal" href="#application">Application</a><ul>
+<li><a class="reference internal" href="#generic1d">Generic1D</a></li>
+<li><a class="reference internal" href="#generic2d">Generic2D</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#plasma">Plasma</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#how-to-use-it">How to use it</a><ul>
+<li><a class="reference internal" href="#mcplas-workflow">MCPlas workflow</a></li>
+<li><a class="reference internal" href="#step-by-step-tutorial">Step-by-step tutorial</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="manual_rst_toolbox/AddFluidEquations.html"
+                          title="Next page">&rarr; AddFluidEquations</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="manual_rst_toolbox/AddFluidEquations.html" title="AddFluidEquations"
+             >next</a> &nbsp; &nbsp;</li>
+    <li><a href="#">MATLAB Sphinx Documentation Test  documentation</a> &#187;</li>
+
+        <li class="nav-item nav-item-this"><a href="">Welcome to MCPlas toolbox!</a></li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2014, Mark Mikofski.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

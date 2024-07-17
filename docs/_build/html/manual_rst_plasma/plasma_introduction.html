@@ -1,0 +1,136 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>&lt;no title&gt; &#8212; MATLAB Sphinx Documentation Test  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/cloud.css?v=f9ae72be" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
+    
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+
+    
+    
+     
+        <script src="../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script src="../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script src="../_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+    <li><a href="../index.html">MATLAB Sphinx Documentation Test  documentation</a> &#187;</li>
+
+        <li class="nav-item nav-item-this"><a href="">&lt;no title&gt;</a></li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p>The input data necessary for running MCPlas includes information about the RKM, transport properties of the particle species, as well as general information about the modelling geometry, operating conditions, properties of the plasma source and fluid model properties.
+These data represent a heterogeneous data set that requires a standardised schema to be verified.
+MCPlas adopts an extended version of the format proposed by the LXCat platform(open-source) (<em>E. Carbone, W. Graef, G. Hagelaar, D. Boer, M. M. Hopkins, J. C. Stephens, B. T. Yee, S. Pancheshnyi, J. van Dijk, L. Pitchford,  Atoms 9 (1) (2021) 1</em>, <em>D. Boer, S. Verhoeven, S. Ali, W. Graef, J. van Dijk, LXCat. URL https://github.com/LXCat-project/LXCat</em>).
+The basic, top-level structure of the JSON data describing an RKM is shown in figure 1.
+It comprises three main properties: <em>references</em>; an object storing the references from which included data are extracted, <em>states</em>; an object listing all the states of the particle species considered, and <em>processes</em>; an array of process objects that provide information on the reaction equations and corresponding data.
+Each individual element of the JSON document is accurately defined by a corresponding JSON schema definition.
+The exact definition of the LXCat schemas can be found in the LXCat GitHub repository (<em>D. Boer, S. Verhoeven, S. Ali, W. Graef, J. van Dijk, LXCat. URL https://github.com/LXCat-project/LXCat</em>).
+These schemas can also be used to validate incoming documents.
+The development of MCPlas has contributed to the extension of the existing electron scattering schemas to further accommodate plasma chemistry data.</p>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/manual_rst_plasma/plasma_introduction.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+    <li><a href="../index.html">MATLAB Sphinx Documentation Test  documentation</a> &#187;</li>
+
+        <li class="nav-item nav-item-this"><a href="">&lt;no title&gt;</a></li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2014, Mark Mikofski.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>

@@ -1,0 +1,11 @@
+4-species_RKM
+~~~~~~~~~~~~~~~~~
+
+The considered RKM takes into account electrons, the argon atom ground state :math:`\mathrm{Ar[1p_0]}`, the argon atom ion :math:`\mathrm{Ar}^\mathrm{+}`, and argon atoms in a lumped excited state :math:`\mathrm{Ar}^\mathrm{*}`. 
+The lumped excited state represents two metastable states of the argon atom :math:`\mathrm{Ar[1s]}_\mathrm{5}` and :math:`\mathrm{Ar[1s]}_\mathrm{3}`. 
+The details about the transport coefficients of the included species and the rate coefficients of the considered chemical reactions can be found in Becker *et al.* (*M. Becker, D. Loffhagen, W. Schmidt, Comput. Phys. Commun. 180 (8) (2009) 1230*).
+
+.. literalinclude:: ../../MCPlas/Plasma/Ar_Becker_2009.json
+   :language: json
+   :linenos:
+   :caption: 4-species_RKM json data
