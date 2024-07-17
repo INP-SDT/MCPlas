@@ -1,0 +1,1 @@
+Here we collect the schemas needed to set up new application cases using Adamant.
