@@ -1,4 +1,4 @@
 AddFluidEquations
 ~~~~~~~~~~~~~~~~~
 
-.. autofunction:: MCPlas.toolbox.AddFluidEquations
+.. autofunction:: toolbox.AddFluidEquations

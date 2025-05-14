@@ -49,10 +49,22 @@ This is the folder with functions
 .. toctree::
    :maxdepth: 3
    
-   manual_rst_toolbox/AddFluidEquations.rst
-   manual_rst_toolbox/ReadInput.rst
+   manual_rst_toolbox/InpRKM.rst
    manual_rst_toolbox/SetConstants.rst
+   manual_rst_toolbox/SetVariables.rst
+   manual_rst_toolbox/SetTransportCoefficients.rst
+   manual_rst_toolbox/SetRateCoefficients.rst
+   manual_rst_toolbox/SetEnergyRateCoefficients.rst
+   manual_rst_toolbox/SetRates.rst
+   manual_rst_toolbox/SetEnergyRates.rst
    manual_rst_toolbox/SetFluxes.rst
+   manual_rst_toolbox/SetSources.rst
+   manual_rst_toolbox/AddSurfaceChargeAccumulation.rst
+   manual_rst_toolbox/AddPoissonEquation.rst
+   manual_rst_toolbox/AddFluidEquations.rst
+   manual_rst_toolbox/msg.rst
+   manual_rst_toolbox/num2strcell.rst
+   
    
 Application
 ************
@@ -100,8 +112,8 @@ Plasma
 .. toctree::
    :maxdepth: 3
    
-   manual_rst_plasma/4-species_RKM.rst
-   manual_rst_plasma/23-species_RKM.rst
+   manual_rst_plasma/Ar_Becker_2009.rst
+   manual_rst_plasma/Ar_Stankov_2022.rst
 
 How to use it
 -------------

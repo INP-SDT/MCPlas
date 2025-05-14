@@ -1,0 +1,4 @@
+SetEnergyRates
+~~~~~~~~~~~~~~
+
+.. autofunction:: toolbox.SetEnergyRates

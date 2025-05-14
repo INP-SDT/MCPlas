@@ -1,4 +1,4 @@
 SetFluxes
 ~~~~~~~~~
 
-.. autofunction:: MCPlas.toolbox.SetFluxes
+.. autofunction:: toolbox.SetFluxes

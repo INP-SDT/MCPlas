@@ -1,16 +1,12 @@
-function SetConstants
-
-% a fun function
+function SetConstants(flags, model)
 %
-% :param U0: the first input
-% :param freq: the second input
-% :param freq: the third input
-% :returns: ``[U]`` some outputs   
+% SetConstants function uses functions specific for Live link for MATLAB module to set
+% necessary constants in Comsol model based on input data 
+%
+% :param flags: input
+% :param model: input
 
-
-  global model;
-  
-  msg(1,'setting physical constants');
+  msg(1,'setting physical constants', flags);
   
   varname = 'constants';
   model.variable.create(varname);

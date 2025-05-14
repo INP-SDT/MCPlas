@@ -1,4 +1,4 @@
 SetProject
 ~~~~~~~~~~~
 
-.. autofunction:: MCPlas.applications.Generic2D.SetProject
+.. autofunction:: applications.Generic2D.SetProject

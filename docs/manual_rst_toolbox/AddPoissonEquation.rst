@@ -1,0 +1,4 @@
+AddPoissonEquation
+~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: toolbox.AddPoissonEquation

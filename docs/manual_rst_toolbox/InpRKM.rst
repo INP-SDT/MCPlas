@@ -1,0 +1,4 @@
+InpRKM
+~~~~~~~~~
+
+.. autofunction:: toolbox.InpRKM

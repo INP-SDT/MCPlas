@@ -1,4 +1,4 @@
 SetMesh
 ~~~~~~~~
 
-.. autofunction:: MCPlas.applications.Generic2D.SetMesh
+.. autofunction:: applications.Generic2D.SetMesh

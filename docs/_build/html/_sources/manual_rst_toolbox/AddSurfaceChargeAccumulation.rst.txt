@@ -1,0 +1,4 @@
+AddSurfaceChargeAccumulation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: toolbox.AddSurfaceChargeAccumulation

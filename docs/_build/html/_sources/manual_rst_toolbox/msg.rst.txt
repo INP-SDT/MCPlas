@@ -1,0 +1,4 @@
+msg
+~~~~~~~~~~~~
+
+.. autofunction:: toolbox.msg

@@ -1,12 +1,36 @@
+% ------------------------
 % Main model build script
+% ------------------------
 
+
+% inp is the main input object used in MCPlas
+clear inp;
+
+% Set input file for reaction kinetic model
+%inp.cfg_RKM_file = '../plasma/Ar_Becker_2009.json';
+inp.cfg_RKM_file = 'plasma/Ar_Stankov_2022.json';
+
+
+% Read json data from file
+addpath('Toolbox');
+inp.cfg_RKM_obj = ReadJSON(inp.cfg_RKM_file);
+
+% Set up reaction kinetic model (RKM)
+inp = InpRKM(inp);
+
+
+% The following is specific for Comsol with Matlab and will not work on
+% Matlab without connection to Comsol (LiveLink for Matlab) or on Octave
 import com.comsol.model.*
 import com.comsol.model.util.*
 
 addpath('Toolbox');
 
-clear  model GeomName ModPath flags inp;
-global model GeomName ModPath flags inp;
+% clear  model GeomName ModPath flags;
+% global model GeomName ModPath flags inp;
+
+clear model;
+%global flags model GeomName;
 
 %---- SetDebugLevel ------------------------------------------------------------
   flags.debug    = 3;
@@ -21,7 +45,7 @@ ModPath = [pwd,'/Applications/Generic',ModellingGeo];
 p=strsplit(ModPath,'/');
 BaseName = p(length(p));  BaseName = BaseName{1};
 
-msg(1,sprintf('Creating model %s in %s',BaseName, ModPath));
+msg(1, sprintf('Creating model %s in %s',BaseName, ModPath), flags);
 
 model = ModelUtil.create('Model');
 model.modelPath(ModPath);
@@ -34,8 +58,8 @@ model.modelNode.create('mod1');
 
 % set comments
 ModComment = ['Dielectric barrier discharge in argon'];
-msg(1,ModComment);
-dlmwrite([ModPath '/Comments.txt'],ModComment,'delimiter','');
+msg(1, ModComment, flags);
+dlmwrite([ModPath '/Comments.txt'], ModComment,'delimiter','');
 model.comments(ModComment);
   
 % set geometry
@@ -44,14 +68,13 @@ GeomName  = ['Geom', ModellingGeo];
 % set various properties of the model
 flags.LogFormulation = true;   % true | false
 flags.SourceTermStab = true;   % true | false
-flags.enFlux   = 'DDAc';   % DDAn | DDA53 | DDAc
+flags.enFlux   = 'DDAn';   % DDAn | DDA53 | DDAc
 flags.circuit  = 'RC';    % off | RC
-flags.dielectric = 2;   % 0 | 1 | 2   (number of dielectric layers)
+flags.dielectric = 0;   % 0 | 1 | 2   (number of dielectric layers)
 flags.nojac    = false;   % true | false
 flags.convflux = 'off';   % on | off
   
-% read plasma model
-inp = ReadInput('Plasma/input_Ar-4Species/');
+
 %------------------------------------------------------------------------------- 
 % Comsol parameters
 %------------------------------------------------------------------------------- 
@@ -114,15 +137,15 @@ inp.epsilonr_2 = 9;  % relative permittivity of dielectric layer 2
     
 % reflection coefficients at powered electrode (P), 
 % grounded electrode (G) and dielectric wall (W)    
-%                  Ar  Ar* Ar+  e 
-inp.ReflectionP = [0.3,0.3,5e-4,0.3];
-inp.ReflectionG = [0.3,0.3,5e-4,0.3];
-inp.ReflectionW_1 = [0.3,0.3,5e-3,0.7];
-inp.ReflectionW_2 = [0.3,0.3,5e-3,0.4];
+% Ar[1p0] Ar[1s5] Ar[1s4] Ar[1s3] Ar[1s2] Ar[2p10] Ar[2p9] Ar[2p8] Ar[2p7] Ar[2p6] Ar[2p5] Ar[2p4] Ar[2p3] Ar[2p2] Ar[2p1] Ar*[hl] Ar^+ Ar_2^*[^3S_u^+,v=0] Ar_2^*[^1S_u^+,v=0] Ar_2^*[^3S_u^+,v>>0] Ar_2^*[^1S_u^+,v>>0] Ar_2^+ e
+inp.ReflectionP = [0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,5e-4,0.3,0.3,0.3,0.3,5e-4,0.3];
+inp.ReflectionG = [0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,5e-4,0.3,0.3,0.3,0.3,5e-4,0.3];
+inp.ReflectionW_1 = [0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,5e-3,0.3,0.3,0.3,0.3,5e-3,0.7];
+inp.ReflectionW_2 = [0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,5e-3,0.3,0.3,0.3,0.3,5e-3,0.7];
 
 % initial values
-%                 Ar   Ar*  Ar+  e
-inp.Dspec_init = [1e12,1e12,1e12,1e12];
+%Ar[1p0] Ar[1s5] Ar[1s4] Ar[1s3] Ar[1s2] Ar[2p10] Ar[2p9] Ar[2p8] Ar[2p7] Ar[2p6] Ar[2p5] Ar[2p4] Ar[2p3] Ar[2p2] Ar[2p1] Ar*[hl] Ar^+ Ar_2^*[^3S_u^+,v=0] Ar_2^*[^1S_u^+,v=0] Ar_2^*[^3S_u^+,v>>0] Ar_2^*[^1S_u^+,v>>0] Ar_2^+ e
+inp.Dspec_init = [1e12,1e12,1e12,1e12,1e12,1e12,2e12,1e12,1e12,1e12,1e12,1e12,1e12,2e12,1e12,1e12,1e12,1e12,1e12,1e12,2e12,1e12,2e12];
   
 %-------------------------------------------------------------------------------   
 
@@ -131,29 +154,32 @@ if flags.debug>0
 end
 
 addpath(ModPath);
-SetGeometry;
+SetGeometry(flags, model, GeomName);
 
 addpath('Toolbox');
-SetConstants;
-SetVariables;
-SetTransportCoefficients;
-SetRateCoefficients;
+SetConstants(flags, model);
+SetVariables(inp, flags, model, GeomName);
+SetTransportCoefficients(inp, flags, model);
+SetRateCoefficients(inp, flags, model);
+SetEnergyRateCoefficients(inp, flags, model);
+SetRates(inp, flags, model);
+SetEnergyRates(inp, flags, model);
 
-SetFluxes;
-SetSources;
+SetFluxes(inp, flags, model, GeomName);
+SetSources(inp, flags, model, GeomName);
 
-AddSurfaceChargeAccumulation;
-AddPoissonEquation;
-AddFluidEquations;
-SetElectrical;
+AddSurfaceChargeAccumulation(flags, model, GeomName);
+AddPoissonEquation(flags, model, GeomName);
+AddFluidEquations(inp, flags, model, GeomName);
+%SetElectrical;
 
 addpath(ModPath);
-SetMesh;
-SetProject;
+SetMesh(inp, flags, model, GeomName);
+SetProject(inp, flags, model);
 
 %-------------------------------------------------------------------------------
 
 mphsave(model,[ModPath,'/',BaseName '.mph'])
-msg(1,sprintf('model saved to %s.mph',BaseName));
+msg(1,sprintf('model saved to %s.mph',BaseName), flags);
 out = model;
 

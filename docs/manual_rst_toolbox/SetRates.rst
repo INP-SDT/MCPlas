@@ -1,0 +1,4 @@
+SetRates
+~~~~~~~~~
+
+.. autofunction:: toolbox.SetRates

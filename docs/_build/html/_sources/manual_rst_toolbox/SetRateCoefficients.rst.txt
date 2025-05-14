@@ -1,0 +1,4 @@
+SetRateCoefficients
+~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: toolbox.SetRateCoefficients

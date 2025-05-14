@@ -1,0 +1,4 @@
+SetEnergyRateCoefficients
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: toolbox.SetEnergyRateCoefficients

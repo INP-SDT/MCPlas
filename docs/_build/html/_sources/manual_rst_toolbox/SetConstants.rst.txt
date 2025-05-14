@@ -1,4 +1,4 @@
 SetConstants
 ~~~~~~~~~~~~
 
-.. autofunction:: MCPlas.toolbox.SetConstants
+.. autofunction:: toolbox.SetConstants

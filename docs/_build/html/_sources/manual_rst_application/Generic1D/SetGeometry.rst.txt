@@ -1,4 +1,4 @@
 SetGeometry
 ~~~~~~~~~~~~
 
-.. autofunction:: MCPlas.applications.Generic1D.SetGeometry
+.. autofunction:: applications.Generic1D.SetGeometry
