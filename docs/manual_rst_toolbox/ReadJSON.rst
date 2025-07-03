@@ -1,0 +1,4 @@
+ReadJSON
+~~~~~~~~
+
+.. autofunction:: toolbox.ReadJSON

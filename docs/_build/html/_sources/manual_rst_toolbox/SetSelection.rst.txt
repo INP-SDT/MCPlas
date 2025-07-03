@@ -1,0 +1,4 @@
+SetSelection
+~~~~~~~~~~~~
+
+.. autofunction:: toolbox.SetSelection

@@ -69,15 +69,16 @@
 <h1>SetMesh<a class="headerlink" href="#setmesh" title="Link to this heading">¶</a></h1>
 <dl class="mat function">
 <dt class="sig sig-object mat" id="applications.Generic2D.SetMesh">
-<span class="sig-prename descclassname"><span class="pre">applications.Generic2D.</span></span><span class="sig-name descname"><span class="pre">SetMesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">inp</span></em>, <em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">GeomName</span></em><span class="sig-paren">)</span><a class="headerlink" href="#applications.Generic2D.SetMesh" title="Link to this definition">¶</a></dt>
-<dd><p>SetMesh function uses functions specific for Live link for MATLAB module to set
-computational mesh based on input data</p>
+<span class="sig-prename descclassname"><span class="pre">applications.Generic2D.</span></span><span class="sig-name descname"><span class="pre">SetMesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">inp</span></em>, <em class="sig-param"><span class="pre">flags</span></em>, <em class="sig-param"><span class="pre">model</span></em><span class="sig-paren">)</span><a class="headerlink" href="#applications.Generic2D.SetMesh" title="Link to this definition">¶</a></dt>
+<dd><p>SetMesh function uses functions specific for LiveLink for MATLAB module to set
+computational mesh based on input data. The mesh is only defined for
+the plasma domain. The default mesh will be used for the dielectric.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>inp</strong> – the first input</p></li>
-<li><p><strong>model</strong> – the second input</p></li>
-<li><p><strong>GeomName</strong> – the third input</p></li>
+<li><p><strong>flags</strong> – the second input</p></li>
+<li><p><strong>model</strong> – the third input</p></li>
 </ul>
 </dd>
 </dl>

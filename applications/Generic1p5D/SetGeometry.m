@@ -1,110 +1,144 @@
-function SetGeometry(flags, model, GeomName)
-%
-% SetGeometry function uses functions specific for Live link for MATLAB module to set
-% desire geometry in Comsol model based on input data 
-%
-% :param flags: the first input
-% :param model: the second input
-% :param GeomName: the third input
+function SetGeometry(inp, flags, model)
+    %
+    % SetGeometry function uses functions specific for the LiveLink
+    % for MATLAB module to set the desired geometry in the COMSOL model.
+    %
+    % :param inp: the first input
+    % :param flags: the second input
+    % :param model: the third input
 
-    %% Set 1D geometry (polar coordinates)
-    
-    % Three different configurations can be set based on "flags.dielectric" input data: 
-    % both electrodes without dielectric layers,
-    % one electrode covered by dielectric layer, the other one is without dielectric layer
-    % both electrode coverd by dielectric layers
+    GeomTitle = '1D axisymmetric';  % Title/label for the geometry
+    msg(1, ['Setting geometry ' GeomTitle], flags);  % Display status message
+    model.geom.create(inp.GeomName, 1);  % Create a 1D geometry sequence with the given name
+    model.geom(inp.GeomName).label(GeomTitle);  % Label the geometry sequence
+    model.geom(inp.GeomName).lengthUnit('m');  % Set geometry unit to meters
+    model.geom(inp.GeomName).axisymmetric(true);  % Enable axisymmetric mode
 
-    if flags.dielectric == 1  % One electrode covered by dielectric layer
-
-        GeomTitle = '1D axisymmetric with one dielectric';
-        msg(1, ['setting geometry ' GeomTitle], flags);
-
-        % Build geometry
-        model.geom.create(GeomName, 1);
-        model.geom(GeomName).label(GeomTitle);
-        model.geom(GeomName).lengthUnit('m');
-        model.geom(GeomName).axisymmetric(true);
-        model.frame('material1').coord(1, 'r');
-        model.frame('material1').coord(3, 'z');
-        model.geom(GeomName).feature.create('i1', 'Interval');
-        model.geom(GeomName).feature('i1').set('intervals', 'many');
-        model.geom(GeomName).feature('i1').set('p', '0, ElecDist, ElecDist+DBthickness_1');
-
-        model.geom(GeomName).runAll;
-        model.geom(GeomName).run;
-
-        % Initialize selections (1=Domain, 0=Boundary)
-        SetSelection(model, 1, 'plasmadomain', 'Plasma domain', 1);
-        SetSelection(model, 1, 'dielectric', 'Dielectric', 2);
-        SetSelection(model, 0, 'plasmaboundaries', 'Plasma boundaries', [1 2]);
-        SetSelection(model, 0, 'poweredelectrode', 'Powered electrode', 1);
-        SetSelection(model, 0, 'groundedelectrode', 'Grounded electrode', 3);
-        SetSelection(model, 0, 'currentprobebndry', 'Current probe boundary', 2);
-        SetSelection(model, 0, 'electrodes', 'Electrodes', [1 3]);
-        SetSelection(model, 0, 'dielectricwalls', 'Dielectric walls', 2);
-
-    elseif flags.dielectric == 2  % Both electrodes covered by dielectric layers
-
-        GeomTitle = '1D axisymmetric with two dielectrics';
-        msg(1, ['setting geometry ' GeomTitle], flags);
-
-        % Build geometry
-        model.geom.create(GeomName, 1);
-        model.geom(GeomName).label(GeomTitle);
-        model.geom(GeomName).lengthUnit('m');
-        model.geom(GeomName).axisymmetric(true);
-        model.frame('material1').coord(1, 'r');
-        model.frame('material1').coord(3, 'z');
-        model.geom(GeomName).feature.create('i1', 'Interval');
-        model.geom(GeomName).feature('i1').set('intervals', 'many');
-        model.geom(GeomName).feature('i1').set('p', '0, DBthickness_1, ElecDist+DBthickness_1, ElecDist+DBthickness_1+DBthickness_2');
-
-        model.geom(GeomName).runAll;
-        model.geom(GeomName).run;
-
-        % Initialize selections (1=Domain, 0=Boundary)
-        SetSelection(model, 1, 'plasmadomain', 'Plasma domain', 2);
-        SetSelection(model, 1, 'dielectric_1', 'Dielectric 1', 1);
-        SetSelection(model, 1, 'dielectric_2', 'Dielectric 2', 3);
-        SetSelection(model, 1, 'dielectric', 'Dielectric', [1, 3]);
-        SetSelection(model, 0, 'plasmaboundaries', 'Plasma boundaries', [2 3]);
-        SetSelection(model, 0, 'poweredelectrode', 'Powered electrode', 1);
-        SetSelection(model, 0, 'groundedelectrode', 'Grounded electrode', 4);
-        SetSelection(model, 0, 'currentprobebndry', 'Current probe boundary', 2);
-        SetSelection(model, 0, 'electrodes', 'Electrodes', [1 4]);
-        SetSelection(model, 0, 'dielectricwall_1', 'Dielectric wall 1', 2);
-        SetSelection(model, 0, 'dielectricwall_2', 'Dielectric wall 2', 3);
-        SetSelection(model, 0, 'dielectricwalls', 'Dielectric walls', [2 3])
-
-    else  % Both electrodes without dielectric layers
-
-        GeomTitle = '1D planparallel without dielectric';
-        msg(1, ['setting geometry ' GeomTitle], flags);
-
-        % Build geometry
-        model.geom.create(GeomName, 1);
-        model.geom(GeomName).label(GeomTitle);
-        model.geom(GeomName).lengthUnit('m');
-
-        model.geom(GeomName).axisymmetric(true);
-        model.frame('material1').coord(1, 'r');
-        model.frame('material1').coord(3, 'z');
-
-        model.geom(GeomName).feature.create('i1', 'Interval');
-        model.geom(GeomName).feature('i1').set('p2', 'ElecDist');
-
-        model.geom(GeomName).runAll;
-        model.geom(GeomName).run;
-
-        % Initialize selections (1=Domain, 0=Boundary)
-        SetSelection(model, 1, 'plasmadomain', 'Plasma domain', 1);
-        SetSelection(model, 0, 'plasmaboundaries', 'Plasma boundaries', [1 2]);
-        SetSelection(model, 0, 'poweredelectrode', 'Powered electrode', 1);
-        SetSelection(model, 0, 'groundedelectrode', 'Grounded electrode', 2);
-        SetSelection(model, 0, 'currentprobebndry', 'Current probe boundary', 2);
-        msg(2, 'Anode is grounded and current probe', flags)
-        SetSelection(model, 0, 'electrodes', 'Electrodes', [1 2]);
-
+    % Check if the electrode dimensions meet the criteria for 1p5D geometry
+    recL = inp.General.rec_ele_length;
+    recW = inp.General.rec_ele_width;
+    circ = inp.General.circ_ele_radius;
+    coaxIn = inp.General.coax_inner_ele_radius;
+    coaxOut = inp.General.coax_outer_ele_radius;
+    coaxLen = inp.General.coax_ele_length;
+    if coaxIn > 0 && coaxOut > 0 && coaxLen > 0 && recL == 0 && recW == 0 && circ == 0
+        % Coaxial configuration: valid for 1p5D geometry
+    else
+        error(['The 1p5D geometry supports only coaxial electrodes configuration. ' ...
+            'Rectangular and circular electrode shapes are not permitted.']);
     end
 
+    dp = inp.General.diel_thickness_powered;
+    dg = inp.General.diel_thickness_grounded;   
+
+    if dp > 0 && dg == 0  % Case: powered electrode covered by dielectric layer
+        
+        % Create a 1D interval with multiple subintervals (many segments)
+        model.geom(inp.GeomName).feature.create('i1', 'Interval');
+        model.geom(inp.GeomName).feature('i1').set('intervals', 'many');
+        temp = 'OuterRadiusInnerEle, OuterRadiusInnerEle+DBthickness, OuterRadiusInnerEle+DBthickness+ElecDist';
+        model.geom(inp.GeomName).feature('i1').set('p', temp);  % Define subinterval points:
+                                                                % OuterRadiusInnerEle (start),
+                                                                % OuterRadiusInnerEle + DBthickness (dielectric), 
+                                                                % OuterRadiusInnerEle + DBthickness + ElecDist (plasma) 
+        % Build and finalize geometry
+        model.geom(inp.GeomName).runAll;
+        model.geom(inp.GeomName).run; 
+        
+        % Define selections for domains (1) and boundaries (0)
+        SetSelection(model, 1, 'dielectric', 'Dielectric', 1);  % 1st domain = dielectric
+        SetSelection(model, 1, 'plasmadomain', 'Plasma domain', 2);  % 2nd domain = plasma
+        SetSelection(model, 0, 'plasmaboundaries', 'Plasma boundaries', ...
+            [2 3]);  % Plasma boundaries
+        SetSelection(model, 0, 'poweredelectrode', ...
+            'Powered electrode', 1);  % Powered electrode boundary
+        SetSelection(model, 0, 'groundedelectrode', ...
+            'Grounded electrode', 3);  % Grounded electrode boundary
+        SetSelection(model, 0, 'currentprobebndry', ...
+            'Current probe boundary', 2);  % Current probe boundary
+        SetSelection(model, 0, 'electrodes', ...
+            'Electrodes', [1 3]);  % Electrodes boundaries
+        SetSelection(model, 0, 'dielectricwalls', ...
+            'Dielectric walls', 2);  % Dielectric wall boundary
+    
+    elseif dp == 0 && dg > 0  % Case: grounded electrode covered by dielectric layer
+        
+        % Create a 1D interval with multiple subintervals (many segments)
+        model.geom(inp.GeomName).feature.create('i1', 'Interval');
+        model.geom(inp.GeomName).feature('i1').set('intervals', 'many');
+        temp = 'OuterRadiusInnerEle, OuterRadiusInnerEle+ElecDist, OuterRadiusInnerEle+ElecDist+DBthickness';
+        model.geom(inp.GeomName).feature('i1').set('p', temp);  % Define subinterval points:
+                                                                % OuterRadiusInnerEle (start),
+                                                                % OuterRadiusInnerEle + ElecDist (plasma), 
+                                                                % OuterRadiusInnerEle + ElecDist + DBthickness (dielectric)
+        % Build and finalize geometry
+        model.geom(inp.GeomName).runAll;
+        model.geom(inp.GeomName).run; 
+        
+        % Define selections for domains (1) and boundaries (0)
+        SetSelection(model, 1, 'plasmadomain', 'Plasma domain', 1);  % 1st domain = plasma
+        SetSelection(model, 1, 'dielectric', 'Dielectric', 2);  % 2nd domain = dielectric
+        SetSelection(model, 0, 'plasmaboundaries', 'Plasma boundaries', ...
+            [1 2]);  % Plasma boundaries
+        SetSelection(model, 0, 'poweredelectrode', ...
+            'Powered electrode', 1);  % Powered electrode boundary
+        SetSelection(model, 0, 'groundedelectrode', ...
+            'Grounded electrode', 3);  % Grounded electrode boundary
+        SetSelection(model, 0, 'currentprobebndry',OuterRadInnerEleInner, ...
+            'Current probe boundary', 1);  % Current probe boundary
+        SetSelection(model, 0, 'electrodes', ...
+            'Electrodes', [1 3]);  % Electrodes boundaries
+        SetSelection(model, 0, 'dielectricwalls', ...
+            'Dielectric walls', 2);  % Dielectric wall boundary
+        
+    elseif dp > 0 && dg > 0  % Case: both electrodes covered by dielectric layer
+        model.geom(inp.GeomName).feature.create('i1', 'Interval');
+        model.geom(inp.GeomName).feature('i1').set('intervals', 'many');
+        temp = [ 'OuterRadiusInnerEle, OuterRadiusInnerEle+DBthickness_1, ' ...
+            'OuterRadiusInnerEle+DBthickness_1+ElecDist, ' ...
+            'OuterRadiusInnerEle+DBthickness_1+ElecDist+DBthickness_2'];
+        model.geom(inp.GeomName).feature('i1').set('p',temp);  % Define subinterval points:
+                                                               % OuterRadiusInnerEle (start),
+                                                               % OuterRadiusInnerEle + DBthickness_1, 
+                                                               % OuterRadiusInnerEle + DBthickness_1
+                                                               % + ElecDist,
+                                                               % OuterRadiusInnerEle + DBthickness_1 + ElecDist
+                                                               % + DBthickness_2
+        % Build and finalize geometry
+        model.geom(inp.GeomName).runAll;
+        model.geom(inp.GeomName).run;
+
+        % Define selections for domains (1) and boundaries (0)
+        SetSelection(model, 1, 'plasmadomain', 'Plasma domain', 2);  % Plasma is the middle domain
+        SetSelection(model, 1, 'dielectric_1', 'Dielectric 1', 1);  % Left dielectric
+        SetSelection(model, 1, 'dielectric_2', 'Dielectric 2', 3);  % Right dielectric
+        SetSelection(model, 1, 'dielectric', 'Dielectric', [1, 3]);  % Dielectric domains
+        SetSelection(model, 0, 'plasmaboundaries', 'Plasma boundaries', [2 3]);  % Plasma boundaries
+        SetSelection(model, 0, 'poweredelectrode', 'Powered electrode', 1);  % Powered electrode boundary
+        SetSelection(model, 0, 'groundedelectrode', 'Grounded electrode', 4);  % Grounde electrode boundary
+        SetSelection(model, 0, 'currentprobebndry', 'Current probe boundary', 2);  % Current probe location
+        SetSelection(model, 0, 'electrodes', 'Electrodes', [1 4]);  % Electrodes boundaries
+        SetSelection(model, 0, 'dielectricwall_1', 'Dielectric wall 1', 2);  % Dielectric wall 1 boundary
+        SetSelection(model, 0, 'dielectricwall_2', 'Dielectric wall 2', 3);  % Dielectric wall 2 boundary
+        SetSelection(model, 0, 'dielectricwalls', 'Dielectric walls', [2 3]);  % Dielectric walls boundaries
+    
+    else % Case: no dielectric layers
+        
+        % Create a simple two-point interval: just a plasma domain between electrodes
+        model.geom(inp.GeomName).feature.create('i1', 'Interval');
+        model.geom(inp.GeomName).feature('i1').set('p2', 'ElecDist');
+        
+        % Build and finalize geometry
+        model.geom(inp.GeomName).runAll;
+        model.geom(inp.GeomName).run;
+        
+        % Define selections for domains (1) and boundaries (0)
+        SetSelection(model, 1, 'plasmadomain', 'Plasma domain', 1);  % Single plasma domain
+        SetSelection(model, 0, 'plasmaboundaries', 'Plasma boundaries', [1 2]);  % Plasma boundaries
+        SetSelection(model, 0, 'poweredelectrode', 'Powered electrode', 1);  % Powered electrode boundary
+        SetSelection(model, 0, 'groundedelectrode', 'Grounded electrode', 2);  % Grounded electrode boundary
+        SetSelection(model, 0, 'currentprobebndry', 'Current probe boundary', 1);  % Current probe location
+        SetSelection(model, 0, 'electrodes', 'Electrodes', [1 2]);  % Electrodes boundaries
+        
+    end
 end

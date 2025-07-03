@@ -69,14 +69,17 @@
 <h1>SetProject<a class="headerlink" href="#setproject" title="Link to this heading">¶</a></h1>
 <dl class="mat function">
 <dt class="sig sig-object mat" id="applications.Generic2D.SetProject">
-<span class="sig-prename descclassname"><span class="pre">applications.Generic2D.</span></span><span class="sig-name descname"><span class="pre">SetProject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">inp</span></em>, <em class="sig-param"><span class="pre">model</span></em><span class="sig-paren">)</span><a class="headerlink" href="#applications.Generic2D.SetProject" title="Link to this definition">¶</a></dt>
-<dd><p>SetProject function uses functions specific for Live link for MATLAB module to set
-studies in Comsol model based on input data</p>
+<span class="sig-prename descclassname"><span class="pre">applications.Generic2D.</span></span><span class="sig-name descname"><span class="pre">SetProject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">inp</span></em>, <em class="sig-param"><span class="pre">flags</span></em>, <em class="sig-param"><span class="pre">model</span></em><span class="sig-paren">)</span><a class="headerlink" href="#applications.Generic2D.SetProject" title="Link to this definition">¶</a></dt>
+<dd><p>SetProject function configures a COMSOL Multiphysics model
+using Livelink for MATLAB module.
+It defines a plasma simulation study, prepares solver sequences,
+and sets numerical parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>inp</strong> – the first input</p></li>
-<li><p><strong>model</strong> – the second input</p></li>
+<li><p><strong>flags</strong> – the second input</p></li>
+<li><p><strong>model</strong> – the third input</p></li>
 </ul>
 </dd>
 </dl>

@@ -1,0 +1,4 @@
+IsModelMember
+~~~~~~~~~~~~~
+
+.. autofunction:: toolbox.IsModelMember

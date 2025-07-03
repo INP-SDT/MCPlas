@@ -35,7 +35,7 @@
 
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="InpRKM" href="manual_rst_toolbox/InpRKM.html" /> 
+    <link rel="next" title="ReadJSON" href="manual_rst_toolbox/ReadJSON.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
     <div class="relbar-top">
@@ -47,7 +47,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="manual_rst_toolbox/InpRKM.html" title="InpRKM"
+          <a href="manual_rst_toolbox/ReadJSON.html" title="ReadJSON"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
     <li><a href="#">MATLAB Sphinx Documentation Test  documentation</a> &#187;</li>
 
@@ -211,7 +211,11 @@ It should be noted that in the case of dielectric boundaries, the accumulation o
 </div>
 <section id="mcplas-m">
 <h3>MCPlas.m<a class="headerlink" href="#mcplas-m" title="Link to this heading">¶</a></h3>
-<p>This is the main matlab file</p>
+<p>This script serves as the core file of the MCPlas toolbox.
+It begins by loading user-defined chemistry and general model settings from JSON files, parsing them into structured input objects.
+After initializing the COMSOL environment and defining the working path, it systematically calls MATLAB functions to establish parameters, geometry, physical constants, variables, transport and reaction coefficients, and model equations.
+It configures electrical conditions, surface effects, and postprocessing elements like probes and plots.
+Meshing and solver settings are finalized before the complete model is saved as a .mph file.</p>
 <dl class="mat function">
 <dt class="sig sig-object mat" id="MCPlas.MCPlas">
 <span class="sig-prename descclassname"><span class="pre">MCPlas.</span></span><span class="sig-name descname"><span class="pre">MCPlas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MCPlas.MCPlas" title="Link to this definition">¶</a></dt>
@@ -220,10 +224,15 @@ It should be noted that in the case of dielectric boundaries, the accumulation o
 </section>
 <section id="toolbox">
 <h3>Toolbox<a class="headerlink" href="#toolbox" title="Link to this heading">¶</a></h3>
-<p>This is the folder with functions</p>
+<p>The Toolbox folder in the MCPlas toolbox contains a collection of MATLAB functions essential for building a COMSOL model using the MATLAB LiveLink module.
+These functions automate model generation by systematically calling COMSOL-specific commands to define all essential features of the model.
+By organizing model-building tasks into modular scripts, the folder ensures clarity, maintainability, and flexibility of the model building process.</p>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/ReadJSON.html">ReadJSON</a></li>
 <li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/InpRKM.html">InpRKM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/InpGeneral.html">InpGeneral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetParameters.html">SetParameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetConstants.html">SetConstants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetVariables.html">SetVariables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetTransportCoefficients.html">SetTransportCoefficients</a></li>
@@ -233,20 +242,38 @@ It should be noted that in the case of dielectric boundaries, the accumulation o
 <li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetEnergyRates.html">SetEnergyRates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetFluxes.html">SetFluxes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetSources.html">SetSources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetProbesAndGraphs.html">SetProbesAndGraphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/AddSurfaceChargeAccumulation.html">AddSurfaceChargeAccumulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/AddPoissonEquation.html">AddPoissonEquation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/AddFluidEquations.html">AddFluidEquations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetElectrical.html">SetElectrical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetSelection.html">SetSelection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/msg.html">msg</a></li>
 <li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/num2strcell.html">num2strcell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/IsModelMember.html">IsModelMember</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/ActivatePlasma.html">ActivatePlasma</a></li>
 </ul>
 </div>
 </section>
 <section id="application">
 <h3>Application<a class="headerlink" href="#application" title="Link to this heading">¶</a></h3>
-<p>This is the folder with application cases</p>
+<p>The Application folder in the MCPlas toolbox serves as the central location for organizing geometry-specific modeling cases.
+It contains subfolders such as Generic1D, Generic1p5D, Generic2D, and Generic2p5D, each corresponding to a particular modelling geometry.
+Within each subfolder, there are dedicated MATLAB scripts responsible for defining the geometry, generating the mesh, and configuring project-specific properties such as solvers and study steps.
+Each case also includes a General JSON input file that provides essential settings tailored to that specific geometry.
+After the model-building process is completed, the resulting .mph file is automatically saved in the same subfolder, keeping all related files organized and localized.</p>
 <section id="generic1d">
 <h4>Generic1D<a class="headerlink" href="#generic1d" title="Link to this heading">¶</a></h4>
-<p>This is the folder with 1D applicationfunctions</p>
+<p>The Generic1D subfolder is dedicated to application of one-dimensional, time-dependent plasma modeling.
+It contains MATLAB scripts that define the geometry, mesh, and project settings specific to 1D simulations.
+This modeling case is designed to support plasma source configurations featuring either rectangular or circular electrodes (figure 1), making it suitable for simplified yet physically relevant geometries.
+The correct specification of electrode dimensions is crucial and must be provided accurately in the associated General JSON input file.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="_images/1D.svg"><img alt="_images/1D.svg" src="_images/1D.svg" width="75%" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 1, 1D modelling geometry.</span><a class="headerlink" href="#id1" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic1D/SetGeometry.html">SetGeometry</a></li>
@@ -256,15 +283,58 @@ It should be noted that in the case of dielectric boundaries, the accumulation o
 </ul>
 </div>
 </section>
+<section id="generic1p5d">
+<h4>Generic1p5D<a class="headerlink" href="#generic1p5d" title="Link to this heading">¶</a></h4>
+<p>The Generic1p5D subfolder is dedicated to application of one-dimensional, time-dependent plasma modeling in polar coordinates.
+It contains MATLAB scripts that configure the geometry, meshing, and project settings only for coaxial plasma source configurations (figure 2).
+This requires that electrode dimensions—such as radius of inner and outer electrodes—be accurately defined in the corresponding General JSON input file.
+These inputs determine the plasma domain and boundary conditions essential for correct simulation behavior.</p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="_images/1p5D.svg"><img alt="_images/1p5D.svg" src="_images/1p5D.svg" width="75%" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 2, 1p5D modelling geometry for simulations in polar coordiantes.</span><a class="headerlink" href="#id2" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic1p5D/SetGeometry.html">SetGeometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic1p5D/SetMesh.html">SetMesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic1p5D/SetProject.html">SetProject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic1p5D/Generic1p5D.html">Generic1p5D</a></li>
+</ul>
+</div>
+</section>
 <section id="generic2d">
 <h4>Generic2D<a class="headerlink" href="#generic2d" title="Link to this heading">¶</a></h4>
-<p>This is the folder with 2D applicationfunctions</p>
+<p>The Generic2D subfolder is dedicated to application of two-dimensional, time-dependent plasma modeling in Cartesian coordinates.
+It contains MATLAB scripts responsible for setting up the geometry, mesh, and project configuration for rectangular electrodes (see figure).
+The dimensions and positions of the rectangular electrodes must be properly specified in the associated General JSON input file.</p>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="_images/2D.svg"><img alt="_images/2D.svg" src="_images/2D.svg" width="75%" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 3, 2D modelling geometry for simulations in Cartesian coordinates.</span><a class="headerlink" href="#id3" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic2D/SetGeometry.html">SetGeometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic2D/SetMesh.html">SetMesh</a></li>
 <li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic2D/SetProject.html">SetProject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic2D/Generic2D.html">Generic2D</a></li>
+</ul>
+</div>
+</section>
+<section id="generic2p5d">
+<h4>Generic2p5D<a class="headerlink" href="#generic2p5d" title="Link to this heading">¶</a></h4>
+<p>The Generic2p5D subfolder is dedicated to the application of two-dimensional, time-dependent plasma modeling in cylindrical coordinates.
+It contains MATLAB scripts responsible for setting up the geometry, mesh, and project configuration for plasma sources with rectangular or circular electrode shapes.
+The dimensions and positions of both rectangular and circular electrodes must be properly specified in the associated General JSON input file, as they directly affect domain generation and boundary condition assignment.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic2p5D/SetGeometry.html">SetGeometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic2p5D/SetMesh.html">SetMesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic2p5D/SetProject.html">SetProject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_application/Generic2p5D/Generic2p5D.html">Generic2p5D</a></li>
 </ul>
 </div>
 </section>
@@ -280,10 +350,10 @@ Each individual element of the JSON document is accurately defined by a correspo
 The exact definition of the LXCat schemas can be found in the LXCat GitHub repository (<em>D. Boer, S. Verhoeven, S. Ali, W. Graef, J. van Dijk, LXCat. URL https://github.com/LXCat-project/LXCat</em>).
 These schemas can also be used to validate incoming documents.
 The development of MCPlas has contributed to the extension of the existing electron scattering schemas to further accommodate plasma chemistry data.</p>
-<figure class="align-center" id="id1">
+<figure class="align-center" id="id4">
 <a class="reference internal image-reference" href="_images/File_structure.jpg"><img alt="_images/File_structure.jpg" src="_images/File_structure.jpg" style="width: 75%;" /></a>
 <figcaption>
-<p><span class="caption-text">Figure 1, A schematic representing the top-level structure of an LXCat JSON document for LTP input data.</span><a class="headerlink" href="#id1" title="Link to this image">¶</a></p>
+<p><span class="caption-text">Figure 5, A schematic representing the top-level structure of an LXCat JSON document for LTP input data.</span><a class="headerlink" href="#id4" title="Link to this image">¶</a></p>
 <div class="legend">
 <p>Here are two JSON input data files for argon 4-species and 23-species RKM:</p>
 </div>
@@ -308,10 +378,10 @@ In the second step of the MCPlas workflow, based on the input data, setting up t
 More specifically, these functions are used to automatically set up the geometry of the modelling domain (<em>SetGeometry</em>), all the included coefficients and variables (<em>SetConstants</em>, <em>SetVariables</em>, <em>SetTransportCoefficients</em>, <em>SetRateCoefficients</em>, <em>SetFluxes</em>, <em>SetSources</em>), the model equations (<em>AddPoissonEquation</em>, <em>AddFluidEquations</em>), as well as the numerical solver (<em>SetMesh</em>, <em>SetProject</em>).
 The third step considers employing Live link <em>for</em> MATLAB to compile the Comsol model.
 The second and third steps automatically execute after running the MCPlas code, and they are not the user’s concern.</p>
-<figure class="align-center" id="id2">
+<figure class="align-center" id="id5">
 <a class="reference internal image-reference" href="_images/MCPlas_workflow.jpg"><img alt="_images/MCPlas_workflow.jpg" src="_images/MCPlas_workflow.jpg" style="width: 75%;" /></a>
 <figcaption>
-<p><span class="caption-text">Figure 2, MCPlas worklow.</span><a class="headerlink" href="#id2" title="Link to this image">¶</a></p>
+<p><span class="caption-text">Figure 6, MCPlas worklow.</span><a class="headerlink" href="#id5" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 </section>
@@ -346,7 +416,9 @@ The second and third steps automatically execute after running the MCPlas code, 
 <li><a class="reference internal" href="#toolbox">Toolbox</a></li>
 <li><a class="reference internal" href="#application">Application</a><ul>
 <li><a class="reference internal" href="#generic1d">Generic1D</a></li>
+<li><a class="reference internal" href="#generic1p5d">Generic1p5D</a></li>
 <li><a class="reference internal" href="#generic2d">Generic2D</a></li>
+<li><a class="reference internal" href="#generic2p5d">Generic2p5D</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#plasma">Plasma</a></li>
@@ -365,8 +437,8 @@ The second and third steps automatically execute after running the MCPlas code, 
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="manual_rst_toolbox/InpRKM.html"
-                          title="Next page">&rarr; InpRKM</a></p>
+    <p class="topless"><a href="manual_rst_toolbox/ReadJSON.html"
+                          title="Next page">&rarr; ReadJSON</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -415,7 +487,7 @@ The second and third steps automatically execute after running the MCPlas code, 
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="manual_rst_toolbox/InpRKM.html" title="InpRKM"
+          <a href="manual_rst_toolbox/ReadJSON.html" title="ReadJSON"
              >next</a> &nbsp; &nbsp;</li>
     <li><a href="#">MATLAB Sphinx Documentation Test  documentation</a> &#187;</li>
 

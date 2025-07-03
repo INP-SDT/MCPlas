@@ -1,30 +1,31 @@
-function SetMesh(inp, flags, model, GeomName)
-%
-% SetMesh function uses functions specific for Live link for MATLAB module to set
-% computational mesh based on input data 
-%
-% :param inp: the first input
-% :param model: the second input
-% :param GeomName: the third input
-
-    %% Set 2D mesh     
-
-    MeshTitle = 'Geometric_2p5D';
-
-    msg(1, ['setting mesh ' MeshTitle], flags);
-
-    model.mesh.create('mesh1', GeomName);
-    model.mesh('mesh1').label(MeshTitle);
-
-    model.mesh('mesh1').create('ftri1', 'FreeTri');
-    model.mesh('mesh1').feature('ftri1').create('size1', 'Size');
-    model.mesh('mesh1').feature('ftri1').feature('size1').selection.named('plasmadomain');
-
-    model.mesh('mesh1').label('Geometric_8');
-    model.mesh('mesh1').feature('ftri1').feature('size1').set('hauto', 3);
-    model.mesh('mesh1').feature('ftri1').feature('size1').set('custom', 'on');
-    model.mesh('mesh1').feature('ftri1').feature('size1').set('hmax', num2str(inp.Nelem_2D));
-    model.mesh('mesh1').feature('ftri1').feature('size1').set('hmaxactive', true);
-    model.mesh('mesh1').run;
-
+function SetMesh(inp, flags, model)
+    %
+    % SetMesh function uses functions specific for LiveLink for MATLAB module to set
+    % computational mesh based on input data. The mesh is only defined for
+    % the plasma domain. The default mesh will be used for the dielectric.
+    %
+    % :param inp: the first input
+    % :param flags: the second input
+    % :param model: the third input
+    
+    MeshTitle = 'Geometric_2p5D';  % Set a descriptive title for the mesh label
+    msg(1, ['Setting mesh ' MeshTitle], flags);  % Display status message
+    model.mesh.create('mesh1', inp.GeomName);  % Create a mesh object in the specified geometry sequence
+    model.mesh('mesh1').label(MeshTitle);  % Assign label to the mesh
+    model.mesh('mesh1').create('ftri1', 'FreeTri');  % Create a free triangular mesh feature for 2D domains
+    model.mesh('mesh1').feature('ftri1').create('size1', 'Size');  % Create a size control sub-feature for mesh
+                                                                   % element sizing within the FreeTri mesh
+    model.mesh('mesh1').feature('ftri1').feature('size1').selection.named( ...
+        'plasmadomain');  % Apply the size setting to predefined selection
+    model.mesh('mesh1').feature('ftri1').feature('size1').set('custom', 'on');  % Enable custom mesh size controls
+    model.mesh('mesh1').feature('ftri1').feature('size1').set('hmaxactive', true);  % Activate the custom maximum size
+   
+    if inp.General.size_elem_2D  > 0  % Case: element size properly defined in JSON General input data file
+        model.mesh('mesh1').feature('ftri1').feature('size1').set('hmax', ...
+            num2str(inp.General.size_elem_2D));  % Set maximum element size
+    else  % Case: element size not properly defined in JSON General input data file
+        error('The mesh element size is not set correctly.');
+    end
+    
+    model.mesh('mesh1').run;  % Execute mesh generation with the defined settings
 end

@@ -4,7 +4,7 @@ function obj = ReadJSON(file)
 % which can be accessed using usual dot notation.
 % %
 % :param JSON file: the first input
-% :returns: ``obj`` json object
+ % :returns: ``obj`` json object
 
     str = fileread(file);
     obj = jsondecode(str);

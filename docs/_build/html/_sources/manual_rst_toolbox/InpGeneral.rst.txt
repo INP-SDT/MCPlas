@@ -1,0 +1,4 @@
+InpGeneral
+~~~~~~~~~~
+
+.. autofunction:: toolbox.InpGeneral

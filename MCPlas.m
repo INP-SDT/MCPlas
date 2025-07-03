@@ -1,185 +1,115 @@
-% ------------------------
-% Main model build script
-% ------------------------
+%% ========================================================================
+%  Main Model Build Script for COMSOL Multiphysics via MATLAB LiveLink
+%  ------------------------------------------------------------------------
+%  This script constructs a COMSOL model for low-temperature plasma using 
+%  chemistry and general input data defined in JSON files. It sets up the 
+%  full modeling environment, including physics interfaces, parameters, 
+%  geometry, meshing, solvers, and postprocessing configurations.
+%
+%  Institution: Leibniz Institute for Plasma Science and Technology (INP)
+%  Date: 03/07/2025 
+% =========================================================================
 
 
-% inp is the main input object used in MCPlas
-clear inp;
+%% ====================================
+% === Initialization and input Load ===
+% =====================================
 
-% Set input file for reaction kinetic model
-%inp.cfg_RKM_file = '../plasma/Ar_Becker_2009.json';
-inp.cfg_RKM_file = 'plasma/Ar_Stankov_2022.json';
+clear inp flags model GeomName ModPath;  % Clear previous data
 
+%inp.cfg_RKM_file = 'plasma/Ar_Stankov_2022.json'; % Define path for reaction kinetic input file
+%inp.cfg_General_file = 'applications/Generic1D/General_input_data.json';
+inp.cfg_RKM_file = 'plasma/Ar_Becker_2009.json'; % Define path for reaction kinetic input file
+inp.cfg_General_file = 'applications/Generic1D/General_input_data_Ar4spec.json';  % Define path for general model
+                                                                                  % settings input file
 
-% Read json data from file
-addpath('Toolbox');
-inp.cfg_RKM_obj = ReadJSON(inp.cfg_RKM_file);
+addpath('Toolbox');  % Add a path to make the "Toolbox" folder accessible
 
-% Set up reaction kinetic model (RKM)
-inp = InpRKM(inp);
+inp.cfg_RKM_obj = ReadJSON(inp.cfg_RKM_file);  % Load chemistry model from JSON input data
+inp.cfg_General_obj = ReadJSON(inp.cfg_General_file);  % Load general model settings from JSON input data
 
+inp = InpRKM(inp); % Initialize reaction kinetic model
+flags = struct();
+[inp, flags, ModellingGeo] = InpGeneral(inp, flags); % Initialize general model parameters and geometry
 
-% The following is specific for Comsol with Matlab and will not work on
-% Matlab without connection to Comsol (LiveLink for Matlab) or on Octave
+%% ==================================
+% === COMSOL model initialization ===
+% ===================================
+
+% Import COMSOL class in order to use the ModelUtil commands
 import com.comsol.model.*
 import com.comsol.model.util.*
 
-addpath('Toolbox');
+flags.debug = 3; % Set debug level
 
-% clear  model GeomName ModPath flags;
-% global model GeomName ModPath flags inp;
+ModPath  = [pwd, '/Applications/Generic', ModellingGeo]; % Define model path
+pathParts = strsplit(ModPath, '/');
+BaseName = pathParts{end}; % Define base name
 
-clear model;
-%global flags model GeomName;
+msg(1, sprintf('Creating model %s in %s', BaseName, ModPath), flags); % Display model creation message
 
-%---- SetDebugLevel ------------------------------------------------------------
-  flags.debug    = 3;
-%-------------------------------------------------------------------------------   
-
-% define modelling geometry
-
-ModellingGeo  = '2p5D'; % 1D | 1p5D | 2D | 2p5D
-
-% set model name and path
-ModPath = [pwd,'/Applications/Generic',ModellingGeo];
-p=strsplit(ModPath,'/');
-BaseName = p(length(p));  BaseName = BaseName{1};
-
-msg(1, sprintf('Creating model %s in %s',BaseName, ModPath), flags);
-
+% Create COMSOL model and set basic identifiers
 model = ModelUtil.create('Model');
 model.modelPath(ModPath);
 model.name([BaseName '.mph']);
 model.label(BaseName);
-
 model.modelNode.create('mod1');
 
-%---- SetParamaters ------------------------------------------------------------
-
-% set comments
-ModComment = ['Dielectric barrier discharge in argon'];
-msg(1, ModComment, flags);
-dlmwrite([ModPath '/Comments.txt'], ModComment,'delimiter','');
+% Add project comments and write to file
+ModComment = 'Low-temperature plasma modelling';
+msg(1, ModComment, flags); 
+dlmwrite([ModPath '/Comments.txt'], ModComment, 'delimiter', '');
 model.comments(ModComment);
-  
-% set geometry
-GeomName  = ['Geom', ModellingGeo]; 
 
-% set various properties of the model
-flags.LogFormulation = true;   % true | false
-flags.SourceTermStab = true;   % true | false
-flags.enFlux   = 'DDAn';   % DDAn | DDA53 | DDAc
-flags.circuit  = 'RC';    % off | RC
-flags.dielectric = 0;   % 0 | 1 | 2   (number of dielectric layers)
-flags.nojac    = false;   % true | false
-flags.convflux = 'off';   % on | off
-  
+%% =====================
+% === Display input  ===
+% ======================
 
-%------------------------------------------------------------------------------- 
-% Comsol parameters
-%------------------------------------------------------------------------------- 
-    
-% geometry
-model.param.set('Geometry', '0', '_______________');
-model.param.set('ElecDist', '3.5[mm]', 'Gap width');
-model.param.set('ElecRadius', '0.5642[cm]', 'Electrode radius');
-  
-  
-model.param.set('DBthickness_1', '0.5[mm]', 'Thickness of dielectric_1'); % for the cases flags.dielectric = 1 and flags.dielectric = 2 
-model.param.set('DBthickness_2', '1.5[mm]', 'Thickness of dielectric_2'); % only for the case flags.dielectric = 2
-
-% discharge parameters
-model.param.set('Discharge','0', '_______________');    
-model.param.set('U0', '6[kV]', 'Applied voltage');
-model.param.set('p0', '760[Torr]', 'Constant gas pressure');  
-model.param.set('T0', '300[K]','Constant gas temperature');
-model.param.set('freq', '60[kHz]','Frequency');
-inp.AppliedVoltage = 'U0*sin(2*pi*freq*t)'; 
-  
-% source term stabilization
-if flags.SourceTermStab
-    model.param.set('Stabilization', '0',        '_______________');      
-    model.param.set('SrcStabFac', 'N_A_const[mol]*1[m^-3*s^-1]', ...
-        'Factor for source term stabilization');       
-    model.param.set('SrcStabPar','1','Parameter for source term stabilization');
+if flags.debug > 0
+    inp  % Display the input structure
 end
 
-%------------------------------------------------------------------------------- 
-% Additional input variables
-%------------------------------------------------------------------------------- 
- 
-% number of elements in plasma domain for 1D and 1p5D
-inp.Nelem_1D = 100;
+%% ================================
+% === Core Model Build Sequence ===
+% =================================
 
-% maximum element size in plasma domain in meters for 2D and 2p5D
-inp.Nelem_2D = 1e-4;
+SetParameters(inp, flags, model);  % Set user-defined parameters
 
-% time for output
-inp.tlist='range(0,1e-8,1/freq)';
+addpath(ModPath);  % Ensure application path is active
 
-% secondary electron emission at powered electrode (P), 
-% grounded electrode (G) and dielectric wall (W)
-inp.GammaP = 0.07;
-inp.GammaG = 0.07;
-inp.GammaW_1 = 0.02; % only for the cases flags.dielectric = 1 and flags.dielectric = 2 
-inp.GammaW_2 = 0.03; % only for the case flags.dielectric = 2
-    
-% energy of secondary electrons
-inp.UmeanSSE   = 2;  % energy of secondary electrons at electrode (P)
-  
-inp.UmeanSSE_1   = 3;  % energy of secondary electrons at dielectric surface_1
-inp.UmeanSSE_2   = 4;  % energy of secondary electrons at dielectric surface_2
-    
-% dielectric constant
-inp.epsilonr_1 = 4;  % relative permittivity of dielectric layer 1
-inp.epsilonr_2 = 9;  % relative permittivity of dielectric layer 2
+SetGeometry(inp, flags, model);  % Define geometry
 
-    
-% reflection coefficients at powered electrode (P), 
-% grounded electrode (G) and dielectric wall (W)    
-% Ar[1p0] Ar[1s5] Ar[1s4] Ar[1s3] Ar[1s2] Ar[2p10] Ar[2p9] Ar[2p8] Ar[2p7] Ar[2p6] Ar[2p5] Ar[2p4] Ar[2p3] Ar[2p2] Ar[2p1] Ar*[hl] Ar^+ Ar_2^*[^3S_u^+,v=0] Ar_2^*[^1S_u^+,v=0] Ar_2^*[^3S_u^+,v>>0] Ar_2^*[^1S_u^+,v>>0] Ar_2^+ e
-inp.ReflectionP = [0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,5e-4,0.3,0.3,0.3,0.3,5e-4,0.3];
-inp.ReflectionG = [0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,5e-4,0.3,0.3,0.3,0.3,5e-4,0.3];
-inp.ReflectionW_1 = [0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,5e-3,0.3,0.3,0.3,0.3,5e-3,0.7];
-inp.ReflectionW_2 = [0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,5e-3,0.3,0.3,0.3,0.3,5e-3,0.7];
+addpath('Toolbox');  % Ensure Toolbox path is active
 
-% initial values
-%Ar[1p0] Ar[1s5] Ar[1s4] Ar[1s3] Ar[1s2] Ar[2p10] Ar[2p9] Ar[2p8] Ar[2p7] Ar[2p6] Ar[2p5] Ar[2p4] Ar[2p3] Ar[2p2] Ar[2p1] Ar*[hl] Ar^+ Ar_2^*[^3S_u^+,v=0] Ar_2^*[^1S_u^+,v=0] Ar_2^*[^3S_u^+,v>>0] Ar_2^*[^1S_u^+,v>>0] Ar_2^+ e
-inp.Dspec_init = [1e12,1e12,1e12,1e12,1e12,1e12,2e12,1e12,1e12,1e12,1e12,1e12,1e12,2e12,1e12,1e12,1e12,1e12,1e12,1e12,2e12,1e12,2e12];
-  
-%-------------------------------------------------------------------------------   
+SetConstants(flags, model); % Set necessary constants
+SetVariables(inp, flags, model); % Define variables
+SetTransportCoefficients(inp, flags, model);  % Define transport coefficients
+SetRateCoefficients(inp, flags, model);  % Define rate coefficients
+SetEnergyRateCoefficients(inp, flags, model);  % Define energy rate coefficients
+SetRates(inp, flags, model);  % Define reaction rates
+SetEnergyRates(inp, flags, model);  % Define electron energy-related rates
 
-if flags.debug>0
-  inp
-end
+SetFluxes(inp, flags, model);  % Set flux terms
+SetSources(inp, flags, model);  % Set source terms
 
-addpath(ModPath);
-SetGeometry(flags, model, GeomName);
+AddSurfaceChargeAccumulation(inp, flags, model);  % Add equation for surface charge accumulation
+AddPoissonEquation(inp, flags, model);  % Add Poisson's equation
+AddFluidEquations(inp, flags, model);  % Add fluid equations
 
-addpath('Toolbox');
-SetConstants(flags, model);
-SetVariables(inp, flags, model, GeomName);
-SetTransportCoefficients(inp, flags, model);
-SetRateCoefficients(inp, flags, model);
-SetEnergyRateCoefficients(inp, flags, model);
-SetRates(inp, flags, model);
-SetEnergyRates(inp, flags, model);
+SetElectrical(inp, flags, model);  % Configure electrical settings
+SetProbesAndGraphs(inp, flags, model);  % Configure probes and plots
 
-SetFluxes(inp, flags, model, GeomName);
-SetSources(inp, flags, model, GeomName);
+addpath(ModPath);  % Ensure application path is active
 
-AddSurfaceChargeAccumulation(flags, model, GeomName);
-AddPoissonEquation(flags, model, GeomName);
-AddFluidEquations(inp, flags, model, GeomName);
-%SetElectrical;
+SetMesh(inp, flags, model);  % Generate computational mesh
+SetProject(inp, flags, model);  % Finalize solver, study, and output settings
 
-addpath(ModPath);
-SetMesh(inp, flags, model, GeomName);
-SetProject(inp, flags, model);
+%% =========================
+% === Save Model to File ===
+% ==========================
 
-%-------------------------------------------------------------------------------
+mphsave(model, [ModPath, '/', BaseName '.mph']);
+msg(1, sprintf('Model saved to %s.mph', BaseName), flags);
 
-mphsave(model,[ModPath,'/',BaseName '.mph'])
-msg(1,sprintf('model saved to %s.mph',BaseName), flags);
-out = model;
+out = model;  % Export final model object
 

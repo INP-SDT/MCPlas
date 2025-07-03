@@ -1,0 +1,108 @@
+{
+  "source": {
+    "properties": {
+      "geometry_settings": {
+        "gap_distance": 0.01,
+        "diel_thickness_powered": 0.002,
+        "diel_thickness_grounded": 0,
+        "rect_electode": {
+          "ele_length": 0.05,
+          "ele_width": 0.02
+        },
+        "circ_electrode": {
+          "ele_radius": 0
+        },
+        "coax_eletrode": {
+          "inner_ele_radius": 0,
+          "outer_ele_radius": 0,
+          "ele_length": 0
+        }
+      },
+      "source_settings": {
+        "elec_prop": {
+          "applied_voltage": 300,
+          "voltage_frequency": 0
+        },
+        "mat_prop": {
+          "perm_diel_powered": 3.4,
+          "perm_diel_grounded": 0
+        }
+      }
+    }
+  },
+  "medium": {
+    "name": "Ar",
+    "properties": {
+      "gas_properties": {
+        "pressure": 133.322,
+        "carrier_gas_composition": "100% Ar",
+        "temperature": 300
+      },
+      "spec_prop": {
+        "electron": {
+          "sec_emiss_coeff": {
+            "ele_powered": 0.07,
+            "ele_grounded": 0.07,
+            "diel_powered": 0,
+            "diel_grounded": 0
+          },
+          "sec_ele_energy": {
+            "ele_powered": 2,
+            "ele_grounded": 2,
+            "diel_powered": 0,
+            "diel_grounded": 0
+          },
+          "refl_coeff": {
+            "ele_powered": 0.3,
+            "ele_grounded": 0.3,
+            "diel_powered": 0,
+            "diel_grounded": 0
+          },
+          "init_dens": 1000000000000,
+          "init_ene": 3
+        },
+        "background_gas": [
+          {
+            "name": "Ar",
+            "background": 100
+          }
+        ],
+        "heavy_spec": [
+          {
+            "name": "Ar[*]",
+            "refl_ele_powered": 0.3,
+            "refl_ele_grounded": 0.3,
+            "refl_diel_powered": 0.3,
+            "refl_diel_grounded": 0.3,
+            "int_dens": 1000000000000
+          },
+          {
+            "name": "Ar^+",
+            "refl_ele_powered": 0.0005,
+            "refl_ele_grounded": 0.0005,
+            "refl_diel_powered": 0.005,
+            "refl_diel_grounded": 0.005,
+            "int_dens": 1000000000000
+          }
+        ]
+      }
+    }
+  },
+  "diagnostics": {
+    "name": "Fliud-Poisson modelling",
+    "diagnostic_properties": {
+      "diagnostic_settings": {
+        "spatial_dimensions": "1D",
+        "electron_flux": "DDA53",
+        "log_formulation": true,
+        "stabilization": true,
+        "nojac": true,
+        "element_number": 500,
+        "element_size": 0,
+        "start_time": 0,
+        "end_time": 0.000001,
+        "time_step": 1e-8
+      }
+    }
+  }
+}
