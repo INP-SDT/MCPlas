@@ -1,0 +1,703 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "MCPlas general input dataset schema",
+  "description": "A schema for defining general input data for building a COMSOL model via the MCPlas toolbox.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "title": "UUID",
+      "description": "System UUID for object identification.",
+      "type": "string"
+    },
+    "url": {
+      "title": "URL",
+      "description": "Landing page (URL) of the dataset.",
+      "type": "string"
+    },
+    "source": {
+      "title": "Plasma Source",
+      "description": "Device which creates the plasma in a given medium.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "name": {
+          "title": "Source Name",
+          "description": "Name and/or type of the plasma source used in the study. Examples: kINPen, COST Jet, CCP.",
+          "type": "string"
+        },
+        "application": {
+          "title": "Source Application",
+          "description": "Application the plasma source is used for. Examples: decontamination, PECVD, etching.",
+          "type": "string"
+        },
+        "specification": {
+          "title": "Source Specification",
+          "description": "Technical specification of the plasma source (waveform, frequency range, pressure range, temperature range).",
+          "type": "string"
+        },
+        "properties": {
+          "title": "Source Properties",
+          "description": "Properties of the plasma source.",
+          "properties": {
+            "geometry_settings": {
+              "title": "Geometry settings",
+              "description": "Object including all attributes defining the configuration of the plasma setup such as the type of plasma device used (e.g., DBD, plasma jet, corona discharge, etc.), its physical shape, structure, dimensions, and materials.",
+              "required": [
+                "gap_distance",
+                "diel_thickness_powered",
+                "diel_thickness_grounded",
+                "rect_electode",
+                "circ_electrode",
+                "coax_eletrode"
+              ],
+              "properties": {
+                "geometry_description": {
+                  "type": "string",
+                  "title": "Geometry description",
+                  "description": "Free text description of the source geometry and materials."
+                },
+                "gap_distance": {
+                  "title": "Gap distance [m]",
+                  "description": "This term refers to the effective space in which plasma formation occurs.",
+                  "type": "number"
+                },
+                "diel_thickness_powered": {
+                  "title": "Thickness of the dielectric layer on the powered electrode [m]",
+                  "description": "If the powered electrode has no dielectric layer, the value in this field should be set to zero.",
+                  "type": "number"
+                },
+                "diel_thickness_grounded": {
+                  "title": "Thickness of the dielectric layer on the grounded electrode [m]",
+                  "description": "If the grounded electrode has no dielectric layer, the value in this field should be set to zero.",
+                  "type": "number"
+                },
+                "rect_electode": {
+                  "title": "Rectangular electrodes",
+                  "description": "Electrode dimensions in the case of a rectangular shape. If the electrodes are not rectangular, all values in this section should be set to zero.",
+                  "required": [
+                    "ele_length",
+                    "ele_width"
+                  ],
+                  "properties": {
+                    "ele_length": {
+                      "title": "Electrode length [m]",
+                      "description": "",
+                      "type": "number"
+                    },
+                    "ele_width": {
+                      "title": "Electrode width [m]",
+                      "description": "",
+                      "type": "number"
+                    }
+                  },
+                  "type": "object"
+                },
+                "circ_electrode": {
+                  "title": "Circular electrodes",
+                  "description": "Electrode dimensions in the case of a circular shape. If the electrodes are not circular, all values in this section should be set to zero.",
+                  "required": [
+                    "ele_radius"
+                  ],
+                  "properties": {
+                    "ele_radius": {
+                      "type": "number",
+                      "title": "Electrode radius [m]",
+                      "description": ""
+                    }
+                  },
+                  "type": "object"
+                },
+                "coax_eletrode": {
+                  "title": "Coaxial electrodes",
+                  "description": "Electrode dimensions in the case of a coaxial configuration. If the configuration of the electrodes is not coaxial, all values in this section should be set to zero.",
+                  "required": [
+                    "inner_ele_radius",
+                    "outer_ele_radius",
+                    "ele_length"
+                  ],
+                  "properties": {
+                    "inner_ele_radius": {
+                      "type": "number",
+                      "title": "Outer radius of inner electrode [m]",
+                      "description": ""
+                    },
+                    "outer_ele_radius": {
+                      "title": "Inner radius of outer electrode [m]",
+                      "description": "",
+                      "type": "number"
+                    },
+                    "ele_length": {
+                      "title": "Electrode length [m]",
+                      "description": "",
+                      "type": "number"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            },
+            "source_settings": {
+              "title": "Source settings",
+              "description": "Object including all attributes of the plasma source used to generate the desired plasma.",
+              "properties": {
+                "elec_prop": {
+                  "title": "Electrical properties",
+                  "description": "",
+                  "required": [
+                    "applied_voltage",
+                    "voltage_frequency"
+                  ],
+                  "properties": {
+                    "applied_voltage": {
+                      "title": "Applied voltage [V]",
+                      "description": "In the case of DC discharge, this field defines the value of constant voltage applied on a powered electrode. In the case of RF discharge, this field defines the amplitude of the applied voltage on a powered electrode.",
+                      "type": "number"
+                    },
+                    "voltage_frequency": {
+                      "title": "Frequency of applied voltage [Hz]",
+                      "description": "Frequency of the applied voltage. In the case of DC discharge, the value in this field should be zero.",
+                      "type": "number"
+                    },
+                    "discharge_current": {
+                      "type": "number",
+                      "title": "Discharge current [A]",
+                      "description": "Current passing through the plasma discharge."
+                    },
+                    "dissipated_power": {
+                      "type": "number",
+                      "title": "Dissipated power [W]",
+                      "description": "Power actually used by the plasma discharge, excluding losses."
+                    }
+                  },
+                  "type": "object"
+                },
+                "mat_prop": {
+                  "title": "Material properties",
+                  "description": "",
+                  "required": [
+                    "perm_diel_powered",
+                    "perm_diel_grounded"
+                  ],
+                  "properties": {
+                    "perm_diel_powered": {
+                      "title": "Relative permitivity of dielectric on powered electrode",
+                      "description": "If the powered electrode has no dielectric layer, the value in this field should be set to zero.",
+                      "type": "number"
+                    },
+                    "perm_diel_grounded": {
+                      "title": "Relative permitivity of dielectric on grounded electrode",
+                      "description": "If the grounded electrode has no dielectric layer, the value in this field should be set to zero.",
+                      "type": "number"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object",
+              "required": [
+                "elec_prop",
+                "mat_prop"
+              ]
+            }
+          },
+          "type": "object",
+          "required": [
+            "geometry_settings",
+            "source_settings"
+          ]
+        },
+        "procedure": {
+          "title": "Source Procedure",
+          "description": "Procedure to prepare and use the plasma source.",
+          "properties": {},
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "medium": {
+      "title": "Plasma Medium",
+      "description": "Gas, mixture of gases, or other substance, which is either (partially) ionized or otherwise activated by a source device.",
+      "required": [
+        "properties",
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "title": "Medium Name",
+          "description": "Name of the medium the plasma source is operated in. Examples: dry air, Ar, CO2, water.",
+          "type": "string"
+        },
+        "properties": {
+          "title": "Medium Properties",
+          "description": "Properties of the medium.",
+          "properties": {
+            "gas_properties": {
+              "title": "Gas properties",
+              "description": "Object including all attributes defining the carrier gas.",
+              "required": [
+                "pressure",
+                "temperature",
+                "carrier_gas_composition"
+              ],
+              "properties": {
+                "gas_description": {
+                  "type": "string",
+                  "title": "Gas description",
+                  "description": "Free text description of the carrier gas."
+                },
+                "pressure": {
+                  "title": "Pressure [Pa]",
+                  "description": "Pressure of the carrier gas during plasma operation.",
+                  "type": "number"
+                },
+                "carrier_gas_composition": {
+                  "title": "Carrier gas composition",
+                  "description": "Free text about composition of the gas mixture used in the plasma (e.g., 90% N₂, 10% O₂).",
+                  "type": "string"
+                },
+                "temperature": {
+                  "title": "Temperature [°C]",
+                  "description": "Temperature of the gas during plasma operation.",
+                  "type": "number"
+                }
+              },
+              "type": "object"
+            },
+            "spec_prop": {
+              "title": "Species_properties",
+              "description": "",
+              "required": [
+                "background_gas",
+                "electron"
+              ],
+              "properties": {
+                "electron": {
+                  "title": "Electron",
+                  "description": "",
+                  "required": [
+                    "sec_emiss_coeff",
+                    "sec_ele_energy",
+                    "refl_coeff",
+                    "init_dens",
+                    "init_ene"
+                  ],
+                  "properties": {
+                    "sec_emiss_coeff": {
+                      "title": "Secondary electron emission coefficient",
+                      "description": "Secondary electron emission coefficient at different surfaces",
+                      "required": [
+                        "ele_powered",
+                        "ele_grounded",
+                        "diel_powered",
+                        "diel_grounded"
+                      ],
+                      "properties": {
+                        "ele_powered": {
+                          "title": "At powered electrode",
+                          "description": "If the powered electrode is covered by dielectric layer, the value in this field should be set to zero. ",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "ele_grounded": {
+                          "title": "At grounded electrode",
+                          "description": "If the grounded electrode is covered by dielectric layer, the value in this field should be set to zero. ",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "diel_powered": {
+                          "title": "At dielectric on powered electrode",
+                          "description": "If the powered electrode has no dielectric layer, the value in this field should be set to zero.",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "diel_grounded": {
+                          "title": "At dielectric on grounded electrode",
+                          "description": "If the grounded electrode has no dielectric layer, the value in this field should be set to zero.",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "sec_ele_energy": {
+                      "title": "Energy of secondary electrons",
+                      "description": "Energy of secondary electrons emitted from different surfaces",
+                      "required": [
+                        "ele_powered",
+                        "ele_grounded",
+                        "diel_powered",
+                        "diel_grounded"
+                      ],
+                      "properties": {
+                        "ele_powered": {
+                          "title": "At powered electrode [eV]",
+                          "description": "If the powered electrode is covered by dielectric layer, the value in this field should be set to zero. ",
+                          "type": "number"
+                        },
+                        "ele_grounded": {
+                          "title": "At grounded electrode [eV]",
+                          "description": "If the grounded electrode is covered by dielectric layer, the value in this field should be set to zero. ",
+                          "type": "number"
+                        },
+                        "diel_powered": {
+                          "title": "At dielectric on powered electrode [eV]",
+                          "description": "If the powered electrode has no dielectric layer, the value in this field should be set to zero.",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "diel_grounded": {
+                          "title": "At dielectric on grounded electrode [eV]",
+                          "description": "If the grounded electrode has no dielectric layer, the value in this field should be set to zero.",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "refl_coeff": {
+                      "title": "Reflection coefficient",
+                      "description": "Reflection coefficient at different surfaces",
+                      "required": [
+                        "ele_powered",
+                        "ele_grounded",
+                        "diel_powered",
+                        "diel_grounded"
+                      ],
+                      "properties": {
+                        "ele_powered": {
+                          "title": "At powered electrode",
+                          "description": "If the powered electrode is covered by dielectric layer, the value in this field should be set to zero. ",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "ele_grounded": {
+                          "title": "At grounded electrode",
+                          "description": "If the grounded electrode is covered by dielectric layer, the value in this field should be set to zero. ",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "diel_powered": {
+                          "title": "At dielectric on powered electrode",
+                          "description": "If the powered electrode has no dielectric layer, the value in this field should be set to zero.",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "diel_grounded": {
+                          "title": "At dielectric on gronded electrode",
+                          "description": "If the grounded electrode has no dielectric layer, the value in this field should be set to zero.",
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "init_dens": {
+                      "title": "Initial number density [1/m^3]",
+                      "description": "This field defines initial number density of electrons necessary for the plasma source modelling.",
+                      "type": "number"
+                    },
+                    "init_ene": {
+                      "title": "Initial mean electron energy [eV]",
+                      "description": "This field defines initial mean electron energy necessary for the plasma source modelling.",
+                      "type": "number",
+                      "minimum": 0,
+                      "default": 3
+                    }
+                  },
+                  "type": "object"
+                },
+                "background_gas": {
+                  "title": "Background gas species",
+                  "description": "",
+                  "items": {
+                    "title": "Species 1",
+                    "description": "",
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "title": "Species name",
+                        "description": "Definition of species name. The name must be one of those defined in the JSON file containing the reaction kinetic model data."
+                      },
+                      "background": {
+                        "type": "number",
+                        "title": "Content percentage in background gas  [%]",
+                        "description": "This field defines the value of the species fraction in the background gas."
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "background"
+                    ]
+                  },
+                  "type": "array"
+                },
+                "heavy_spec": {
+                  "title": "Heavy species",
+                  "description": "",
+                  "items": {
+                    "title": "Species 1",
+                    "description": "",
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "title": "Species name",
+                        "description": "Definition of species name. The name must be one of those defined in the JSON file containing the reaction kinetic model data."
+                      },
+                      "refl_ele_powered": {
+                        "title": "Reflection coefficient at powered electrode",
+                        "description": "",
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "refl_ele_grounded": {
+                        "type": "number",
+                        "title": "Reflection coefficient at grounded electrode",
+                        "description": "",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "refl_diel_powered": {
+                        "title": "Reflection coefficient at dielectric on powered electrode",
+                        "description": "If the powered electrode has no dielectric layer, the value in this field should be set to zero.",
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "refl_diel_grounded": {
+                        "title": "Reflection coefficient at dielectric on grounded electrode",
+                        "description": "If the grounded electrode has no dielectric layer, the value in this field should be set to zero.",
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "int_dens": {
+                        "type": "number",
+                        "title": "Initial number density [1/m^3]",
+                        "description": "This field defines initial number density necessary for the plasma source modelling."
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "refl_ele_powered",
+                      "refl_ele_grounded",
+                      "refl_diel_powered",
+                      "refl_diel_grounded",
+                      "int_dens"
+                    ]
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object",
+          "required": [
+            "gas_properties",
+            "spec_prop"
+          ]
+        },
+        "procedure": {
+          "title": "Medium Procedure",
+          "description": "Standard procedure to prepare the medium (pre-treatment).",
+          "properties": {},
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "target": {
+      "title": "Plasma Target",
+      "description": "Substrate the plasma acts on, directly (target is/was in contact with a plasma) or mediated by an additional substance.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "title": "Target Properties",
+          "description": "Properties of the target.",
+          "properties": {},
+          "type": "object"
+        },
+        "procedure": {
+          "title": "Target Procedure",
+          "description": "Standard procedure to prepare the target.",
+          "type": "object",
+          "properties": {}
+        }
+      }
+    },
+    "diagnostics": {
+      "title": "Diagnostics",
+      "description": "Measurement, modeling, or simulation method used to produce the digital resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Diagnostics Name",
+          "description": "Name of the applied diagnostics and/or modelling/simulation methods. Examples: OES, SEM, PIC-MCC.",
+          "type": "string"
+        },
+        "diagnostic_properties": {
+          "title": "Diagnostics Properties",
+          "description": "Details of the applied diagnostics.",
+          "type": "object",
+          "properties": {
+            "diagnostic_settings": {
+              "title": "Fluid-Poisson model settings",
+              "description": "Object include attributes necessary to setup Fluid-Poisson model via MSPlas.",
+              "type": "object",
+              "properties": {
+                "spatial_dimensions": {
+                  "title": "Modelling geometry",
+                  "description": "This field gives information about the spatial dimensions and coordinate types used in the model. It considers the following:\n1D - one-dimensional modelling,\n1p5D - one-dimensional modelling (polar coordinate),\n2D - two-dimensional modelling (Cartesian coordinates),\n2p5D - two-dimensional modelling (cylindrical coordinates).\n",
+                  "type": "string",
+                  "default": "1D",
+                  "enum": [
+                    "1D",
+                    "1p5D",
+                    "2D",
+                    "2p5D"
+                  ]
+                },
+                "electron_flux": {
+                  "title": "Drift-diffusion approximation",
+                  "description": "This field defines drift-diffusion approximation used in the model. For improved drift-diffusion approximation choose \"DDAn\", while for drift-diffusion approximation where diffusion and mobility of electron energy are defined as 5/3UeDe and 5/3Uebe choose \"DDA53\". For conventional drift-diffusion approximation choose \"DDAc\". Details about mentioned approximations can be found in M. M. Becker and D. Loffhagen, AIP ADVANCES 3, 012108 (2013).\n",
+                  "type": "string",
+                  "default": "DDA53",
+                  "enum": [
+                    "DDAn",
+                    "DDA53",
+                    "DDAc"
+                  ]
+                },
+                "log_formulation": {
+                  "title": "Logarithmic formulation of species density and mean electron energy",
+                  "description": "The use of logarithmic formulation is often recommended in practice, since it has been shown to improve numerical stability.",
+                  "type": "boolean",
+                  "default": false
+                },
+                "stabilization": {
+                  "title": "Source term stabilization",
+                  "description": "Include source term stabilisation for species number density and mean electron energy balance equations to improve the numerical stability of simulations.",
+                  "type": "boolean",
+                  "default": true
+                },
+                "nojac": {
+                  "type": "boolean",
+                  "title": "\"nojac\" operator",
+                  "description": "\"In COMSOL Multiphysics, the nojac operator is used to exclude specific expressions from the Jacobian matrix computation during numerical simulations. This can lead to reduced memory usage and potentially faster computation times, as the solver avoids unnecessary calculations\"",
+                  "default": true
+                },
+                "element_number": {
+                  "title": "Number of spatial steps",
+                  "description": "This field defines a number of spatial steps in the plasma domain for 1D and 1p5D geometries. The value in this field should be set to zero for other geometries (2D and 2p5D).",
+                  "type": "number",
+                  "default": 500
+                },
+                "element_size": {
+                  "title": "Maximum element size in triangular mesh [m]",
+                  "description": "This field defines the maximum size of triangular elements in the plasma domain for 2D and 2p5D geometries. The value in this field should be set to zero for other geometries (1D and 1p5D).",
+                  "type": "number"
+                },
+                "start_time": {
+                  "title": "Start output time [s]",
+                  "description": "First time point for output ",
+                  "type": "number",
+                  "minimum": 0
+                },
+                "end_time": {
+                  "title": "End output time [s]",
+                  "description": "Last time point for output ",
+                  "type": "number"
+                },
+                "time_step": {
+                  "title": "Time step for output [s]",
+                  "description": "Time step for the output defines the time points between the start and end of the output time.",
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "time_step",
+                "start_time",
+                "end_time",
+                "element_size",
+                "element_number"
+              ]
+            }
+          }
+        },
+        "procedure": {
+          "title": "Diagnostics Procedure",
+          "description": "Description of the diagnostic procedure.",
+          "type": "object",
+          "properties": {}
+        }
+      }
+    },
+    "resource": {
+      "title": "Resource",
+      "description": "Digital object obtained by diagnostics",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "UUID",
+            "description": "System UUID for object identification.",
+            "type": "string"
+          },
+          "url": {
+            "title": "URL",
+            "description": "Download link (URL) of the resource.",
+            "type": "string"
+          },
+          "filetype": {
+            "title": "Resource Filetype",
+            "description": "File type of the resource. Examples: csv, pdf, png, txt.",
+            "type": "string"
+          },
+          "datatype": {
+            "title": "Resource Datatype",
+            "description": "Data type of the resource. Examples: data table, SEM image, cfu-plot, high-speed video.",
+            "type": "string"
+          },
+          "range": {
+            "title": "Resource Range",
+            "description": "Range in which the resource is valid. Example: wavelength range: 400-800 nm.",
+            "type": "string"
+          },
+          "quality": {
+            "title": "Resource Quality",
+            "description": "Data quality score. One of: verified, published, reviewed.",
+            "type": "string",
+            "enum": [
+              "verified",
+              "published",
+              "reviewed"
+            ]
+          }
+        }
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "medium"
+  ]
+}
