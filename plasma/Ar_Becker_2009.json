@@ -57,7 +57,6 @@
       "info": [
         {
           "type": "energy",
-		  "comments":"gjhjknjkn",
           "data": {
             "type": "Constant",
             "value": 0,
@@ -4154,7 +4153,7 @@
           "threshold": { "value": 0, "unit": "eV" },
           "data": {
             "type": "LUT",
-            "labels": ["Mean electron energy", "Cross Section"],
+            "labels": ["Umean", "Sigma"],
             "units": ["eV", "m^2"],
             "values": [
               [0.000000E+00, 6.300000E-20],
@@ -4612,7 +4611,7 @@
           "threshold": { "value": 11.55, "unit": "eV" },
           "data": {
             "type": "LUT",
-            "labels": ["Mean electron energy", "Cross Section"],
+            "labels": ["Umean", "Sigma"],
             "units": ["eV", "m^2"],
             "values": [
               [1.155000E+01, 0.000000E+00],
@@ -5066,7 +5065,7 @@
           "threshold": { "value": 15.76, "unit": "eV" },
           "data": {
             "type": "LUT",
-            "labels": ["Umean", "k"],
+            "labels": ["Umean", "Sigma"],
             "units": ["eV", "m^3/s"],
             "values": [
               [1.576000E+01, 0.000000E+00],
@@ -5497,7 +5496,7 @@
           "threshold": { "value": 4.21, "unit": "eV" },
           "data": {
             "type": "LUT",
-            "labels": ["Umean", "k"],
+            "labels": ["Umean", "Sigma"],
             "units": ["eV", "m^3/s"],
             "values": [
               [4.210000E+00, 0.000000E+00],
@@ -5903,7 +5902,7 @@
           "threshold": { "value": 0, "unit": "eV" },
           "data": {
             "type": "LUT",
-            "labels": ["Umean", "Cross Section"],
+            "labels": ["Umean", "Sigma"],
             "units": ["eV", "m^2"],
             "values": [
               [0.000000E+00, 2.090568E-21],

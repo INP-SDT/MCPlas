@@ -26,16 +26,6 @@
           "description": "Name and/or type of the plasma source used in the study. Examples: kINPen, COST Jet, CCP.",
           "type": "string"
         },
-        "application": {
-          "title": "Source Application",
-          "description": "Application the plasma source is used for. Examples: decontamination, PECVD, etching.",
-          "type": "string"
-        },
-        "specification": {
-          "title": "Source Specification",
-          "description": "Technical specification of the plasma source (waveform, frequency range, pressure range, temperature range).",
-          "type": "string"
-        },
         "properties": {
           "title": "Source Properties",
           "description": "Properties of the plasma source.",

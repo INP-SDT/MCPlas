@@ -2,7 +2,7 @@ function [inp] = InpRKM(inp)
     %
     % InpRKM function uses the object structure generated from the JSON 
     % data and returns the same structure with additional fields related to
-    % reaction kinetic model(RKM) necessary for setting up the COMSOL model.
+    % reaction kinetic model (RKM) necessary for setting up the COMSOL model.
     %
     % :param inp: input
     % :returns: ``inp`` output

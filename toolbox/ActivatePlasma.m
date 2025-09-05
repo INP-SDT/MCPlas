@@ -1,6 +1,6 @@
 function ActivatePlasma(study, ok, model, inp)
     %
-    % The ActivatePlasma function enables or disables plasma-related physics 
+    % ActivatePlasma function enables or disables plasma-related physics 
     % interfaces in a COMSOL study step, based on input flags.
     %
     % :param study:     the first input

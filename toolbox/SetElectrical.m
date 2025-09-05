@@ -1,6 +1,6 @@
 function SetElectrical(inp, flags, model)
     %
-    % The SetElectrical function uses functions specific for the LiveLink
+    % SetElectrical function uses functions specific for the LiveLink
     % for MATLAB module to set the applied voltage and current density
     % in the COMSOL model based on input data.
     %

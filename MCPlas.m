@@ -70,7 +70,7 @@ if flags.debug > 0
 end
 
 %% ================================
-% === Core Model Build Sequence ===
+% === Core Model Setup Pipeline ===
 % =================================
 
 SetParameters(inp, flags, model);  % Set user-defined parameters

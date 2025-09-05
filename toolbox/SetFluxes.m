@@ -570,7 +570,7 @@ function SetBoundaryFluxes(transpexpr, coord, inp, model)
                     ['((1-r', id, ')/(1+r', id, '))*(abs(V', id, '_', coord, ...
                     '*eq', id, '.n', coord, '*N', id, ') + 0.5*vth', id, ...
                     '*N', id, ')']);  % Set species boundary flux in a variable node with
-                                      % the tag name "bndfluxes" in the COMSOL model tree
+                                    % the tag name "bndfluxes" in the COMSOL model tree
             % Only diffusion
             elseif length(find(strcmp(transpexpr(:, 1), ['D', id]) == 1)) > 0
                 model.variable(variablesname).set(['F', id, '_boundary'], ...
@@ -583,7 +583,7 @@ function SetBoundaryFluxes(transpexpr, coord, inp, model)
                     ['(1-r', id, ')*((max(V', id, '_', coord, '*eq', ...
                     id, '.n', coord, ',0) + 0.25*vth', id, ...
                     ')*N', id, ')']);  % Set species boundary flux in a variable node with
-                                       % the tag name "bndfluxes" in the COMSOL model tree
+                                     % the tag name "bndfluxes" in the COMSOL model tree
             end
             
         else  % Case: 2D Cartesian (x-axis and y-axis) or cylindrical (r-axis and z-axis) coordinates
@@ -596,14 +596,14 @@ function SetBoundaryFluxes(transpexpr, coord, inp, model)
                     '*eq', id, '.n', coord(2), ' + V', id, '_', coord(1), ...
                     '*eq', id, '.n', coord(1), ')*N', id, ' + 0.5*vth', ...
                     id, '*N', id, ')']);  % Set species boundary flux in a variable node with
-                                          % the tag name "bndfluxes" in the COMSOL model tree
+                                        % the tag name "bndfluxes" in the COMSOL model tree
             
             % Only diffusion
             elseif length(find(strcmp(transpexpr(:, 1), ['D', id]) == 1)) > 0
                 model.variable(variablesname).set(['F', id, '_boundary'], ...
                     ['((1-r', id, ')/(1+r', id, '))*(0.5*vth', id, ...
                     '*N', id, ')']);  % Set species boundary flux in a variable node with
-                                      % the tag name "bndfluxes" in the COMSOL model tree
+                                    % the tag name "bndfluxes" in the COMSOL model tree
             
             % Only drift
             elseif length(find(strcmp(specexpr(:, 1), ['V', id, '_', coord(1)]) == 1)) > 0
@@ -612,7 +612,7 @@ function SetBoundaryFluxes(transpexpr, coord, inp, model)
                     id, '.n', coord(2), ' + V', id, '_', coord(1), ...
                     '*eq', id, '.n', coord(1), ',0) + 1/4*vth', id, ...
                     ')*N', id, ')']);  % Set species boundary flux in a variable node with
-                                       % the tag name "bndfluxes" in the COMSOL model tree
+                                     % the tag name "bndfluxes" in the COMSOL model tree
             end
         end
     end
@@ -669,7 +669,7 @@ function SetBoundaryFluxes(transpexpr, coord, inp, model)
             '*eq', id, '.n', coord(2), ')*We', ...
             ' + 2/3*vth', id, '*We) - umWall*(2*gamma/(1+r', id, ...
             '))*(', iflux, ')']);  % Set electron energy boundary flux in a variable node with
-                                   % the tag name "bndfluxes" in the COMSOL model tree
+                                 % the tag name "bndfluxes" in the COMSOL model tree
         
     end
 
@@ -680,13 +680,13 @@ function SetBoundaryFluxes(transpexpr, coord, inp, model)
         model.variable(variablesname).set('DisplacementCurrent', ...
             ['-epsilon0*epsilonr*Phi', coord, 't*poeq.n', coord], ...
             'Displacement current density');  % Set displacement current in a variable node with
-                                              % the tag name "bndfluxes" in the COMSOL model tree
+                                          % the tag name "bndfluxes" in the COMSOL model tree
     else  % Case: 2D Cartesian (x-axis and y-axis) or cylindrical (r-axis and z-axis) coordinates
         model.variable(variablesname).set('DisplacementCurrent', ...
             ['-epsilon0*epsilonr*(Phi', coord(2), 't*poeq.n', ...
             coord(2), '+Phi', coord(1), 't*poeq.n', coord(1), ...
             ')'], 'Displacement current density');  % Set displacement current in a variable node with
-                                                    % the tag name "bndfluxes" in the COMSOL model tree
+                                                % the tag name "bndfluxes" in the COMSOL model tree
     end
 
     % Set charged species flux onto the wall
@@ -707,6 +707,6 @@ function SetBoundaryFluxes(transpexpr, coord, inp, model)
 
     model.variable(variablesname).set('NormalChCFlux', ...
         ['e0*(', tmp, ')'], 'Charge carrier flux onto the wall');  % Set flux of charged species onto the 
-                                                                   % wall in a variable node with the tag
-                                                                   % name "bndfluxes" in the COMSOL model tree
+                                                            % wall in a variable node with the tag
+                                                            % name "bndfluxes" in the COMSOL model tree
 end

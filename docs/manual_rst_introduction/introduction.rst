@@ -33,7 +33,7 @@ The fluxes :math:`{\mathbf{\Gamma}}_\mathrm{h}` of heavy particles (:math:`j=\ma
         \mathbf{\Gamma}_\mathrm{h}(\mathbf{r},t)
         = \mathrm{sgn}(q_\mathrm{h})n_\mathrm{h}(\mathbf{r},t) b_\mathrm{h}(\mathbf{r},t) \mathbf{E}(\mathbf{r},t)   
         -\nabla(D_\mathrm{h}(\mathbf{r},t) n_\mathrm{h}(\mathbf{r},t))
-        \,  \label{eq:flux_particle}\\.
+        \,  \label{eq:flux_particle}.
  
 Here, :math:`b_\mathrm{h}` and :math:`D_\mathrm{h}` stand for the  mobility and diffusion coefficient of heavy species :math:`\mathrm{h}`, respectively, while the function :math:`\mathrm{sgn}(q_\mathrm{h})` defines the sign of :math:`q_\mathrm{h}`.
 
@@ -57,22 +57,23 @@ These properties are given as integrals of the isotropic part :math:`f_0` and th
 
     .. math::
         \nu_\mathrm{e} = \frac{2}{3m_\mathrm{e}\mathit{\Gamma}_\mathrm{e}}\int\limits_0^\infty 
-        \frac{U^{\frac{3}{2}}}{\lambda_\mathrm{e}(U)} f_1(U)\,\mathrm{d}U\,, \label{eq:nu}\\
+        \frac{U^{\frac{3}{2}}}{\lambda_\mathrm{e}(U)} f_1(U)\,\mathrm{d}U, \label{eq:nu}\\
         %	
         \tilde{\nu}_\mathrm{e} = \frac{2}{3m_\mathrm{e} Q_\mathrm{e}}\int\limits_0^\infty 
-        \frac{U^{\frac{5}{2}}}{\lambda_\mathrm{e}(U)} f_1(U)\,\mathrm{d}U\,, \label{eq:enu}\\
+        \frac{U^{\frac{5}{2}}}{\lambda_\mathrm{e}(U)} f_1(U)\,\mathrm{d}U, \label{eq:enu}\\
         %	
         \xi_0 = \frac{2}{3 n_\mathrm{e}}\int\limits_0^\infty 
         U^{\frac{3}{2}} f_0(U)\,\mathrm{d}U\,, \label{eq:transp_first}\\
         %	
         \xi_2 = \frac{4}{15 n_\mathrm{e}}\int\limits_0^\infty 
-        U^{\frac{3}{2}} f_2(U)\,\mathrm{d}U\,, \\	
+        U^{\frac{3}{2}} f_2(U)\,\mathrm{d}U,
+		\\	
         %	
         \tilde{\xi}_0 = \frac{2}{3 n_\mathrm{e}}\int\limits_0^\infty 
-        U^{\frac{5}{2}} f_0(U)\,\mathrm{d}U\,, \\
+        U^{\frac{5}{2}} f_0(U)\,\mathrm{d}U, \\
         %	
         \tilde{\xi}_2 = \frac{4}{15 n_\mathrm{e}}\int\limits_0^\infty 
-        U^{\frac{5}{2}} f_2(U)\,\mathrm{d}U\,. \label{eq:transp_last}		
+        U^{\frac{5}{2}} f_2(U)\,\mathrm{d}U. \label{eq:transp_last}		
 		
 It is important to note that MCPlas also provides the option to apply a common drift-diffusion approximation for electron transport.
 
@@ -101,18 +102,18 @@ The vector of electron drift velocity :math:`\mathbf{v}_{\mathrm{dr},\mathrm{e}}
 
     .. math::
         \mathbf{v}_{\mathrm{dr},\mathrm{e}} 
-        = -\frac{e_0}{m_\mathrm{e}\nu_\mathrm{e}} \mathbf{E}(\mathbf{r},t)\, ,
+        = -\frac{e_0}{m_\mathrm{e}\nu_\mathrm{e}} \mathbf{E}(\mathbf{r},t)\,,
         \qquad
         %\\
         v_{\mathrm{th},\mathrm{e}} 
-        = \sqrt{\frac{8 k_\mathrm{B} T_\mathrm{e}}{\pi m_\mathrm{e}}}\, ,\\
+        = \sqrt{\frac{8 k_\mathrm{B} T_\mathrm{e}}{\pi m_\mathrm{e}}}\,,\\
         \tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}} 
         = -\frac{e_0u_\mathrm{e}}{m_\mathrm{e}\tilde{\nu}_\mathrm{e}}\Bigl(\frac{5}{3}
-        + \frac{2}{3}\frac{\xi_2}{\xi_0}\Bigr) \mathbf{E}(\mathbf{r},t)\, ,
+        + \frac{2}{3}\frac{\xi_2}{\xi_0}\Bigr) \mathbf{E}(\mathbf{r},t)\,,
         \qquad
         %\\
         \tilde{v}_{\mathrm{th},\mathrm{e}}
-        = 2 k_\mathrm{B} T_\mathrm{e}\sqrt{\frac{8 k_\mathrm{B} T_\mathrm{e}}{\pi m_\mathrm{e}}}\, ,    
+        = 2 k_\mathrm{B} T_\mathrm{e}\sqrt{\frac{8 k_\mathrm{B} T_\mathrm{e}}{\pi m_\mathrm{e}}}\,,    
 
 respectively. 
 Here, :math:`T_\mathrm{e} = 2u_\mathrm{e}/(3k_\mathrm{B})` is the temperature of electrons and :math:`k_\mathrm{B}` is the Boltzmann constant. 

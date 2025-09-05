@@ -6,7 +6,7 @@
 Welcome to MCPlas toolbox!
 =====================================
 
-.. image:: images/Logo.jpg
+.. image:: images/Logo_version_2.jpg
    :scale: 25%
    :align: center
   
@@ -160,6 +160,11 @@ The Generic2p5D subfolder is dedicated to the application of two-dimensional, ti
 It contains MATLAB scripts responsible for setting up the geometry, mesh, and project configuration for plasma sources with rectangular or circular electrode shapes.
 The dimensions and positions of both rectangular and circular electrodes must be properly specified in the associated General JSON input file, as they directly affect domain generation and boundary condition assignment.  
 
+.. figure:: images/2p5D.svg
+   :width: 75%
+   :align: center 
+
+   Figure 4, 2D modelling geometry for simulations in cylindrical coordinates.
 .. toctree::
    :maxdepth: 3
    
@@ -197,12 +202,12 @@ How to use it
 
    Figure 6, MCPlas worklow.
    
+.. video:: video/my_video.mp4
+    :width: 640
+    :height: 360
+    :autoplay:
 
-.. include:: manual_rst_tutorial/Step_by_step_tutorial.rst
-
-   
-   
-
+ 
 Indices and tables
 ==================
 
