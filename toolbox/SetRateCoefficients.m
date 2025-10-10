@@ -16,6 +16,7 @@ function SetRateCoefficients(inp, flags, model)
     model.variable(variablesname).name('Rate coefficients');  % Define the node name
     model.variable(variablesname).selection.named('plasmadomain');  % Specify domain (domain name must
                                                                     % be defined in the SetSection.m file)
+
     for i = inp.RateCoefficient_id
         id = num2str(i);
         temp_label = 'k';
@@ -24,6 +25,7 @@ function SetRateCoefficients(inp, flags, model)
         temp_FullName = 'Rate coefficient';
         temp_name = 'k';
         data_type = temp_data.type;
+        funcname = [];
         
         switch data_type
             case 'Constant'  % Constant defined values
@@ -48,7 +50,7 @@ function SetRateCoefficients(inp, flags, model)
                     dep = 'EdN';
                 elseif isequal(char(dep), 'L') || ...
                     isequal(char(dep), 'd')  % Discharge gap distances
-                    dep = 'ElecDist';
+                    dep = 'DischGap';
                 elseif isequal(char(dep), 'R')  % Electrode radius
                     dep = 'ElecRadius';
                 end
@@ -104,7 +106,7 @@ function SetRateCoefficients(inp, flags, model)
                 model.func(funcname).set('fununit', fununit);  % Set unit for the function
                 dep = strjoin(dep, ', ');
                 dep = replace(dep, ["L", "d", "R"], ...
-                    ["ElecDist", "ElecDist", "R"]);  % Replace more variable names to be 
+                    ["DischGap", "DischGap", "R"]);  % Replace more variable names to be 
                                                      % consistent with earlier defined 
                                                      % variables in the COMSOL model
                 dep = char("(" + dep + ")");

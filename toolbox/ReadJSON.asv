@@ -1,0 +1,114 @@
+function obj = ReadJSON(file)
+%
+% ReadJSON function reads json data from file and returns json object 
+% which can be accessed using usual dot notation.
+% %
+% :param JSON file: the first input
+ % :returns: ``obj`` json object
+
+outputFile = 'temp.json';    % New JSON file (temporary)
+
+%% --- Read JSON as text ---
+fid = fopen(file,'r','n','UTF-8');
+if fid == -1
+    error('Could not open input file: %s', file);
+end
+rawText = fread(fid,'*char')';
+fclose(fid);
+
+%% --- Define special character replacements ---
+replacements = { ...
+    '-'     , '_dash_'; ...
+    ' '     , '_space_'; ...
+    '.'     , '_dot_'; ...
+    '@'     , '_at_'; ...
+    '#'     , '_hash_'; ...
+    '$'     , '_dollar_'; ...
+    '%'     , '_percent_'; ...
+    '^'     , '_caret_'; ...
+    '&'     , '_and_'; ...
+    '*'     , '_star_'; ...
+    '('     , '_lparen_'; ...
+    ')'     , '_rparen_'; ...
+    '['     , '_lbrack_'; ...
+    ']'     , '_rbrack_'; ...
+    '{'     , '_lbrace_'; ...
+    '}'     , '_rbrace_'; ...
+    ':'     , '_colon_'; ...
+    ';'     , '_semicolon_'; ...
+    '"'     , '_quote_'; ...
+    char(39), '_apostrophe_'; ...
+    '<'     , '_lt_'; ...
+    '>'     , '_gt_'; ...
+    '/'     , '_slash_'; ...
+    '\'     , '_backslash_'; ...
+    '|'     , '_pipe_'; ...
+    '?'     , '_qmark_'; ...
+    '!'     , '_bang_'; ...
+    '~'     , '_tilde_'; ...
+    '`'     , '_backtick_'; ...
+    '='     , '_equals_'; ...
+    '+'     , '_plus_'; ...
+    ','     , '_comma_' ...
+    };
+
+%% --- Find JSON keys ---
+pattern = '"([^"]+)"\s*:'; % match "keyName" followed by optional spaces and colon
+[keys, keyStarts, keyEnds] = regexp(rawText, pattern, 'tokens', 'start', 'end');
+
+% Flatten keys
+keys = keys(:);
+keyStarts = keyStarts(:);
+keyEnds = keyEnds(:);
+
+%% --- Build modified JSON in one pass ---
+segments = cell(1, numel(keys)+1);
+prevEnd = 0;
+
+for k = 1:numel(keys)
+    % Add text before current key
+    segments{k} = rawText(prevEnd+1 : keyStarts(k)-1);
+    
+    % Extract key text
+    oldKey = keys{k};
+    if iscell(oldKey)
+        oldKey = oldKey{1};
+    end
+    newKey = oldKey;
+    
+    % Apply replacements
+    for r = 1:size(replacements,1)
+        newKey = strrep(newKey, replacements{r,1}, replacements{r,2});
+    end
+    
+    % Put back quotes
+    segments{k} = [segments{k}, '"', newKey, '"'];
+    
+    prevEnd = keyEnds(k)-1;
+end
+
+% Add remaining text after last key
+segments{end} = rawText(prevEnd+1:end);
+
+% Join all segments
+modifiedText = [segments{:}];
+
+%% --- Save modified JSON ---
+fid = fopen(outputFile,'w','n','UTF-8');
+if fid == -1
+    error('Could not create output file: %s', outputFile);
+end
+fwrite(fid, modifiedText, 'char');
+fclose(fid);
+fprintf('Modified JSON saved as: %s\n', outputFile);
+
+%% --- Read new JSON file ---
+    str = fileread('temp.json');
+    obj = jsondecode(str);
+
+%% --- Delete new JSON file (cleanup) ---
+if isfile(outputFile)
+    delete(outputFile);
+    fprintf('Deleted: %s\n', outputFile);
+end
+end

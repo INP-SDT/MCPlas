@@ -7,7 +7,7 @@
 %  geometry, meshing, solvers, and postprocessing configurations.
 %
 %  Institution: Leibniz Institute for Plasma Science and Technology (INP)
-%  Date: 03/07/2025 
+%  Date: 10/10/2025 
 % =========================================================================
 
 
@@ -17,13 +17,11 @@
 
 clear inp flags model GeomName ModPath;  % Clear previous data
 
-%inp.cfg_RKM_file = 'plasma/Ar_Stankov_2022.json'; % Define path for reaction kinetic input file
-%inp.cfg_General_file = 'applications/Generic1D/General_input_data.json';
 inp.cfg_RKM_file = 'plasma/Ar_Becker_2009.json'; % Define path for reaction kinetic input file
-inp.cfg_General_file = 'applications/Generic1D/General_input_data_Ar4spec.json';  % Define path for general model
-                                                                                  % settings input file
+inp.cfg_General_file = 'applications/Generic1D/General_input_data.json';  % Define path for general model
+                                                                             % settings input file
 
-addpath('Toolbox');  % Add a path to make the "Toolbox" folder accessible
+addpath('toolbox');  % Add a path to make the "Toolbox" folder accessible
 
 inp.cfg_RKM_obj = ReadJSON(inp.cfg_RKM_file);  % Load chemistry model from JSON input data
 inp.cfg_General_obj = ReadJSON(inp.cfg_General_file);  % Load general model settings from JSON input data
@@ -42,7 +40,7 @@ import com.comsol.model.util.*
 
 flags.debug = 3; % Set debug level
 
-ModPath  = [pwd, '/Applications/Generic', ModellingGeo]; % Define model path
+ModPath  = [pwd, '/applications/Generic', ModellingGeo]; % Define model path
 pathParts = strsplit(ModPath, '/');
 BaseName = pathParts{end}; % Define base name
 
@@ -79,7 +77,7 @@ addpath(ModPath);  % Ensure application path is active
 
 SetGeometry(inp, flags, model);  % Define geometry
 
-addpath('Toolbox');  % Ensure Toolbox path is active
+addpath('toolbox');  % Ensure Toolbox path is active
 
 SetConstants(flags, model); % Set necessary constants
 SetVariables(inp, flags, model); % Define variables

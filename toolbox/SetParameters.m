@@ -9,7 +9,7 @@ function SetParameters(inp, flags, model)
 
     msg(1, 'Setting global parameters', flags);  % Display status message
 
-    model.param.set('ElecDist', num2str(inp.General.ele_distance) ...
+    model.param.set('DischGap', num2str(inp.General.ele_distance) ...
         + "[m]", 'Gap width'); % Set plasma gap distance
 
     % Extract electrode dimension values from input to improve clarity
@@ -23,35 +23,47 @@ function SetParameters(inp, flags, model)
     % Identify which electrode configuration is active
     isCirc = circ > 0;
     isRect = recL > 0 && recW > 0;
-    isCoax = coaxIn > 0 && coaxOut > 0 && coaxLen > 0;
+    isCoax = coaxIn > 0 && coaxOut > 0;
 
     % Validate that exactly one configuration is defined
     configCount = isCirc + isRect + isCoax;
     if configCount ~= 1
         error(['Exactly one electrode configuration (circular, rectangular, or coaxial) ' ...
-               'must be defined in the general JSON input file.']);
+            'must be fully (all included dimensions) defined in the general JSON input file.']);
     end
 
     % Set electrode parameters based on configuration type
     if isCirc % Cylindrical electrodes
         model.param.set('ElecRadius', num2str(circ) + ...
-            "[m]", 'Electrode radius');  % Set the radius of electrodes 
-        model.param.set('Area', "ElecRadius*ElecRadius*Pi", ...
-            'Electrode area');   % Set electrode area 
-    elseif isRect % Rectangular electrodes 
+            "[m]", 'Electrode radius');  % Set the radius of electrodes
+        model.param.set('Area', "ElecRadius*ElecRadius*pi", ...
+            'Electrode area');   % Set electrode area
+    elseif isRect % Rectangular electrodes
         model.param.set('ElecLength', num2str(recL) + ...
             "[m]", 'Electrode length');  % Set electrode length
         model.param.set('ElecWidth',  num2str(recW) + ...
             "[m]", 'Electrode width');  % Set electrode width
         model.param.set('Area', "ElecLength*ElecWidth", ...
-            'Electrode area');  % Set electrode area 
+            'Electrode area');  % Set electrode area
     elseif isCoax % Coaxial electrodes configuration
-        model.param.set('OuterRadiusInnerEle', num2str(coaxIn) + ...
-            "[m]", 'Outer radius of inner electrode');  % Set outer radius of the inner electrode
-        model.param.set('InnerRadiusOuterEle', num2str(coaxOut) + ...
-            "[m]", 'Inner radius of outer electrode');  % Set inner radius of the outer electrode
-        model.param.set('ElecLength', num2str(coaxLen) + ...
-            "[m]", 'Electrode length');  % Set electrode length
+
+        if coaxOut > coaxIn
+            model.param.set('RadiusInnerEle', num2str(coaxIn) + ...
+                "[m]", 'Outer radius of inner electrode');  % Set outer radius of the inner electrode
+            model.param.set('InnerRadiusOuterEle', num2str(coaxOut) + ...
+                "[m]", 'Inner radius of outer electrode');  % Set inner radius of the outer electrode
+        else
+            error('Radius of inner electrode cannot be equal or larger than radius of outer electrode');
+        end
+        if coaxLen > 0
+            model.param.set('ElecLength', num2str(coaxLen) + ...
+                "[m]", 'Electrode length');  % Set electrode length
+            model.param.set('Area', "2*pi*RadiusInnerEle*ElecLength", ...
+                'Electrode area');  % Set electrode area
+        else
+            error('Electrode length must be > 0');
+        end
+
     end
 
     % Set dielectric layer parameters
@@ -61,30 +73,53 @@ function SetParameters(inp, flags, model)
     if dp > 0 && dg == 0  % Case: powered electrode covered by dielectric layer
         model.param.set('DBthickness', dp + "[m]", ...
             'Thickness of dielectric at powered electrode');  % Set the thickness of dielectric
-                                                              % on powered electrode
+        % on powered electrode
         if isCoax % Coaxial electrodes configuration
-            model.param.set('Area', "2*pi*(OuterRadiusInnerEle+DBthickness)*ElecLength", ...
-                'Area for current calculations');  % Set the area of the dielectric surface
+            if coaxOut-(coaxIn+dp)==inp.General.ele_distance
+                model.param.set('Area', "2*pi*(RadiusInnerEle+DBthickness)*ElecLength", ...
+                    'Area for current calculations');  % Set the area of the dielectric surface
+            else
+                error('Discharge gap or electrode radius or dielectric thickness values are not set correctly.');
+            end
         end
     elseif dp == 0 && dg > 0  % Case: grounded electrode covered by dielectric layer
         model.param.set('DBthickness', dg + "[m]", ...
             'Thickness of dielectric at grounded electrode');  % Set the thickness of dielectric
-                                                               % on grounded electrode
+        % on grounded electrode
         if isCoax % Coaxial electrodes configuration
-            model.param.set('Area', "2*pi*OuterRadiusInnerEle*ElecLength", ...
-                'Area for current calculations');  % Set the electrode area
+            if coaxOut-dg-coaxIn==inp.General.ele_distance
+                model.param.set('Area', "2*pi*RadiusInnerEle*ElecLength", ...
+                    'Area for current calculations');  % Set the electrode area
+            else
+                error('Discharge gap or electrode radius or dielectric thickness values are not set correctly.');
+            end
         end
-    elseif dp > 0 && dg > 0  % Case: both electrodes covered by dielectric layer 
+    elseif dp > 0 && dg > 0  % Case: both electrodes covered by dielectric layer
         model.param.set('DBthickness_1', dp + "[m]", ...
             'Thickness of dielectric at powered electrode');  % Set the thickness of dielectric
-                                                              % on powered electrode
+        % on powered electrode
         model.param.set('DBthickness_2', dg + "[m]", ...
             'Thickness of dielectric at grounded electrode');  % Set the thickness of dielectric
-                                                               % on grounded electrode
+        % on grounded electrode
         if isCoax % Coaxial electrodes configuration
-            model.param.set('Area', "2*pi*(OuterRadiusInnerEle+DBthickness_1)*ElecLength", ...
-                'Area for current calculations');  % Set the area of the dielectric surface
+            if coaxOut-dp-dg-coaxIn==inp.General.ele_distance
+                model.param.set('Area', "2*pi*(RadiusInnerEle+DBthickness_1)*ElecLength", ...
+                    'Area for current calculations');  % Set the area of the dielectric surface
+            else
+                error('Discharge gap or electrode radius or dielectric thickness values are not set correctly.');
+            end
+
         end
+    else
+        if isCoax % Coaxial electrodes configuration
+            if coaxOut-coaxIn==inp.General.ele_distance
+                model.param.set('Area', "2*pi*RadiusInnerEle*ElecLength", ...
+                    'Area for current calculations');  % Set the electrode area
+            else
+                error('Discharge gap or electrode radius values are not set correctly.');
+            end
+        end
+
     end
 
     % Set discharge parameters
@@ -97,7 +132,6 @@ function SetParameters(inp, flags, model)
 
     % Source term stabilization parameters (if enabled)
     if flags.SourceTermStab
-        model.param.set('Stabilization', '0', 'Enable source term stabilization');  % Activation flag
         model.param.set('SrcStabFac', 'N_A_const[mol]*1[m^-3*s^-1]', ...
             'Factor for source term stabilization');  % Stabilization factor
         model.param.set('SrcStabPar', '1', 'Parameter for source term stabilization');  % Stabilization parameter

@@ -8,6 +8,18 @@ function [inp, flags, ModellingGeo] = InpGeneral(inp, flags)
     % :param flags: the second input
     % :returns: inp, flags, ModellingGeo
 
+    %% ================================================
+    % === Verify JSON input file directory location ===
+    % =================================================
+
+    temp = inp.cfg_General_obj.diagnostics.diagnostic_properties.diagnostic_settings;
+    ModellingGeo = temp.spatial_dimensions;  % Geometry: 1D, 1p5D, 2D, 2p5D
+    if ~contains(inp.cfg_General_file,  ModellingGeo)
+        error(['Invalid storage location for JSON General input file. ' ...
+            'Move the file to the correct folder associated with the defined' ...
+            ' modelling geometry.']);
+    end
+
     %% ====================================================
     % === Check compatibility of the species defined in ===
     % =======JSON RKM and JSON General input files ========

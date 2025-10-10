@@ -31,12 +31,13 @@ function SetProject(inp, flags, model)
     dg = inp.General.diel_thickness_grounded;
     
     if dp > 0 || dg > 0  % Case: at least one dielectric layer is present
-        model.study('FluidPoisson').feature('time').set('probesel', 'manual');  % Enable manual probe selection
+        model.study('FluidPoisson').feature('time').set('probesel', 'manual');  % Manual enabling of probes
         model.study('FluidPoisson').feature('time').set('probes', ...
-                                                        {'var1' 'var2'});  % Select specific probes
+                                                        {'pdom3','var1' 'var2'});  % Select specific probes
         model.study('FluidPoisson').feature('time').set('plot', true);  % Enable plotting while solving
         model.study('FluidPoisson').feature('time').set('plotgroup', 'pg5');  % Set specific plot group
     else  % Case: without dielectric layers
+        model.study('FluidPoisson').feature('time').set('probesel', 'all');  % Enable all probes
         model.study('FluidPoisson').feature('time').set('plot', true);  % Enable plotting while solving
         model.study('FluidPoisson').feature('time').set('plotgroup', 'pg3');  % Set specific plot group
     end

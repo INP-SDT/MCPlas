@@ -32,16 +32,30 @@ function SetProbesAndGraphs(inp, flags, model)
             probe_coordinates = {'DBthickness'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
             
-            % Set domain probe for voltage V2 at boundary (z = DBthickness+ElecDist)
+            % Set domain probe for voltage V2 at boundary (z = DBthickness+DischGap)
             probe_settings = {'pdom2', 'Electric potential boundary 2', ...
                 'ppb2', 'Electric potential boundary 2', 'V2', 'Phi', 'V',  'window2'};
-            probe_coordinates = {'DBthickness+ElecDist'};
+            probe_coordinates = {'DBthickness+DischGap'};
+            SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
+            
+            % Set domain probe for applied voltage at boundary (z = 0)
+            probe_settings = {'pdom3', 'Applied voltage', ...
+                'ppb3', 'Applied voltage', 'Uapp', 'Phi', 'V',  'window3'};
+            probe_coordinates = {'0'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
             
             % Set global probe for gap voltage (V1-V2)
             probe_settings = {'var1', 'Gap Voltage', 'GapVoltage', ...
-                'V1-V2', 'Gap voltage', 'V', 'window3'};
+                'V1-V2', 'Voltage', 'V', 'window3'};
             SetGlobalProbe(model, probe_settings, table_tag);
+
+            % Set window3 axes
+            model.result('pg3').set('window', 'window3');
+            model.result('pg3').set('windowtitle', '');
+            model.result('pg3').run;
+            model.result('pg3').set('xlabelactive', true);
+            model.result('pg3').set('ylabelactive', true);
+            model.result('pg3').set('ylabel', 'Voltage (V)');
 
             % Set global probe for total current Itot
             probe_settings = {'var2', 'Total Current', 'TotalCurrent', ...
@@ -61,16 +75,30 @@ function SetProbesAndGraphs(inp, flags, model)
             probe_coordinates = {'0'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
             
-            % Set domain probe for voltage V2 at boundary (z = ElecDist)
+            % Set domain probe for voltage V2 at boundary (z = DischGap)
             probe_settings = {'pdom2', 'Electric potential boundary 2', ...
                 'ppb2', 'Electric potential boundary 2', 'V2', 'Phi', 'V',  'window2'};
-            probe_coordinates = {'ElecDist'};
+            probe_coordinates = {'DischGap'};
+            SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
+
+            % Set domain probe for applied voltage at boundary (z = 0)
+            probe_settings = {'pdom3', 'Applied voltage', ...
+                'ppb3', 'Applied voltage', 'Uapp', 'Phi', 'V',  'window3'};
+            probe_coordinates = {'0'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
             
             % Set global probe for gap voltage (V1-V2)
             probe_settings = {'var1', 'Gap Voltage', 'GapVoltage', ...
                 'V1-V2', 'Gap voltage', 'V', 'window3'};
             SetGlobalProbe(model, probe_settings, table_tag);
+
+            % Set window3 axes
+            model.result('pg3').set('window', 'window3');
+            model.result('pg3').set('windowtitle', '');
+            model.result('pg3').run;
+            model.result('pg3').set('xlabelactive', true);
+            model.result('pg3').set('ylabelactive', true);
+            model.result('pg3').set('ylabel', 'Voltage (V)');
 
             % Set global probe for total current Itot
             probe_settings = {'var2', 'Total Current', 'TotalCurrent', ...
@@ -90,17 +118,31 @@ function SetProbesAndGraphs(inp, flags, model)
             probe_coordinates = {'DBthickness_1'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);  
             
-            % Set domain probe for voltage V2 at boundary (z = DBthickness_1 + ElecDist)
+            % Set domain probe for voltage V2 at boundary (z = DBthickness_1 + DischGap)
             probe_settings = {'pdom2', 'Electric potential boundary 2', ...
                 'ppb2', 'Electric potential boundary 2', 'V2', 'Phi', 'V',  'window2'};
-            probe_coordinates = {'DBthickness_1+ElecDist'};
+            probe_coordinates = {'DBthickness_1+DischGap'};
+            SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
+
+            % Set domain probe for applied voltage at boundary (z = 0)
+            probe_settings = {'pdom3', 'Applied voltage', ...
+                'ppb3', 'Applied voltage', 'Uapp', 'Phi', 'V',  'window3'};
+            probe_coordinates = {'0'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
             
             % Set global probe for gap voltage (V1-V2)
             probe_settings = {'var1', 'Gap Voltage', 'GapVoltage', ...
                 'V1-V2', 'Gap voltage', 'V', 'window3'};
             SetGlobalProbe(model, probe_settings, table_tag);
-            
+
+            % Set window3 axes
+            model.result('pg3').set('window', 'window3');
+            model.result('pg3').set('windowtitle', '');
+            model.result('pg3').run;
+            model.result('pg3').set('xlabelactive', true);
+            model.result('pg3').set('ylabelactive', true);
+            model.result('pg3').set('ylabel', 'Voltage (V)');
+
             % Set global probe for total current Itot
             probe_settings = {'var2', 'Total Current', 'TotalCurrent', ...
                 'Itotal', 'Total current', 'A', 'window4'};
@@ -114,8 +156,8 @@ function SetProbesAndGraphs(inp, flags, model)
         else % Both electrodes without dielectric layers
             
             % Set domain probe for gap voltage
-            probe_settings = {'pdom1', 'Voltage', 'ppb1', ...
-                'Gap voltage', 'U', 'Phi', 'V',  'window1'};
+            probe_settings = {'pdom1', 'Applied voltage', 'ppb1', ...
+                'Applied voltage', 'U', 'Phi', 'V',  'window1'};
             probe_coordinates = {'0'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
 
@@ -137,22 +179,36 @@ function SetProbesAndGraphs(inp, flags, model)
 
         if dp > 0 && dg == 0 % Powered electrode covered by a dielectric layer
           
-            % Set domain probe for voltage V1 at boundary (r = DBthickness+OuterRadiusInnerEle)
+            % Set domain probe for voltage V1 at boundary (r = DBthickness+RadiusInnerEle)
             probe_settings = {'pdom1', 'Electric potential boundary 1', ...
                 'ppb1', 'Electric potential boundary 1', 'V1', 'Phi', 'V',  'window1'};
-            probe_coordinates = {'DBthickness+OuterRadiusInnerEle'};
+            probe_coordinates = {'DBthickness+RadiusInnerEle'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
             
-            % Set domain probe for voltage V2 at boundary (r = DBthickness+OuterRadiusInnerEle+ElecDist)
+            % Set domain probe for voltage V2 at boundary (r = DBthickness+RadiusInnerEle+DischGap)
             probe_settings = {'pdom2', 'Electric potential boundary 2', ...
                 'ppb2', 'Electric potential boundary 2', 'V2', 'Phi', 'V',  'window2'};
-            probe_coordinates = {'DBthickness+OuterRadiusInnerEle+ElecDist'};
+            probe_coordinates = {'DBthickness+RadiusInnerEle+DischGap'};
+            SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
+
+            % Set domain probe for applied voltage at boundary (r = RadiusInnerEle)
+            probe_settings = {'pdom3', 'Applied voltage', ...
+                'ppb3', 'Applied voltage', 'Uapp', 'Phi', 'V',  'window3'};
+            probe_coordinates = {'RadiusInnerEle'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
             
             % Set global probe for gap voltage (V1-V2)
             probe_settings = {'var1', 'Gap Voltage', 'GapVoltage', ...
                 'V1-V2', 'Gap voltage', 'V', 'window3'};
             SetGlobalProbe(model, probe_settings, table_tag);
+
+            % Set window3 axes
+            model.result('pg3').set('window', 'window3');
+            model.result('pg3').set('windowtitle', '');
+            model.result('pg3').run;
+            model.result('pg3').set('xlabelactive', true);
+            model.result('pg3').set('ylabelactive', true);
+            model.result('pg3').set('ylabel', 'Voltage (V)');
 
             % Set global probe for total current Itot
             probe_settings = {'var2', 'Total Current', 'TotalCurrent', ...
@@ -166,22 +222,36 @@ function SetProbesAndGraphs(inp, flags, model)
         
         elseif dp == 0 && dg > 0 % Grounded electrode covered by a dielectric layer
           
-            % Set domain probe for voltage V1 at boundary (r = OuterRadiusInnerEle)
+            % Set domain probe for voltage V1 at boundary (r = RadiusInnerEle)
             probe_settings = {'pdom1', 'Electric potential boundary 1', ...
                 'ppb1', 'Electric potential boundary 1', 'V1', 'Phi', 'V',  'window1'};
-            probe_coordinates = {'OuterRadiusInnerEle'};
+            probe_coordinates = {'RadiusInnerEle'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
             
-            % Set domain probe for voltage V2 at boundary (r = OuterRadiusInnerEle+ElecDist)
+            % Set domain probe for voltage V2 at boundary (r = RadiusInnerEle+DischGap)
             probe_settings = {'pdom2', 'Electric potential boundary 2', ...
                 'ppb2', 'Electric potential boundary 2', 'V2', 'Phi', 'V',  'window2'};
-            probe_coordinates = {'OuterRadiusInnerEle+ElecDist'};
+            probe_coordinates = {'RadiusInnerEle+DischGap'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
+
+            % Set domain probe for applied voltage at boundary (r = RadiusInnerEle)
+            probe_settings = {'pdom3', 'Applied voltage', ...
+                'ppb3', 'Applied voltage', 'Uapp', 'Phi', 'V',  'window3'};
+            probe_coordinates = {'RadiusInnerEle'};
+            SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);            
             
             % Set global probe for gap voltage (V1-V2)
             probe_settings = {'var1', 'Gap Voltage', 'GapVoltage', ...
                 'V1-V2', 'Gap voltage', 'V', 'window3'};
             SetGlobalProbe(model, probe_settings, table_tag);
+
+            % Set window3 axes
+            model.result('pg3').set('window', 'window3');
+            model.result('pg3').set('windowtitle', '');
+            model.result('pg3').run;
+            model.result('pg3').set('xlabelactive', true);
+            model.result('pg3').set('ylabelactive', true);
+            model.result('pg3').set('ylabel', 'Voltage (V)');
 
             % Set global probe for total current Itot
             probe_settings = {'var2', 'Total Current', 'TotalCurrent', ...
@@ -195,23 +265,37 @@ function SetProbesAndGraphs(inp, flags, model)
         
         elseif dp > 0 && dg > 0  % Both electrodes covered by dielectric layers
             
-            % Set domain probe for voltage V1 at boundary (r = DBthickness_1+OuterRadiusInnerEle)
+            % Set domain probe for voltage V1 at boundary (r = DBthickness_1+RadiusInnerEle)
             probe_settings = {'pdom1', 'Electric potential boundary 1', ...
                 'ppb1', 'Electric potential boundary 1', 'V1', 'Phi', 'V',  'window1'};
-            probe_coordinates = {'OuterRadiusInnerEle+DBthickness_1'};
+            probe_coordinates = {'RadiusInnerEle+DBthickness_1'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);  
             
             % Set domain probe for voltage V2 at boundary 
-            % (r = OuterRadiusInnerEle+DBthickness_1+ElecDist)
+            % (r = RadiusInnerEle+DBthickness_1+DischGap)
             probe_settings = {'pdom2', 'Electric potential boundary 2', ...
                 'ppb2', 'Electric potential boundary 2', 'V2', 'Phi', 'V',  'window2'};
-            probe_coordinates = {'OuterRadiusInnerEle+DBthickness_1+ElecDist'};
+            probe_coordinates = {'RadiusInnerEle+DBthickness_1+DischGap'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
+
+            % Set domain probe for applied voltage at boundary (r = RadiusInnerEle)
+            probe_settings = {'pdom3', 'Applied voltage', ...
+                'ppb3', 'Applied voltage', 'Uapp', 'Phi', 'V',  'window3'};
+            probe_coordinates = {'RadiusInnerEle'};
+            SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);            
             
             % Set global probe for gap voltage (V1-V2)
             probe_settings = {'var1', 'Gap Voltage', 'GapVoltage', ...
                 'V1-V2', 'Gap voltage', 'V', 'window3'};
             SetGlobalProbe(model, probe_settings, table_tag);
+
+            % Set window3 axes
+            model.result('pg3').set('window', 'window3');
+            model.result('pg3').set('windowtitle', '');
+            model.result('pg3').run;
+            model.result('pg3').set('xlabelactive', true);
+            model.result('pg3').set('ylabelactive', true);
+            model.result('pg3').set('ylabel', 'Voltage (V)');
             
             % Set global probe for total current Itot
             probe_settings = {'var2', 'Total Current', 'TotalCurrent', ...
@@ -226,9 +310,9 @@ function SetProbesAndGraphs(inp, flags, model)
         else % Both electrodes without dielectric layers
             
             % Set domain probe for gap voltage
-            probe_settings = {'pdom1', 'Voltage', 'ppb1', ...
-                'Gap voltage', 'U', 'Phi', 'V',  'window1'};
-            probe_coordinates = {'0'};
+            probe_settings = {'pdom1', 'Applied voltage', 'ppb1', ...
+                'Applied voltage', 'U', 'Phi', 'V',  'window1'};
+            probe_coordinates = {'RadiusInnerEle'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
 
             % Set global probe for total current Itot
@@ -257,17 +341,32 @@ function SetProbesAndGraphs(inp, flags, model)
             probe_coordinates = {'ElecLength/2', 'DBthickness'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
             
-            % Set domain probe for voltage V2 at boundary y = DBthickness+ElecDist in the
+            % Set domain probe for voltage V2 at boundary y = DBthickness+DischGap in the
             % middle of electrode length (x = ElecLength/2)            
             probe_settings = {'pdom2', 'Electric potential boundary 2', ...
                 'ppb2', 'Electric potential boundary 2', 'V2', 'Phi', 'V',  'window2'};
-            probe_coordinates = {'ElecLength/2', 'DBthickness+ElecDist'};
+            probe_coordinates = {'ElecLength/2', 'DBthickness+DischGap'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
+
+            % Set domain probe for applied voltage at boundary y = 0 in the
+            % middle of electrode length (x = ElecLength/2)  
+            probe_settings = {'pdom3', 'Applied voltage', ...
+                'ppb3', 'Applied voltage', 'Uapp', 'Phi', 'V',  'window3'};
+            probe_coordinates = {'ElecLength/2', '0'};
+            SetDomainProbe(model, probe_settings, probe_coordinates, table_tag); 
             
             % Set global probe for gap voltage (V1-V2)
             probe_settings = {'var1', 'Gap Voltage', 'GapVoltage', ...
                 'V1-V2', 'Gap voltage', 'V', 'window3'};
             SetGlobalProbe(model, probe_settings, table_tag);
+
+            % Set window3 axes
+            model.result('pg3').set('window', 'window3');
+            model.result('pg3').set('windowtitle', '');
+            model.result('pg3').run;
+            model.result('pg3').set('xlabelactive', true);
+            model.result('pg3').set('ylabelactive', true);
+            model.result('pg3').set('ylabel', 'Voltage (V)');            
 
             % Set global probe for total current Itot
             probe_settings = {'var2', 'Total Current', 'TotalCurrent', ...
@@ -290,12 +389,27 @@ function SetProbesAndGraphs(inp, flags, model)
             probe_coordinates = {'ElecLength/2', '0'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
             
-            % Set domain probe for voltage V2 at boundary y = ElecDist in the
+            % Set domain probe for voltage V2 at boundary y = DischGap in the
             % middle of electrode length (x = ElecLength/2)            
             probe_settings = {'pdom2', 'Electric potential boundary 2', ...
                 'ppb2', 'Electric potential boundary 2', 'V2', 'Phi', 'V',  'window2'};
-            probe_coordinates = {'ElecLength/2', 'ElecDist'};
+            probe_coordinates = {'ElecLength/2', 'DischGap'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
+
+            % Set domain probe for applied voltage at boundary y = 0 in the
+            % middle of electrode length (x = ElecLength/2)  
+            probe_settings = {'pdom3', 'Applied voltage', ...
+                'ppb3', 'Applied voltage', 'Uapp', 'Phi', 'V',  'window3'};
+            probe_coordinates = {'ElecLength/2', '0'};
+            SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
+
+            % Set window3 axes
+            model.result('pg3').set('window', 'window3');
+            model.result('pg3').set('windowtitle', '');
+            model.result('pg3').run;
+            model.result('pg3').set('xlabelactive', true);
+            model.result('pg3').set('ylabelactive', true);
+            model.result('pg3').set('ylabel', 'Voltage (V)');
             
             % Set global probe for gap voltage (V1-V2)
             probe_settings = {'var1', 'Gap Voltage', 'GapVoltage', ...
@@ -323,12 +437,27 @@ function SetProbesAndGraphs(inp, flags, model)
             probe_coordinates = {'ElecLength/2', 'DBthickness_1'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
             
-            % Set domain probe for voltage V2 at boundary y = ElecDist + DBthickness_1 in the
+            % Set domain probe for voltage V2 at boundary y = DischGap + DBthickness_1 in the
             % middle of electrode length (x = ElecLength/2)             
             probe_settings = {'pdom2', 'Electric potential boundary 2', ...
                 'ppb2', 'Electric potential boundary 2', 'V2', 'Phi', 'V',  'window2'};
-            probe_coordinates = {'ElecLength/2', 'ElecDist + DBthickness_1'};
+            probe_coordinates = {'ElecLength/2', 'DischGap + DBthickness_1'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
+
+            % Set domain probe for applied voltage at boundary y = 0 in the
+            % middle of electrode length (x = ElecLength/2)  
+            probe_settings = {'pdom3', 'Applied voltage', ...
+                'ppb3', 'Applied voltage', 'Uapp', 'Phi', 'V',  'window3'};
+            probe_coordinates = {'ElecLength/2', '0'};
+            SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
+
+            % Set window3 axes
+            model.result('pg3').set('window', 'window3');
+            model.result('pg3').set('windowtitle', '');
+            model.result('pg3').run;
+            model.result('pg3').set('xlabelactive', true);
+            model.result('pg3').set('ylabelactive', true);
+            model.result('pg3').set('ylabel', 'Voltage (V)');
             
             % Set global probe for gap voltage (V1-V2)
             probe_settings = {'var1', 'Gap Voltage', 'GapVoltage', ...
@@ -350,8 +479,8 @@ function SetProbesAndGraphs(inp, flags, model)
         else % Both electrodes without dielectric layers
             
             % Set domain probe for gap voltage
-            probe_settings = {'pdom1', 'Gap voltage', 'ppb1', ...
-                'Gap voltage', 'U', 'Phi', 'V',  'window1'};
+            probe_settings = {'pdom1', 'Applied voltage', 'ppb1', ...
+                'Applied voltage', 'U', 'Phi', 'V',  'window1'};
             probe_coordinates = {'ElecLength/2', '0'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
 
@@ -382,18 +511,33 @@ function SetProbesAndGraphs(inp, flags, model)
             probe_coordinates = {'0', 'DBthickness'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
             
-            % Set domain probe for voltage V2 at boundary z = DBthickness+ElecDist
+            % Set domain probe for voltage V2 at boundary z = DBthickness+DischGap
             % in the electrode center (r = 0)
             probe_settings = {'pdom2', 'Electric potential boundary 2', ...
                 'ppb2', 'Electric potential boundary 2', 'V2', 'Phi', 'V',  'window2'};
-            probe_coordinates = {'0', 'DBthickness+ElecDist'};
+            probe_coordinates = {'0', 'DBthickness+DischGap'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
+
+            % Set domain probe for applied voltage at boundary y = 0 in the
+            % middle of electrode length (x = ElecLength/2)  
+            probe_settings = {'pdom3', 'Applied voltage', ...
+                'ppb3', 'Applied voltage', 'Uapp', 'Phi', 'V',  'window3'};
+            probe_coordinates = {'0', '0'};
+            SetDomainProbe(model, probe_settings, probe_coordinates, table_tag); 
             
             % Set global probe for gap voltage (V1-V2)
             probe_settings = {'var1', 'Gap Voltage', 'GapVoltage', ...
                 'V1-V2', 'Gap voltage', 'V', 'window3'};
             SetGlobalProbe(model, probe_settings, table_tag);
 
+            % Set window3 axes
+            model.result('pg3').set('window', 'window3');
+            model.result('pg3').set('windowtitle', '');
+            model.result('pg3').run;
+            model.result('pg3').set('xlabelactive', true);
+            model.result('pg3').set('ylabelactive', true);
+            model.result('pg3').set('ylabel', 'Voltage (V)');
+            
             % Set global probe for total current Itot
             probe_settings = {'var2', 'Total Current', 'TotalCurrent', ...
                 'Itotal', 'Total current', 'A', 'window4'};
@@ -415,16 +559,32 @@ function SetProbesAndGraphs(inp, flags, model)
             probe_coordinates = {'0', '0'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
             
-            % Set domain probe for voltage V2 at boundary z = ElecDist in the electrode center (r = 0)
+            % Set domain probe for voltage V2 at boundary z = DischGap in the electrode center (r = 0)
             probe_settings = {'pdom2', 'Electric potential boundary 2', ...
                 'ppb2', 'Electric potential boundary 2', 'V2', 'Phi', 'V',  'window2'};
-            probe_coordinates = {'0', 'ElecDist'};
+            probe_coordinates = {'0', 'DischGap'};
+            SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
+
+            % Set domain probe for applied voltage at boundary y = 0 in the
+            % middle of electrode length (x = ElecLength/2)  
+            probe_settings = {'pdom3', 'Applied voltage', ...
+                'ppb3', 'Applied voltage', 'Uapp', 'Phi', 'V',  'window3'};
+            probe_coordinates = {'0', '0'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
             
             % Set global probe for gap voltage (V1-V2)
             probe_settings = {'var1', 'Gap Voltage', 'GapVoltage', ...
                 'V1-V2', 'Gap voltage', 'V', 'window3'};
             SetGlobalProbe(model, probe_settings, table_tag);
+
+            % Set window3 axes
+            model.result('pg3').set('window', 'window3');
+            model.result('pg3').set('windowtitle', '');
+            model.result('pg3').run;
+            model.result('pg3').set('xlabelactive', true);
+            model.result('pg3').set('ylabelactive', true);
+            model.result('pg3').set('ylabel', 'Voltage (V)');
+            
 
             % Set global probe for total current Itot
             probe_settings = {'var2', 'Total Current', 'TotalCurrent', ...
@@ -447,11 +607,18 @@ function SetProbesAndGraphs(inp, flags, model)
             probe_coordinates = {'0', 'DBthickness_1'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
             
-            % Set domain probe for voltage V2 at boundary z = ElecDist + DBthickness_1
+            % Set domain probe for voltage V2 at boundary z = DischGap + DBthickness_1
             % in the electrode center (r = 0)
             probe_settings = {'pdom2', 'Electric potential boundary 2', ...
                 'ppb2', 'Electric potential boundary 2', 'V2', 'Phi', 'V',  'window2'};
-            probe_coordinates = {'0', 'ElecDist + DBthickness_1'};
+            probe_coordinates = {'0', 'DischGap + DBthickness_1'};
+            SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
+
+            % Set domain probe for applied voltage at boundary y = 0 in the
+            % middle of electrode length (x = ElecLength/2)  
+            probe_settings = {'pdom3', 'Applied voltage', ...
+                'ppb3', 'Applied voltage', 'Uapp', 'Phi', 'V',  'window3'};
+            probe_coordinates = {'0', '0'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
             
             % Set global probe for gap voltage (V1-V2)
@@ -459,6 +626,14 @@ function SetProbesAndGraphs(inp, flags, model)
                 'V1-V2', 'Gap voltage', 'V', 'window3'};
             SetGlobalProbe(model, probe_settings, table_tag);
 
+            % Set window3 axes
+            model.result('pg3').set('window', 'window3');
+            model.result('pg3').set('windowtitle', '');
+            model.result('pg3').run;
+            model.result('pg3').set('xlabelactive', true);
+            model.result('pg3').set('ylabelactive', true);
+            model.result('pg3').set('ylabel', 'Voltage (V)');
+            
             % Set global probe for total current Itot
             probe_settings = {'var2', 'Total Current', 'TotalCurrent', ...
                 'Itotal', 'Total current', 'A', 'window4'};
@@ -474,8 +649,8 @@ function SetProbesAndGraphs(inp, flags, model)
         else % Both electrodes without dielectric layers
             
             % Set domain probe for gap voltage
-            probe_settings = {'pdom1', 'Gap voltage', 'ppb1', ...
-                'Gap voltage', 'U', 'Phi', 'V',  'window1'};
+            probe_settings = {'pdom1', 'Applied voltage', 'ppb1', ...
+                'Applied voltage', 'U', 'Phi', 'V',  'window1'};
             probe_coordinates = {'0', '0'};
             SetDomainProbe(model, probe_settings, probe_coordinates, table_tag);
 

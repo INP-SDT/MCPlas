@@ -53,7 +53,7 @@ function SetEnergyRateCoefficients(inp, flags, model)
                         dep = 'EdN';
                     elseif isequal(char(dep), 'L') || isequal(char(dep), 'd') % 
                         % Distance between electrodes
-                        dep = 'ElecDist';
+                        dep = 'DischGap';
                     elseif isequal(char(dep), 'R')  % Electrode radius
                         dep = 'ElecRadius';
                     end
@@ -113,7 +113,7 @@ function SetEnergyRateCoefficients(inp, flags, model)
                                                          % in the COMSOL model
                     dep = strjoin(dep, ', ');
                     dep = replace(dep, ["L", "d", "R"], ...
-                        ["ElecDist", "ElecDist", "R"]);  % Replace more variable names to be 
+                        ["DischGap", "DischGap", "R"]);  % Replace more variable names to be 
                                                          % consistent with earlier defined 
                                                          % variables in the COMSOL model
                     dep = char("(" + dep + ")");

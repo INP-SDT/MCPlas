@@ -36,11 +36,11 @@ function SetGeometry(inp, flags, model)
         % Create a 1D interval with multiple subintervals (many segments)
         model.geom(inp.GeomName).feature.create('i1', 'Interval');
         model.geom(inp.GeomName).feature('i1').set('intervals', 'many');
-        temp = 'OuterRadiusInnerEle, OuterRadiusInnerEle+DBthickness, OuterRadiusInnerEle+DBthickness+ElecDist';
+        temp = 'RadiusInnerEle, RadiusInnerEle+DBthickness, RadiusInnerEle+DBthickness+DischGap';
         model.geom(inp.GeomName).feature('i1').set('p', temp);  % Define subinterval points:
-                                                                % OuterRadiusInnerEle (start),
-                                                                % OuterRadiusInnerEle + DBthickness (dielectric), 
-                                                                % OuterRadiusInnerEle + DBthickness + ElecDist (plasma) 
+                                                                % RadiusInnerEle (start),
+                                                                % RadiusInnerEle + DBthickness (dielectric), 
+                                                                % RadiusInnerEle + DBthickness + DischGap (plasma) 
         % Build and finalize geometry
         model.geom(inp.GeomName).runAll;
         model.geom(inp.GeomName).run; 
@@ -66,11 +66,11 @@ function SetGeometry(inp, flags, model)
         % Create a 1D interval with multiple subintervals (many segments)
         model.geom(inp.GeomName).feature.create('i1', 'Interval');
         model.geom(inp.GeomName).feature('i1').set('intervals', 'many');
-        temp = 'OuterRadiusInnerEle, OuterRadiusInnerEle+ElecDist, OuterRadiusInnerEle+ElecDist+DBthickness';
+        temp = 'RadiusInnerEle, RadiusInnerEle+DischGap, RadiusInnerEle+DischGap+DBthickness';
         model.geom(inp.GeomName).feature('i1').set('p', temp);  % Define subinterval points:
-                                                                % OuterRadiusInnerEle (start),
-                                                                % OuterRadiusInnerEle + ElecDist (plasma), 
-                                                                % OuterRadiusInnerEle + ElecDist + DBthickness (dielectric)
+                                                                % RadiusInnerEle (start),
+                                                                % RadiusInnerEle + DischGap (plasma), 
+                                                                % RadiusInnerEle + DischGap + DBthickness (dielectric)
         % Build and finalize geometry
         model.geom(inp.GeomName).runAll;
         model.geom(inp.GeomName).run; 
@@ -84,7 +84,7 @@ function SetGeometry(inp, flags, model)
             'Powered electrode', 1);  % Powered electrode boundary
         SetSelection(model, 0, 'groundedelectrode', ...
             'Grounded electrode', 3);  % Grounded electrode boundary
-        SetSelection(model, 0, 'currentprobebndry',OuterRadInnerEleInner, ...
+        SetSelection(model, 0, 'currentprobebndry',...
             'Current probe boundary', 1);  % Current probe boundary
         SetSelection(model, 0, 'electrodes', ...
             'Electrodes', [1 3]);  % Electrodes boundaries
@@ -94,15 +94,15 @@ function SetGeometry(inp, flags, model)
     elseif dp > 0 && dg > 0  % Case: both electrodes covered by dielectric layer
         model.geom(inp.GeomName).feature.create('i1', 'Interval');
         model.geom(inp.GeomName).feature('i1').set('intervals', 'many');
-        temp = [ 'OuterRadiusInnerEle, OuterRadiusInnerEle+DBthickness_1, ' ...
-            'OuterRadiusInnerEle+DBthickness_1+ElecDist, ' ...
-            'OuterRadiusInnerEle+DBthickness_1+ElecDist+DBthickness_2'];
+        temp = [ 'RadiusInnerEle, RadiusInnerEle+DBthickness_1, ' ...
+            'RadiusInnerEle+DBthickness_1+DischGap, ' ...
+            'RadiusInnerEle+DBthickness_1+DischGap+DBthickness_2'];
         model.geom(inp.GeomName).feature('i1').set('p',temp);  % Define subinterval points:
-                                                               % OuterRadiusInnerEle (start),
-                                                               % OuterRadiusInnerEle + DBthickness_1, 
-                                                               % OuterRadiusInnerEle + DBthickness_1
-                                                               % + ElecDist,
-                                                               % OuterRadiusInnerEle + DBthickness_1 + ElecDist
+                                                               % RadiusInnerEle (start),
+                                                               % RadiusInnerEle + DBthickness_1, 
+                                                               % RadiusInnerEle + DBthickness_1
+                                                               % + DischGap,
+                                                               % RadiusInnerEle + DBthickness_1 + DischGap
                                                                % + DBthickness_2
         % Build and finalize geometry
         model.geom(inp.GeomName).runAll;
@@ -113,31 +113,43 @@ function SetGeometry(inp, flags, model)
         SetSelection(model, 1, 'dielectric_1', 'Dielectric 1', 1);  % Left dielectric
         SetSelection(model, 1, 'dielectric_2', 'Dielectric 2', 3);  % Right dielectric
         SetSelection(model, 1, 'dielectric', 'Dielectric', [1, 3]);  % Dielectric domains
-        SetSelection(model, 0, 'plasmaboundaries', 'Plasma boundaries', [2 3]);  % Plasma boundaries
-        SetSelection(model, 0, 'poweredelectrode', 'Powered electrode', 1);  % Powered electrode boundary
-        SetSelection(model, 0, 'groundedelectrode', 'Grounded electrode', 4);  % Grounde electrode boundary
-        SetSelection(model, 0, 'currentprobebndry', 'Current probe boundary', 2);  % Current probe location
+        SetSelection(model, 0, 'plasmaboundaries', 'Plasma boundaries', ...
+            [2 3]);  % Plasma boundaries
+        SetSelection(model, 0, 'poweredelectrode', 'Powered electrode', ...
+            1);  % Powered electrode boundary
+        SetSelection(model, 0, 'groundedelectrode', 'Grounded electrode', ...
+            4);  % Grounde electrode boundary
+        SetSelection(model, 0, 'currentprobebndry', 'Current probe boundary', ...
+            2);  % Current probe location
         SetSelection(model, 0, 'electrodes', 'Electrodes', [1 4]);  % Electrodes boundaries
-        SetSelection(model, 0, 'dielectricwall_1', 'Dielectric wall 1', 2);  % Dielectric wall 1 boundary
-        SetSelection(model, 0, 'dielectricwall_2', 'Dielectric wall 2', 3);  % Dielectric wall 2 boundary
-        SetSelection(model, 0, 'dielectricwalls', 'Dielectric walls', [2 3]);  % Dielectric walls boundaries
+        SetSelection(model, 0, 'dielectricwall_1', 'Dielectric wall 1', ...
+            2);  % Dielectric wall 1 boundary
+        SetSelection(model, 0, 'dielectricwall_2', 'Dielectric wall 2', ...
+            3);  % Dielectric wall 2 boundary
+        SetSelection(model, 0, 'dielectricwalls', 'Dielectric walls', ...
+            [2 3]);  % Dielectric walls boundaries
     
     else % Case: no dielectric layers
         
         % Create a simple two-point interval: just a plasma domain between electrodes
         model.geom(inp.GeomName).feature.create('i1', 'Interval');
-        model.geom(inp.GeomName).feature('i1').set('p2', 'ElecDist');
-        
+        model.geom(inp.GeomName).feature('i1').setIndex('coord', 'RadiusInnerEle', 0);
+        model.geom(inp.GeomName).feature('i1').setIndex('coord', 'DischGap+RadiusInnerEle', 1);
+                
         % Build and finalize geometry
         model.geom(inp.GeomName).runAll;
         model.geom(inp.GeomName).run;
         
         % Define selections for domains (1) and boundaries (0)
         SetSelection(model, 1, 'plasmadomain', 'Plasma domain', 1);  % Single plasma domain
-        SetSelection(model, 0, 'plasmaboundaries', 'Plasma boundaries', [1 2]);  % Plasma boundaries
-        SetSelection(model, 0, 'poweredelectrode', 'Powered electrode', 1);  % Powered electrode boundary
-        SetSelection(model, 0, 'groundedelectrode', 'Grounded electrode', 2);  % Grounded electrode boundary
-        SetSelection(model, 0, 'currentprobebndry', 'Current probe boundary', 1);  % Current probe location
+        SetSelection(model, 0, 'plasmaboundaries', 'Plasma boundaries', ...
+            [1 2]);  % Plasma boundaries
+        SetSelection(model, 0, 'poweredelectrode', 'Powered electrode', ...
+            1);  % Powered electrode boundary
+        SetSelection(model, 0, 'groundedelectrode', 'Grounded electrode', ...
+            2);  % Grounded electrode boundary
+        SetSelection(model, 0, 'currentprobebndry', 'Current probe boundary', ...
+            1);  % Current probe location
         SetSelection(model, 0, 'electrodes', 'Electrodes', [1 2]);  % Electrodes boundaries
         
     end

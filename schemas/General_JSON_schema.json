@@ -102,15 +102,15 @@
                   "title": "Coaxial electrodes",
                   "description": "Electrode dimensions in the case of a coaxial configuration. If the configuration of the electrodes is not coaxial, all values in this section should be set to zero.",
                   "required": [
-                    "inner_ele_radius",
                     "outer_ele_radius",
-                    "ele_length"
+                    "ele_length",
+                    "inner_ele_radius"
                   ],
                   "properties": {
                     "inner_ele_radius": {
-                      "type": "number",
-                      "title": "Outer radius of inner electrode [m]",
-                      "description": ""
+                      "title": "Radius of inner electrode [m]",
+                      "description": "If the electrode is not a rod, but a tube, the value in this field should represent the outer radius of the tube.",
+                      "type": "number"
                     },
                     "outer_ele_radius": {
                       "title": "Inner radius of outer electrode [m]",
@@ -249,7 +249,7 @@
                   "type": "string"
                 },
                 "temperature": {
-                  "title": "Temperature [°C]",
+                  "title": "Temperature [K]",
                   "description": "Temperature of the gas during plasma operation.",
                   "type": "number"
                 }
@@ -502,34 +502,9 @@
             "gas_properties",
             "spec_prop"
           ]
-        },
-        "procedure": {
-          "title": "Medium Procedure",
-          "description": "Standard procedure to prepare the medium (pre-treatment).",
-          "properties": {},
-          "type": "object"
         }
       },
       "type": "object"
-    },
-    "target": {
-      "title": "Plasma Target",
-      "description": "Substrate the plasma acts on, directly (target is/was in contact with a plasma) or mediated by an additional substance.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "title": "Target Properties",
-          "description": "Properties of the target.",
-          "properties": {},
-          "type": "object"
-        },
-        "procedure": {
-          "title": "Target Procedure",
-          "description": "Standard procedure to prepare the target.",
-          "type": "object",
-          "properties": {}
-        }
-      }
     },
     "diagnostics": {
       "title": "Diagnostics",
@@ -584,17 +559,17 @@
                   "title": "Source term stabilization",
                   "description": "Include source term stabilisation for species number density and mean electron energy balance equations to improve the numerical stability of simulations.",
                   "type": "boolean",
-                  "default": true
+                  "default": false
                 },
                 "nojac": {
                   "type": "boolean",
                   "title": "\"nojac\" operator",
-                  "description": "\"In COMSOL Multiphysics, the nojac operator is used to exclude specific expressions from the Jacobian matrix computation during numerical simulations. This can lead to reduced memory usage and potentially faster computation times, as the solver avoids unnecessary calculations\"",
-                  "default": true
+                  "description": "In COMSOL Multiphysics, the \"nojac\" operator is used to exclude specific expressions from the Jacobian matrix computation during numerical simulations. This can lead to reduced memory usage and potentially faster computation times, as the solver avoids unnecessary calculations.",
+                  "default": false
                 },
                 "element_number": {
                   "title": "Number of spatial steps",
-                  "description": "This field defines a number of spatial steps in the plasma domain for 1D and 1p5D geometries. The value in this field should be set to zero for other geometries (2D and 2p5D).",
+                  "description": "This field defines a number of equidistant spatial steps in the plasma domain for 1D and 1p5D geometries. The value in this field should be set to zero for other geometries (2D and 2p5D).",
                   "type": "number",
                   "default": 500
                 },
@@ -630,61 +605,8 @@
               ]
             }
           }
-        },
-        "procedure": {
-          "title": "Diagnostics Procedure",
-          "description": "Description of the diagnostic procedure.",
-          "type": "object",
-          "properties": {}
         }
       }
-    },
-    "resource": {
-      "title": "Resource",
-      "description": "Digital object obtained by diagnostics",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "title": "UUID",
-            "description": "System UUID for object identification.",
-            "type": "string"
-          },
-          "url": {
-            "title": "URL",
-            "description": "Download link (URL) of the resource.",
-            "type": "string"
-          },
-          "filetype": {
-            "title": "Resource Filetype",
-            "description": "File type of the resource. Examples: csv, pdf, png, txt.",
-            "type": "string"
-          },
-          "datatype": {
-            "title": "Resource Datatype",
-            "description": "Data type of the resource. Examples: data table, SEM image, cfu-plot, high-speed video.",
-            "type": "string"
-          },
-          "range": {
-            "title": "Resource Range",
-            "description": "Range in which the resource is valid. Example: wavelength range: 400-800 nm.",
-            "type": "string"
-          },
-          "quality": {
-            "title": "Resource Quality",
-            "description": "Data quality score. One of: verified, published, reviewed.",
-            "type": "string",
-            "enum": [
-              "verified",
-              "published",
-              "reviewed"
-            ]
-          }
-        }
-      },
-      "minItems": 1,
-      "uniqueItems": true
     }
   },
   "required": [

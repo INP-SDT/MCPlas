@@ -1,30 +1,74 @@
 function [inp] = InpRKM(inp)
     %
-    % InpRKM function uses the object structure generated from the JSON 
+    % InpRKM function uses the object structure generated from the JSON
     % data and returns the same structure with additional fields related to
     % reaction kinetic model (RKM) necessary for setting up the COMSOL model.
     %
     % :param inp: input
     % :returns: ``inp`` output
-    
+
     %% ================================================
     % === Define species names from JSON input file ===
     % =================================================
+
     names = fieldnames(inp.cfg_RKM_obj.states);
-    inp.specnames = strings(length(names), 1);
-    for i = 1:length(names)
-        inp.specnames(i) = string(inp.cfg_RKM_obj.states.(names{i}).label); 
+    inp.specnames = string(names);  %Convert to string array
+
+    % Define reverse mapping (abbr -> char) ---
+    revMap = { ...
+        '_ds_' , '-'; ...
+        '_sp_' , ' '; ...
+        '_dt_' , '.'; ...
+        '_at_' , '@'; ...
+        '_hs_' , '#'; ...
+        '_dl_' , '$'; ...
+        '_pc_' , '%'; ...
+        '_ct_' , '^'; ...
+        '_ad_' , '&'; ...
+        '_st_' , '*'; ...
+        '_lp_' , '('; ...
+        '_rp_' , ')'; ...
+        '_lb_' , '['; ...
+        '_rb_' , ']'; ...
+        '_lc_' , '{'; ...
+        '_rc_' , '}'; ...
+        '_cl_' , ':'; ...
+        '_sc_' , ';'; ...
+        '_qt_' , '"'; ...
+        '_ap_' , ''''; ...
+        '_lt_' , '<'; ...
+        '_gt_' , '>'; ...
+        '_sl_' , '/'; ...
+        '_bs_' , '\'; ...
+        '_pi_' , '|'; ...
+        '_qm_' , '?'; ...
+        '_bg_' , '!'; ...
+        '_tl_' , '~'; ...
+        '_bt_' , '`'; ...
+        '_eq_' , '='; ...
+        '_pl_' , '+'; ...
+        '_cm_' , ',' ...
+        };
+
+    % Reverse abbreviations
+    for k = 1:length(inp.specnames)
+        key = inp.specnames(k);
+        for r = 1:size(revMap,1)
+            key = strrep(key, revMap{r,1}, revMap{r,2});
+        end
+        inp.specnames(k) = key;
     end
+
     inp.Nspec = length(inp.specnames); % Define total number of species
-    
+
     %% ============================================
     % === Define species indexes and properties ===
     % =============================================
-    
+
     inp.Z = zeros(inp.Nspec, 1);
     inp.nInd = [];
     inp.iInd = [];
-    j = 0; 
+    j = 0;
     k = 0;
     for i = 1:inp.Nspec
         temp_state = inp.cfg_RKM_obj.states.(names{i});
@@ -56,35 +100,35 @@ function [inp] = InpRKM(inp)
             end
         end
     end
-    inp.eEnergyEqn = ['eq', num2str(inp.Nspec + 1)]; % Set index for electron energy 
-                                                     % balance equation needed later
-    
+    inp.eEnergyEqn = ['eq', num2str(inp.Nspec + 1)]; % Set index for electron energy
+    % balance equation needed later
+
     %% ================================================================
     % === Define variables necessary for setting up model chemistry ===
     % =================================================================
-    
+
     % Define reaction matrices
     % -------------------------
-    
+
     % Reaction matrices define the gain and loss of each species.
-    % Values in the gain matrix (ReacGain) correspond to the number of 
+    % Values in the gain matrix (ReacGain) correspond to the number of
     % particular species produced in each process.
-    % Values in the loss matrix (ReacLoss) correspond to the number of 
+    % Values in the loss matrix (ReacLoss) correspond to the number of
     % particular species lost in each process.
-    % Values in the power matrix (ReacPower) correspond to the total number 
+    % Values in the power matrix (ReacPower) correspond to the total number
     % of reactants in each process.
-    
+
     inp.Nreac = length(inp.cfg_RKM_obj.processes); % Set total number of processes
     inp.ReacGain = zeros(inp.Nreac, inp.Nspec);
     inp.ReacLoss = zeros(inp.Nreac, inp.Nspec);
     inp.ReacPower = zeros(inp.Nspec, inp.Nreac);
-    
+
     for i = 1:inp.Nreac
         reaction = inp.cfg_RKM_obj.processes(i).reaction;
         for j = 1:inp.Nspec
             left = 0;
             for k = 1:length(reaction.lhs)
-                % Check whether certain species is a reactant (left hand side of 
+                % Check whether certain species is a reactant (left hand side of
                 % chemical reaction) in specific process.
                 % If it is a reactant, determine the quantity (count).
                 if strcmp(getfield(reaction.lhs(k), 'state'), ...
@@ -101,30 +145,30 @@ function [inp] = InpRKM(inp)
                     right = reaction.rhs(k).count;
                 end
             end
-            inp.ReacGain(i, j) = max(0, right - left); % Determine values of the gain 
-                                                       % reaction matrix
-            inp.ReacLoss(i, j) = max(0, left - right); % Determine values of the loss 
-                                                       % reaction matrix
+            inp.ReacGain(i, j) = max(0, right - left); % Determine values of the gain
+            % reaction matrix
+            inp.ReacLoss(i, j) = max(0, left - right); % Determine values of the loss
+            % reaction matrix
             inp.ReacPower(j, i) = left; % Determine values of the power reaction matrix
         end
     end
-    
+
     % Identify processes involving electrons
     % --------------------------------------
-   
+
     inp.ele_processes = [];
     ele_name = inp.specnames(inp.eInd);
     for i = 1:inp.Nreac
         reaction = inp.cfg_RKM_obj.processes(i).reaction;
         if ismember(ele_name, {reaction.lhs.state}) > 0 || ...
-           ismember(ele_name, {reaction.rhs.state}) > 0
+                ismember(ele_name, {reaction.rhs.state}) > 0
             inp.ele_processes = [inp.ele_processes, i];
         end
     end
-    
+
     % Make a complete list of included chemical reactions
     % ---------------------------------------------------
-    
+
     inp.reacnames = cell(inp.Nreac, 1);
     for i = 1:inp.Nreac
         reaction = inp.cfg_RKM_obj.processes(i).reaction;
@@ -150,9 +194,9 @@ function [inp] = InpRKM(inp)
                 temp_state = [temp_state ' + ' getfield(reaction.rhs(j), 'state')];
             end
         end
-        inp.reacnames(i, 1) = {temp_state}; 
+        inp.reacnames(i, 1) = {temp_state};
     end
-    
+
     % Define rate coefficients
     % ------------------------
 
@@ -199,7 +243,7 @@ function [inp] = InpRKM(inp)
             end
         end
     end
-    
+
     % Define energy rate coefficients
     % --------------------------------
     target_1 = "RateCoefficient";
@@ -208,16 +252,16 @@ function [inp] = InpRKM(inp)
     for i = inp.ele_processes
         temp_info = inp.cfg_RKM_obj.processes(i).info;
 
-         if isstruct(temp_info)  % Case: 'info' is a structure
+        if isstruct(temp_info)  % Case: 'info' is a structure
             types = {temp_info.type};
-            
+
             if any(strcmp(types, target_2)) % Direct energy rate coefficient available
                 temp_id = find(strcmp(types, target_2), 1);
                 inp.coefficients.("Rene" + num2str(i)) = temp_info(temp_id).data;
             elseif any(strcmp(types, target_1))
-                 % When energy rate coefficient for specific process is not
-                 % defined by the user in JSON file, it will be defined as
-                 % a product of the rate coefficient and energy threshold value.
+                % When energy rate coefficient for specific process is not
+                % defined by the user in JSON file, it will be defined as
+                % a product of the rate coefficient and energy threshold value.
                 temp_id = find(strcmp(types, target_1), 1);
                 if isfield(temp_info(temp_id), "threshold") && ...
                         temp_info(temp_id).threshold.value ~= 0
@@ -233,7 +277,7 @@ function [inp] = InpRKM(inp)
                 error(['No energy rate coefficient or threshold for process ', num2str(i)]);
             end
 
-         else  % Case: 'info' is a cell array of structs
+        else  % Case: 'info' is a cell array of structs
             found = false;
 
             for j = 1:numel(temp_info)
@@ -247,9 +291,9 @@ function [inp] = InpRKM(inp)
                 elseif strcmp(info_j.type, target_1) && ...
                         isfield(info_j, "threshold") && ...
                         info_j.threshold.value ~= 0
-                 % When energy rate coefficient for specific process is not
-                 % defined by the user in JSON file, it will be defined as
-                 % a product of the rate coefficient and energy threshold value.
+                    % When energy rate coefficient for specific process is not
+                    % defined by the user in JSON file, it will be defined as
+                    % a product of the rate coefficient and energy threshold value.
 
                     threshold = info_j.threshold;
                     inp.coefficients.("Rene" + num2str(i)).data = ...
@@ -264,10 +308,10 @@ function [inp] = InpRKM(inp)
             end
         end
     end
-    
+
     % Define reaction rates
     % ---------------------
-    
+
     inp.ReactionRates = strings(length(inp.RateCoefficient_id), 1);
     for i = inp.RateCoefficient_id
         id = num2str(i);
@@ -282,10 +326,10 @@ function [inp] = InpRKM(inp)
             end
         end
     end
-    
+
     % Define electron energy reaction rates
     % -------------------------------------
-    
+
     inp.ReactionEnergyRates = strings(length(inp.ele_processes), 1);
     for i = inp.ele_processes
         id = num2str(i);
@@ -301,11 +345,11 @@ function [inp] = InpRKM(inp)
             end
         end
     end
-    
+
     %% ===============================================================================
     % === Define variables necessary for setting up species transport coefficients ===
     % ================================================================================
-    
+
     for i = 1:inp.Nspec
         temp_info = inp.cfg_RKM_obj.states.(names{i}).info;
 

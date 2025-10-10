@@ -23,10 +23,10 @@ function SetGeometry(inp, flags, model)
         % Create a 1D interval with multiple subintervals (many segments)
         model.geom(inp.GeomName).feature.create('i1', 'Interval');
         model.geom(inp.GeomName).feature('i1').set('intervals', 'many');
-        temp = '0, DBthickness, ElecDist+DBthickness';
+        temp = '0, DBthickness, DischGap+DBthickness';
         model.geom(inp.GeomName).feature('i1').set('p', temp);  % Define subinterval points:
                                                                 % 0 (start), DBthickness (dielectric), 
-                                                                % DBthickness + ElecDist (plasma) 
+                                                                % DBthickness + DischGap (plasma) 
         % Build and finalize geometry
         model.geom(inp.GeomName).runAll;
         model.geom(inp.GeomName).run; 
@@ -51,10 +51,10 @@ function SetGeometry(inp, flags, model)
         % Create a 1D interval with multiple subintervals (many segments)
         model.geom(inp.GeomName).feature.create('i1', 'Interval');
         model.geom(inp.GeomName).feature('i1').set('intervals', 'many');
-        temp = '0, ElecDist, ElecDist+DBthickness';
+        temp = '0, DischGap, DischGap+DBthickness';
         model.geom(inp.GeomName).feature('i1').set('p', temp);  % Define subinterval points:
-                                                                % 0 (start), ElecDist (plasma), 
-                                                                % ElecDist + DBthickness (dielectric)
+                                                                % 0 (start), DischGap (plasma), 
+                                                                % DischGap + DBthickness (dielectric)
         % Build and finalize geometry
         model.geom(inp.GeomName).runAll;
         model.geom(inp.GeomName).run; 
@@ -79,12 +79,12 @@ function SetGeometry(inp, flags, model)
         model.geom(inp.GeomName).feature.create('i1', 'Interval');
         model.geom(inp.GeomName).feature('i1').set('intervals', 'many');
         temp = [ '0, DBthickness_1, ' ...
-            'ElecDist+DBthickness_1, ' ...
-            'ElecDist+DBthickness_1+DBthickness_2'];
+            'DischGap+DBthickness_1, ' ...
+            'DischGap+DBthickness_1+DBthickness_2'];
         model.geom(inp.GeomName).feature('i1').set('p',temp);  % Define subinterval points:
                                                                % 0 (start), DBthickness_1, 
-                                                               % DBthickness_1 + ElecDist,
-                                                               % DBthickness_1 + ElecDist% + DBthickness_2
+                                                               % DBthickness_1 + DischGap,
+                                                               % DBthickness_1 + DischGap% + DBthickness_2
         % Build and finalize geometry
         model.geom(inp.GeomName).runAll;
         model.geom(inp.GeomName).run;
@@ -107,7 +107,7 @@ function SetGeometry(inp, flags, model)
         
         % Create a simple two-point interval: just a plasma domain between electrodes
         model.geom(inp.GeomName).feature.create('i1', 'Interval');
-        model.geom(inp.GeomName).feature('i1').set('p2', 'ElecDist');
+        model.geom(inp.GeomName).feature('i1').set('p2', 'DischGap');
         
         % Build and finalize geometry
         model.geom(inp.GeomName).runAll;

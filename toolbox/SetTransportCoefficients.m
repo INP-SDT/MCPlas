@@ -368,7 +368,7 @@ function SetData(model, variablesname, id, temp)
                 dep = 'EdN';
             elseif isequal(char(dep), 'L') || isequal(char(dep), 'd') % 
                 % Discharge gap distance
-                dep = 'ElecDist';
+                dep = 'DischGap';
             elseif isequal(char(dep), 'R') % Electrode radius
                 dep = 'ElecRadius';
             end
@@ -439,7 +439,7 @@ function SetData(model, variablesname, id, temp)
                                                  % index of the corresponding species
             dep = strjoin(dep, ', ');
             dep = replace(dep, ["L", "d", "R"], ...
-                ["ElecDist", "ElecDist", "R"]);  % Replace variable names to be 
+                ["DischGap", "DischGap", "R"]);  % Replace variable names to be 
                                                  % consistent with earlier defined 
                                                  % variables in the COMSOL model
             if length(temp.factor) == 0

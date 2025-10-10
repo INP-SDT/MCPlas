@@ -21,6 +21,7 @@ function SetMesh(inp, flags, model)
                                                   % (e.g., 'plasmadomain')
     model.mesh('mesh1').feature('edg1').feature('dis1').set('type', 'number');  % Set the mesh distribution type
                                                                                 % to use a fixed number of elements
+    model.mesh('mesh1').feature('edg1').feature('dis1').set('equidistant', true);  % Set equidistant mesh point distribution                                                                                
     if inp.General.num_elem_1D  > 0 
         model.mesh('mesh1').feature('edg1').feature('dis1').set('numelem', ...
             num2str(inp.General.num_elem_1D));  % Set the number of mesh elements

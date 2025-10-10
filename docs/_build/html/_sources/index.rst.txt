@@ -85,7 +85,9 @@ Application
 The Application folder in the MCPlas toolbox serves as the central location for organizing geometry-specific modeling cases.
 It contains subfolders such as Generic1D, Generic1p5D, Generic2D, and Generic2p5D, each corresponding to a particular modelling geometry. 
 Within each subfolder, there are dedicated MATLAB scripts responsible for defining the geometry, generating the mesh, and configuring project-specific properties such as solvers and study steps. 
-Each case also includes a General JSON input file that provides essential settings tailored to that specific geometry.
+Each case also includes a General JSON input file that provides essential settings tailored to that specific geometry (options ``1D``, ``1p5D``, ``2D``, ``2p5D``).
+The General JSON input file should be prepared using Adamant web-tool.
+How to prepare this input file will be explaned in some of the next sections. 
 After the model-building process is completed, the resulting .mph file is automatically saved in the same subfolder, keeping all related files organized and localized. 
 
 Generic1D
@@ -192,20 +194,46 @@ Plasma
    manual_rst_plasma/Ar_Becker_2009.rst
    manual_rst_plasma/Ar_Stankov_2022.rst
 
+Preparation of General input data
+---------------------------------
+
+In addition to input data containing information on the RKM and species transport properties, some general input data are required to build the model. 
+For the preparation of these data in JSON data format employing of the Adamant web-tool (https://plasma-mds.github.io/adamant/) is proposed. 
+This tool is primarily intended to facilitate the implementation of digital research data management processes in small laboratories by enabling easy compilation and creation of metadata and metadata schemas based on JSON schema standards. 
+All the features of the Adamant are very convenient for generating the JSON data format containing all general input data necessary for model generation. 
+
+In general, Adamant can generate JSON data files based on the included JSON schema. 
+The JSON schema can be included in three ways: (i) selecting one of the existing schemas, (ii) uploading a schema already prepared by the user, or (iii) creating a schema from scratch directly on the platform. 
+The MCPlas toolbox comes with a pre-prepared JSON schema. 
+Based on Plasma-MDS~(*S. Franke, L. Paulet, J. Sch¨afer, D. O’Connell, M. M. Becker, Sci. Data (2020) 439*), a metadata schema for plasma science, the provided JSON schema is designed to promote the application of the FAIR data principles to plasma modelling. 
+For the purposes of MCPlas, Plasma-MDS was specifically modified to correspond to the general input data required to set up the fluid-Poisson model in COMSOL.
+
+The user has to upload the provided JSON schema to the Adamant platform and start the rendering process. 
+Subsequently, Adamant automatically generates an interactive web form schema, whose elements correspond to the general input data that the user has to complete.
+The elements are structured into three major object fields: plasma source, plasma medium, and diagnostics. 
+The plasma source field describes the geometry, electrical, and material properties of the source. 
+The plasma medium field encompasses the general characteristics of the gas under study, as well as the surface properties specific to the included species and surface materials. 
+Finally, the diagnostics field contains the relevant properties of the fluid–Poisson model, which is employed here as a diagnostic tool for investigation.
+Compiling the fully defined web form schema generates a JSON data file containing all general input data needed for the model building. 
+If the user wants to make a modelling analysis with changed general input data, it just needs to start the rendering process of the JSON schema again, edit the desired data in the web form schema, and generate a new JSON data file.
+  
 How to use it
 -------------
   
 .. include:: manual_rst_tutorial/MCPlas_workflow.rst
-.. figure:: images/MCPlas_workflow.jpg
+.. figure:: images/MCPlas_workflow.png
    :width: 75%
    :align: center 
 
    Figure 6, MCPlas worklow.
-   
+ 
+.. include:: manual_rst_tutorial/Step_by_step_tutorial.rst 
+
 .. video:: video/my_video.mp4
     :width: 640
     :height: 360
     :autoplay:
+   
 
  
 Indices and tables

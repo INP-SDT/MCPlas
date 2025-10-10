@@ -3,7 +3,7 @@
     "properties": {
       "geometry_settings": {
         "gap_distance": 0.01,
-        "diel_thickness_powered": 0.002,
+        "diel_thickness_powered": 0,
         "diel_thickness_grounded": 0,
         "rect_electode": {
           "ele_length": 0.05,
@@ -20,11 +20,11 @@
       },
       "source_settings": {
         "elec_prop": {
-          "applied_voltage": 300,
+          "applied_voltage": 350,
           "voltage_frequency": 0
         },
         "mat_prop": {
-          "perm_diel_powered": 3.4,
+          "perm_diel_powered": 0,
           "perm_diel_grounded": 0
         }
       }
@@ -41,8 +41,8 @@
       "spec_prop": {
         "electron": {
           "sec_emiss_coeff": {
-            "ele_powered": 0.07,
-            "ele_grounded": 0.07,
+            "ele_powered": 0.06,
+            "ele_grounded": 0.06,
             "diel_powered": 0,
             "diel_grounded": 0
           },
@@ -58,182 +58,30 @@
             "diel_powered": 0,
             "diel_grounded": 0
           },
-          "init_dens": 2000000000000,
-          "init_ene": 3		  
+          "init_dens": 1000000000000,
+          "init_ene": 3
         },
         "background_gas": [
           {
-            "name": "Ar[1p0]",
+            "name": "Ar",
             "background": 100
           }
         ],
         "heavy_spec": [
           {
-            "name": "Ar[1s5]",
+            "name": "Ar[*]",
             "refl_ele_powered": 0.3,
             "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar[1s4]",
-            "refl_ele_powered": 0.3,
-            "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar[1s3]",
-            "refl_ele_powered": 0.3,
-            "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar[1s2]",
-            "refl_ele_powered": 0.3,
-            "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar[2p10]",
-            "refl_ele_powered": 0.3,
-            "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar[2p9]",
-            "refl_ele_powered": 0.3,
-            "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar[2p8]",
-            "refl_ele_powered": 0.3,
-            "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar[2p7]",
-            "refl_ele_powered": 0.3,
-            "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar[2p6]",
-            "refl_ele_powered": 0.3,
-            "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar[2p5]",
-            "refl_ele_powered": 0.3,
-            "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar[2p4]",
-            "refl_ele_powered": 0.3,
-            "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar[2p3]",
-            "refl_ele_powered": 0.3,
-            "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar[2p2]",
-            "refl_ele_powered": 0.3,
-            "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar[2p1]",
-            "refl_ele_powered": 0.3,
-            "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar*[hl]",
-            "refl_ele_powered": 0.3,
-            "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
+            "refl_diel_powered": 0,
+            "refl_diel_grounded": 0,
             "int_dens": 1000000000000
           },
           {
             "name": "Ar^+",
             "refl_ele_powered": 0.0005,
             "refl_ele_grounded": 0.0005,
-            "refl_diel_powered": 0.005,
-            "refl_diel_grounded": 0.005,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar_2^*[^3S_u^+,v=0]",
-            "refl_ele_powered": 0.3,
-            "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar_2^*[^1S_u^+,v=0]",
-            "refl_ele_powered": 0.3,
-            "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar_2^*[^3S_u^+,v>>0]",
-            "refl_ele_powered": 0.3,
-            "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar_2^*[^1S_u^+,v>>0]",
-            "refl_ele_powered": 0.3,
-            "refl_ele_grounded": 0.3,
-            "refl_diel_powered": 0.3,
-            "refl_diel_grounded": 0.3,
-            "int_dens": 1000000000000
-          },
-          {
-            "name": "Ar_2^+",
-            "refl_ele_powered": 0.0005,
-            "refl_ele_grounded": 0.0005,
-            "refl_diel_powered": 0.005,
-            "refl_diel_grounded": 0.005,
+            "refl_diel_powered": 0,
+            "refl_diel_grounded": 0,
             "int_dens": 1000000000000
           }
         ]
@@ -247,13 +95,13 @@
         "spatial_dimensions": "2D",
         "electron_flux": "DDA53",
         "log_formulation": true,
-        "stabilization": true,
-        "nojac": true,
-        "element_number": 500,
+        "stabilization": false,
+        "nojac": false,
+        "element_number": 0,
         "element_size": 4e-4,
         "start_time": 0,
-        "end_time": 0.000001,
-        "time_step": 1e-8
+        "end_time": 1e-4,
+        "time_step": 1e-5
       }
     }
   }

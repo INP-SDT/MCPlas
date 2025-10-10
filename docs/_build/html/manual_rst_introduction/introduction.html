@@ -65,73 +65,75 @@ Depending on the user’s needs, model equations can be solved in either Cartesi
 <p>The plasma description provided by MCPlas is based on the equations of fluid-Poisson model</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[\begin{split}\frac{\partial}{\partial t}n_j(\mathbf{r},t)
-+ \nabla\cdot\mathbf{\Gamma}_j(\mathbf{r},t) = S_j(\mathbf{r},t),
+\[\begin{split}\frac{\partial}{\partial t}n_j
++ \nabla\cdot\mathbf{\Gamma}_j = S_j,
 \label{eq:continuity}\\
 %
-\frac{\partial}{\partial t}w_\mathrm{e}(\mathbf{r},t)
-+\nabla\cdot\mathbf{Q}_\mathrm{e}(\mathbf{r},t)
-= -e_0\mathbf{\Gamma}_\mathrm{e}(\mathbf{r},t) \mathbf{E}(\mathbf{r},t) - P(\mathbf{r},t),
+\frac{\partial}{\partial t}w_\mathrm{e}
++\nabla\cdot\mathbf{Q}_\mathrm{e}
+= -e_0\mathbf{\Gamma}_\mathrm{e}\cdot \mathbf{E} + \tilde{S}_\mathrm{e},
 \label{eq:we}\\
 %
--\nabla \cdot(\varepsilon_\mathrm{r}\varepsilon_0\nabla\phi(\mathbf{r},t))
-= \sum_j q_j n_j(\mathbf{r},t),
+-\nabla \cdot(\varepsilon_\mathrm{r}\varepsilon_0\nabla\phi)
+= \sum_j q_j n_j,
 \label{eq:poisson}\end{split}\]</div>
 </div></blockquote>
 <p>where the first and second relations represent balance equations for the particle number densities <span class="math notranslate nohighlight">\(n_j\)</span> of species of kind <span class="math notranslate nohighlight">\(j\)</span>
-with charge <span class="math notranslate nohighlight">\(q_j\)</span> and electron energy density <span class="math notranslate nohighlight">\(w_\mathrm{e}=n_\mathrm{e}u_\mathrm{e}\)</span> with mean electron energy <span class="math notranslate nohighlight">\(u_\mathrm{e}\)</span>, respectively.
-Third equation is Poisson’s equation for the self-consistent determination of the electric potential <span class="math notranslate nohighlight">\(\phi\)</span> and the electric field <span class="math notranslate nohighlight">\(\mathbf{E}(\mathbf{r},t)=-\nabla\phi(\mathbf{r},t)\)</span>.
+with charge <span class="math notranslate nohighlight">\(q_j\)</span> and energy density <span class="math notranslate nohighlight">\(w_\mathrm{e}=n_\mathrm{e}u_\mathrm{e}\)</span> of electrons with density <span class="math notranslate nohighlight">\(n_\mathrm{e}\)</span> and mean energy <span class="math notranslate nohighlight">\(u_\mathrm{e}\)</span>, respectively.
+Third equation is Poisson’s equation for the self-consistent determination of the electric potential <span class="math notranslate nohighlight">\(\phi\)</span> and the electric field <span class="math notranslate nohighlight">\(\mathbf{E}=-\nabla\phi\)</span>.
 In the second equation, <span class="math notranslate nohighlight">\(e_0\)</span> and <span class="math notranslate nohighlight">\(P_\mathrm{e}\)</span> determine the elementary charge and the loss of electron energy in collision processes and in the third, <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{r}\)</span> and <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{0}\)</span> are
-the relative and vacuum permittivity.</p>
-<p>The fluxes <span class="math notranslate nohighlight">\({\mathbf{\Gamma}}_\mathrm{h}\)</span> of heavy particles (<span class="math notranslate nohighlight">\(j=\mathrm{h}\)</span>) in particel balance equation are expressed by the common drift–diffusion approximation (<em>Sigeneger, R. Winkler, IEEE Trans. Plasma Sci. 27 (5)
-(1999) 1254</em>, <em>G. K. Grubert, M. M. Becker, D. Loffhagen, Phys. Rev. E 80 (2009) 036405</em>}</p>
+the relative and vacuum permittivity.
+The source terms <span class="math notranslate nohighlight">\(S_j\)</span> describe the gain and loss of particles due to collision and radiation processes, and <span class="math notranslate nohighlight">\(\tilde{S}_\mathrm{e}\)</span> accounts for the corresponding gain and loss of electron energy.
+All variables (<span class="math notranslate nohighlight">\(n_j\)</span>, <span class="math notranslate nohighlight">\(w_\mathrm{e}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{\Gamma}_j\)</span>, <span class="math notranslate nohighlight">\(\mathbf{Q}_\mathrm{e}\)</span>, <span class="math notranslate nohighlight">\(S_j\)</span>,  <span class="math notranslate nohighlight">\(\tilde{S}_\mathrm{e}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>) are space- and time-dependent quantities.
+To improve clarity and readability, the explicit notation of their dependence on <span class="math notranslate nohighlight">\((\mathbf{r},t)\)</span> is suppressed in the text.</p>
+<p>The fluxes <span class="math notranslate nohighlight">\({\mathbf{\Gamma}}_\mathrm{h}\)</span> of heavy particles (<span class="math notranslate nohighlight">\(j=\mathrm{h}\)</span>) are expressed by the common drift-diffusion approximation (<em>Sigeneger, R. Winkler, IEEE Trans. Plasma Sci. 27 (5)
+(1999) 1254</em>, <em>G. K. Grubert, M. M. Becker, D. Loffhagen, Phys. Rev. E 80 (2009) 036405</em>)</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[\mathbf{\Gamma}_\mathrm{h}(\mathbf{r},t)
-= \mathrm{sgn}(q_\mathrm{h})n_\mathrm{h}(\mathbf{r},t) b_\mathrm{h}(\mathbf{r},t) \mathbf{E}(\mathbf{r},t)
--\nabla(D_\mathrm{h}(\mathbf{r},t) n_\mathrm{h}(\mathbf{r},t))
-\,  \label{eq:flux_particle}.\]</div>
+\[\mathbf{\Gamma}_\mathrm{h}
+= \mathrm{sgn}(q_\mathrm{h})n_\mathrm{h} b_\mathrm{h} \mathbf{E}
+-D_\mathrm{h}\nabla n_\mathrm{h}\,, \label{eq:flux_particle}\]</div>
 </div></blockquote>
-<p>Here, <span class="math notranslate nohighlight">\(b_\mathrm{h}\)</span> and <span class="math notranslate nohighlight">\(D_\mathrm{h}\)</span> stand for the  mobility and diffusion coefficient of heavy species <span class="math notranslate nohighlight">\(\mathrm{h}\)</span>, respectively, while the function <span class="math notranslate nohighlight">\(\mathrm{sgn}(q_\mathrm{h})\)</span> defines the sign of <span class="math notranslate nohighlight">\(q_\mathrm{h}\)</span>.</p>
-<p>A consistent drift-diffusion approximation for the flux <span class="math notranslate nohighlight">\({\mathbf{\Gamma}}_\mathrm{e}\)</span> of electron (<span class="math notranslate nohighlight">\(j=\mathrm{e}\)</span>) and the flux <span class="math notranslate nohighlight">\({\mathbf{Q}}_\mathrm{e}\)</span> of the electron energy has been deduced by an expansion of the electron velocity distribution function (EVDF) in Legendre polynomials and the derivation of the first four moment equations from the electron Boltzmann equation (<em>M. M. Becker, D. Loffhagen, AIP Adv. 3 (2013) 012108</em>, <em>M. M. Becker, D. Loffhagen, Adv. Pure Math. 3 (2013) 343</em>).
+<p>where,  <span class="math notranslate nohighlight">\(b_\mathrm{h}\)</span> and <span class="math notranslate nohighlight">\(D_\mathrm{h}\)</span> stand for the  mobility and diffusion coefficient of heavy species <span class="math notranslate nohighlight">\(\mathrm{h}\)</span>, respectively, while the function <span class="math notranslate nohighlight">\(\mathrm{sgn}(q_\mathrm{h})\)</span> defines the sign of <span class="math notranslate nohighlight">\(q_\mathrm{h}\)</span>.
+Three options are offered by MCPlas for the definition of the electron flux <span class="math notranslate nohighlight">\({\mathbf{\Gamma}}_\mathrm{e}\)</span> and electron energy flux <span class="math notranslate nohighlight">\({\mathbf{Q}}_\mathrm{e}\)</span>.
+The conventional drift-diffusion approximation (option <code class="docutils literal notranslate"><span class="pre">DDAc</span></code>) for these fluxes reads</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{\Gamma}_\mathrm{e}
+= -n_\mathrm{e} b_\mathrm{e} \mathbf{E}
+-\nabla(D_\mathrm{e}n_\mathrm{e})\,,\label{eq:JeDDAc}\\
+%
+\mathbf{Q}_\mathrm{e}
+= -w_\mathrm{e} \tilde{b}_\mathrm{e} \mathbf{E}
+-\nabla(\tilde{D}_\mathrm{e}w_\mathrm{e})\,,\label{eq:QeDDAc}\end{split}\]</div>
+</div></blockquote>
+<p>where <span class="math notranslate nohighlight">\(b_\mathrm{e}\)</span> and <span class="math notranslate nohighlight">\(D_\mathrm{e}\)</span> are electron transport coefficients, and <span class="math notranslate nohighlight">\(\tilde{b}_\mathrm{e}\)</span> and <span class="math notranslate nohighlight">\(\tilde{D}_\mathrm{e}\)</span> represent the electron energy transport coefficients.
+The frequently used approach (option <code class="docutils literal notranslate"><span class="pre">DDA53</span></code>) employs the simplified form of the electron energy flux</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\mathbf{Q}_\mathrm{e}
+= -\frac{5}{3} w_\mathrm{e} {b}_\mathrm{e} \mathbf{E}
+-\frac{5}{3}\nabla({D}_\mathrm{e}w_\mathrm{e})\,.\label{eq:QeDDA53}\]</div>
+</div></blockquote>
+<p>The improved drift-diffusion approximation (option <code class="docutils literal notranslate"><span class="pre">DDAn</span></code>) represents a third way of characterising <span class="math notranslate nohighlight">\({\mathbf{\Gamma}}_\mathrm{e}\)</span> and  <span class="math notranslate nohighlight">\({\mathbf{Q}}_\mathrm{e}\)</span>.
+It was deduced by an expansion of the electron velocity distribution function (EVDF) in Legendre polynomials and the derivation of the first four moment equations from the electron Boltzmann equation (<em>M. M. Becker, D. Loffhagen, AIP Adv. 3 (2013) 012108</em>, <em>M. M. Becker, D. Loffhagen, Adv. Pure Math. 3 (2013) 343</em>).
 It reads</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[\begin{split}\mathbf{\Gamma}_\mathrm{e}(\mathbf{r},t)
-= -\frac{1}{m_\mathrm{e}\nu_\mathrm{e}}\frac{\partial}{\partial z}
-\Bigl((\xi_0 + \xi_2)n_\mathrm{e}(\mathbf{r},t) \Bigr)
--\frac{e_0}{m_\mathrm{e}\nu_\mathrm{e}} \mathbf{E}(\mathbf{r},t) n_\mathrm{e}(\mathbf{r},t)\,, \label{eq:JeDDAn}\\
+\[\begin{split}\mathbf{\Gamma}_\mathrm{e}
+= -\frac{e_0}{m_\mathrm{e}\nu_\mathrm{e}}\nabla
+\Bigl((\xi_0 + \xi_2)n_\mathrm{e} \Bigr)
+-\frac{e_0}{m_\mathrm{e}\nu_\mathrm{e}} \mathbf{E} n_\mathrm{e}\,, \label{eq:JeDDAn}\\
 %
-\mathbf{Q}_\mathrm{e}(\mathbf{r},t) = -\frac{1}{m_\mathrm{e}\tilde{\nu}_\mathrm{e}}\frac{\partial}{\partial z}
-\Bigl((\tilde{\xi}_0 + \tilde{\xi}_2) w_\mathrm{e}(\mathbf{r},t) \Bigr) \label{eq:QeDDAn}\\
+\mathbf{Q}_\mathrm{e} = -\frac{e_0}{m_\mathrm{e}\tilde{\nu}_\mathrm{e}}\nabla
+\Bigl((\tilde{\xi}_0 + \tilde{\xi}_2) w_\mathrm{e} \Bigr) \label{eq:QeDDAn}\\
 \qquad\qquad\; -\frac{e_0}{m_\mathrm{e}\tilde{\nu}_\mathrm{e}}\Bigl(\frac{5}{3}
-+ \frac{2}{3}\frac{\xi_2}{\xi_0}\Bigr)\mathbf{E}(\mathbf{r},t) w_\mathrm{e}(\mathbf{r},t), \nonumber\end{split}\]</div>
++ \frac{2}{3}\frac{\xi_2}{\xi_0}\Bigr)\mathbf{E} w_\mathrm{e}, \nonumber\end{split}\]</div>
 </div></blockquote>
-<p>and includes the momentum and energy flux dissipation frequencies <span class="math notranslate nohighlight">\(\nu_\mathrm{e}\)</span> and <span class="math notranslate nohighlight">\(\tilde{\nu}_\mathrm{e}\)</span> as well as the transport coefficients <span class="math notranslate nohighlight">\(\xi_0\)</span>, <span class="math notranslate nohighlight">\(\xi_2\)</span>, <span class="math notranslate nohighlight">\(\tilde{\xi}_0\)</span> and <span class="math notranslate nohighlight">\(\tilde{\xi}_2\)</span>.
-These properties are given as integrals of the isotropic part <span class="math notranslate nohighlight">\(f_0\)</span> and the first two contributions <span class="math notranslate nohighlight">\(f_1\)</span> and <span class="math notranslate nohighlight">\(f_2\)</span> to the anisotropy of the EVDF over the kinetic energy <span class="math notranslate nohighlight">\(U\)</span> of the electrons with mass <span class="math notranslate nohighlight">\(m_\mathrm{e}\)</span>, respectively, according to</p>
-<blockquote>
-<div><div class="math notranslate nohighlight">
-\[\begin{split}\nu_\mathrm{e} = \frac{2}{3m_\mathrm{e}\mathit{\Gamma}_\mathrm{e}}\int\limits_0^\infty
-\frac{U^{\frac{3}{2}}}{\lambda_\mathrm{e}(U)} f_1(U)\,\mathrm{d}U, \label{eq:nu}\\
-%
-\tilde{\nu}_\mathrm{e} = \frac{2}{3m_\mathrm{e} Q_\mathrm{e}}\int\limits_0^\infty
-\frac{U^{\frac{5}{2}}}{\lambda_\mathrm{e}(U)} f_1(U)\,\mathrm{d}U, \label{eq:enu}\\
-%
-\xi_0 = \frac{2}{3 n_\mathrm{e}}\int\limits_0^\infty
-U^{\frac{3}{2}} f_0(U)\,\mathrm{d}U\,, \label{eq:transp_first}\\
-%
-\xi_2 = \frac{4}{15 n_\mathrm{e}}\int\limits_0^\infty
-U^{\frac{3}{2}} f_2(U)\,\mathrm{d}U,
-        \\
-%
-\tilde{\xi}_0 = \frac{2}{3 n_\mathrm{e}}\int\limits_0^\infty
-U^{\frac{5}{2}} f_0(U)\,\mathrm{d}U, \\
-%
-\tilde{\xi}_2 = \frac{4}{15 n_\mathrm{e}}\int\limits_0^\infty
-U^{\frac{5}{2}} f_2(U)\,\mathrm{d}U. \label{eq:transp_last}\end{split}\]</div>
-</div></blockquote>
-<p>It is important to note that MCPlas also provides the option to apply a common drift-diffusion approximation for electron transport.</p>
-<p>Boundary conditions for the balance equation for electron density and mean electron energy are included in MCPlas in accordance with the study given by Hagelaar <em>et al.</em> (<em>G. J. M. Hagelaar, F. J. de Hoog, G. M. W. Kroesen, Phys. Rev. E 62 (1) (2000) 1452</em>) and read</p>
+<p>and includes the momentum and energy flux dissipation frequencies <span class="math notranslate nohighlight">\(\nu_\mathrm{e}\)</span> and <span class="math notranslate nohighlight">\(\tilde{\nu}_\mathrm{e}\)</span>, respectively, the transport coefficients <span class="math notranslate nohighlight">\(\xi_0\)</span>, <span class="math notranslate nohighlight">\(\xi_2\)</span>, <span class="math notranslate nohighlight">\(\tilde{\xi}_0\)</span> and <span class="math notranslate nohighlight">\(\tilde{\xi}_2\)</span>, as well as electron mass <span class="math notranslate nohighlight">\(m_\mathrm{e}\)</span>.
+It should be emphasized that this approximation is unique to the MCPlas toolbox, as to our knowledge it is not part of any other modelling tool.
+Considering the accuracy improvements relative to the drift–diffusion approximation at low and atmospheric pressures (<em>M. Baeva, D. Loffhagen, M. M. Becker, D. Uhrlandt Plasma Chem. Plasma Process. 39 (4) (2019) 949–968</em>), it represents a highly significant feature of the toolbox.</p>
+<p>Boundary conditions for the electron density and mean electron energy balance equations are included in MCPlas in accordance with the study given by Hagelaar <em>et al.</em> (<em>G. J. M. Hagelaar, F. J. de Hoog, G. M. W. Kroesen, Phys. Rev. E 62 (1) (2000) 1452</em>) and read</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\begin{split}\mathbf{\Gamma}_\mathrm{e}\cdot\boldsymbol{\nu}
@@ -151,28 +153,26 @@ U^{\frac{5}{2}} f_2(U)\,\mathrm{d}U. \label{eq:transp_last}\end{split}\]</div>
 \sum_i\max(\mathbf{\Gamma}_i\cdot\boldsymbol{\nu},0)\,,
 \label{eq:boundary_eps}\end{split}\]</div>
 </div></blockquote>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\nu}\)</span> represents the normal vector pointing toward the plasma boundaries.
-The vector of electron drift velocity <span class="math notranslate nohighlight">\(\mathbf{v}_{\mathrm{dr},\mathrm{e}}\)</span>, the thermal velocity of electron <span class="math notranslate nohighlight">\(v_{\mathrm{th},\mathrm{e}}\)</span>, the vector of electron energy drift velocity <span class="math notranslate nohighlight">\(\tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}}\)</span>, and the thermal velocities of electron energy <span class="math notranslate nohighlight">\(\tilde{v}_{\mathrm{th}, \mathrm{e}}\)</span> are given by</p>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\nu}\)</span> represents the normal vector pointing toward the plasma boundaries, and <span class="math notranslate nohighlight">\(r_\mathrm{e}\)</span>, <span class="math notranslate nohighlight">\(\gamma\)</span>, <span class="math notranslate nohighlight">\(u_\mathrm{e}^\gamma\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Gamma}_i\)</span> denote the electron reflection coefficient, the secondary electron emission coefficient, mean energy of secondary electrons and the ion fluxes at the boundaries, respectively.
+The vector of electron drift velocity <span class="math notranslate nohighlight">\(\mathbf{v}_{\mathrm{dr},\mathrm{e}}\)</span>, the thermal velocity of electron <span class="math notranslate nohighlight">\(v_{\mathrm{th},\mathrm{e}}\)</span>, the vector of electron energy drift velocity <span class="math notranslate nohighlight">\(\tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}}\)</span>, and the thermal velocity of electron energy <span class="math notranslate nohighlight">\(\tilde{v}_{\mathrm{th}, \mathrm{e}}\)</span> are given by</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\begin{split}\mathbf{v}_{\mathrm{dr},\mathrm{e}}
-= -\frac{e_0}{m_\mathrm{e}\nu_\mathrm{e}} \mathbf{E}(\mathbf{r},t)\,,
+= -\frac{e_0}{m_\mathrm{e}\nu_\mathrm{e}} \mathbf{E}\, ,
 \qquad
 %\\
 v_{\mathrm{th},\mathrm{e}}
-= \sqrt{\frac{8 k_\mathrm{B} T_\mathrm{e}}{\pi m_\mathrm{e}}}\,,\\
-\tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}}
+= \sqrt{\frac{8 k_\mathrm{B} T_\mathrm{e}}{\pi m_\mathrm{e}}}\, ,\\
+ \tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}}
 = -\frac{e_0u_\mathrm{e}}{m_\mathrm{e}\tilde{\nu}_\mathrm{e}}\Bigl(\frac{5}{3}
-+ \frac{2}{3}\frac{\xi_2}{\xi_0}\Bigr) \mathbf{E}(\mathbf{r},t)\,,
++ \frac{2}{3}\frac{\xi_2}{\xi_0}\Bigr) \mathbf{E}\, ,
 \qquad
 %\\
 \tilde{v}_{\mathrm{th},\mathrm{e}}
-= 2 k_\mathrm{B} T_\mathrm{e}\sqrt{\frac{8 k_\mathrm{B} T_\mathrm{e}}{\pi m_\mathrm{e}}}\,,\end{split}\]</div>
+= 2 k_\mathrm{B} T_\mathrm{e}\sqrt{\frac{8 k_\mathrm{B} T_\mathrm{e}}{\pi m_\mathrm{e}}}\, .\end{split}\]</div>
 </div></blockquote>
-<p>respectively.
-Here, <span class="math notranslate nohighlight">\(T_\mathrm{e} = 2u_\mathrm{e}/(3k_\mathrm{B})\)</span> is the temperature of electrons and <span class="math notranslate nohighlight">\(k_\mathrm{B}\)</span> is the Boltzmann constant.
-Also, <span class="math notranslate nohighlight">\(r_\mathrm{e}\)</span>, <span class="math notranslate nohighlight">\(\gamma\)</span>, <span class="math notranslate nohighlight">\(u_\mathrm{e}^\gamma\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Gamma}_i\)</span> denote the electron reflection coefficient, the secondary electron emission coefficient,  mean energy of secondary electrons and the ion fluxes at the boundaries, respectively.
-The boundary condition for heavy particles balance equation has the following form</p>
+<p>Here, <span class="math notranslate nohighlight">\(T_\mathrm{e} = 2u_\mathrm{e}/(3k_\mathrm{B})\)</span> is the temperature of electrons and <span class="math notranslate nohighlight">\(k_\mathrm{B}\)</span> is the Boltzmann constant.</p>
+<p>The boundary condition for heavy particles balance equation has the following form</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\begin{split}\mathbf{\Gamma}_\mathrm{h}\cdot\boldsymbol{\nu}
@@ -182,9 +182,34 @@ n_\mathrm{h} \mathbf{v}_{\mathrm{dr},\mathrm{h}}  \right|
 +\frac{1}{2} n_\mathrm{h} {v}_{\mathrm{th},\mathrm{h}} \Bigr),
 \label{eq:boundary_heavy}\\\end{split}\]</div>
 </div></blockquote>
-<p>where variables and coefficients associated with heavy particles are defined in a manner analogous to that of electrons.
-It should be noted that in the case of dielectric boundaries, the accumulation of surface charges is taken into account, as described in Stankov <em>et al.</em> (<em>M. Stankov, M. M. Becker, R. Bansemer, K.-D. Weltmann, D. Loffhagen, Plasma Sources Sci. Technol. 29 (12)
+<p>where the variables and coefficients associated to heavy particles are defined in a manner analogous to that of the electrons.
+It should be noted that in the case of dielectric boundaries, the accumulation of surface charges is additionaly taken into account, as described e.g. in (<em>M. Stankov, M. M. Becker, R. Bansemer, K.-D. Weltmann, D. Loffhagen, Plasma Sources Sci. Technol. 29 (12)
 (2020) 125009</em>).</p>
+<p>The source terms <span class="math notranslate nohighlight">\(S_j\)</span> and <span class="math notranslate nohighlight">\(\tilde{S}_\mathrm{e}\)</span> in balance equations are defined as</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\begin{split}S_j = \sum_{l=1}^{N_\mathrm{r}} (G_{jl} - L_{jl}) R_l,
+\label{eq:S_j}\,\\
+\tilde{S}_\mathrm{e} = \sum_{l=1}^{N_\mathrm{r}} \Delta \varepsilon_l R_l,
+\label{eq:S_e}\,\end{split}\]</div>
+</div></blockquote>
+<p>where <span class="math notranslate nohighlight">\(R_l\)</span> is the reaction rate of reaction <span class="math notranslate nohighlight">\(l\)</span>, given by</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[R_l = k_l \prod_{i=1}^{N_\mathrm{s}} n_i^{\beta_{il}}.
+\label{eq:R_l}\]</div>
+</div></blockquote>
+<p>Here, <span class="math notranslate nohighlight">\(\beta_{il}\)</span>, <span class="math notranslate nohighlight">\(k_l\)</span>, and <span class="math notranslate nohighlight">\(\Delta \varepsilon_l\)</span> denote the partial reaction order of species <span class="math notranslate nohighlight">\(i\)</span>, the rate coefficient, and the net electron energy change (gain or loss), respectively, for reaction <span class="math notranslate nohighlight">\(l\)</span>.
+<span class="math notranslate nohighlight">\(N_\mathrm{r}\)</span> denotes the number of reactions, and <span class="math notranslate nohighlight">\(N_\mathrm{s}\)</span> is the number of species considered in the model.
+<span class="math notranslate nohighlight">\(G_{jl}\)</span> and <span class="math notranslate nohighlight">\(L_{jl}\)</span> represent the gain and loss matrix elements, respectively.
+They are defined by the stoichiometric coefficients for the given species and reactions.
+MCPlas automatically generates these matrices from the reaction kinetic model (RKM) input data, which facilitates effortless switching between models with different levels of complexity.</p>
+<p>To ensure numerical stability and obtain consistent solutions, MCPlas uses some stabilisation techniques.
+One such approach involves the logarithmic transformation of the densities of particle species and the mean electron energy.
+This inherently enforces positivity and suppresses oscillations in regions with steep gradients or low concentrations
+The toolbox also implements a source term stabilisation method applicable to all particles and electron energy balance equations, in a similar way to that used in Comsol Plasma Module.
+This term is designed to counteract numerical instabilities caused by stiff or nonlinear reactions.
+It acts as a buffer at very low particle number densities, preventing the appearance of negative values, and becomes negligible at higher number densities.</p>
 
 
             <div class="clearer"></div>

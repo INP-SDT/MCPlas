@@ -41,7 +41,7 @@ function SetGeometry(inp, flags, model)
         % Create second rectangle representing the plasma region
         model.geom(inp.GeomName).feature.create('r2', 'Rectangle');
         model.geom(inp.GeomName).feature('r2').setIndex('size', 'ElecLength', 0);  % Width
-        model.geom(inp.GeomName).feature('r2').setIndex('size', 'ElecDist', 1);  % Height 
+        model.geom(inp.GeomName).feature('r2').setIndex('size', 'DischGap', 1);  % Height 
         model.geom(inp.GeomName).feature('r2').setIndex('pos', 'DBthickness', 1);  % Position
 
         % Build and finalize the geometry
@@ -63,13 +63,13 @@ function SetGeometry(inp, flags, model)
         % Create first rectangle representing the plasma region
         model.geom(inp.GeomName).feature.create('r1', 'Rectangle');
         model.geom(inp.GeomName).feature('r1').setIndex('size', 'ElecLength', 0);  % Width
-        model.geom(inp.GeomName).feature('r1').setIndex('size', 'ElecDist', 1);  % Height
+        model.geom(inp.GeomName).feature('r1').setIndex('size', 'DischGap', 1);  % Height
 
         % Create second rectangle representing the dielectric layer
         model.geom(inp.GeomName).feature.create('r2', 'Rectangle');
         model.geom(inp.GeomName).feature('r2').setIndex('size', 'ElecLength', 0);  % Width
         model.geom(inp.GeomName).feature('r2').setIndex('size', 'DBthickness', 1);  % Height
-        model.geom(inp.GeomName).feature('r2').setIndex('pos', 'ElecDist', 1);  % Position
+        model.geom(inp.GeomName).feature('r2').setIndex('pos', 'DischGap', 1);  % Position
 
         % Build and finalize the geometry
         model.geom(inp.GeomName).runAll;
@@ -95,7 +95,7 @@ function SetGeometry(inp, flags, model)
         % Create second rectangle representing plasma region between dielectrics
         model.geom(inp.GeomName).feature.create('r2', 'Rectangle');
         model.geom(inp.GeomName).feature('r2').setIndex('size', 'ElecLength', 0);  % Width
-        model.geom(inp.GeomName).feature('r2').setIndex('size', 'ElecDist', 1);  % Height
+        model.geom(inp.GeomName).feature('r2').setIndex('size', 'DischGap', 1);  % Height
         model.geom(inp.GeomName).feature('r2').setIndex('pos', 'DBthickness_1', 1);  % Positioned above
                                                                                      % first dielectric
 
@@ -103,7 +103,7 @@ function SetGeometry(inp, flags, model)
         model.geom(inp.GeomName).feature.create('r3', 'Rectangle');
         model.geom(inp.GeomName).feature('r3').setIndex('size', 'ElecLength', 0);  % Width
         model.geom(inp.GeomName).feature('r3').setIndex('size', 'DBthickness_2', 1);  % Height
-        model.geom(inp.GeomName).feature('r3').setIndex('pos', 'ElecDist+DBthickness_1', 1);  % Positioned above
+        model.geom(inp.GeomName).feature('r3').setIndex('pos', 'DischGap+DBthickness_1', 1);  % Positioned above
                                                                                               % plasma region
 
         % Build and finalize all geometry features
@@ -129,7 +129,7 @@ function SetGeometry(inp, flags, model)
         % Create rectangle representing plasma domain (no dielectrics)
         model.geom(inp.GeomName).feature.create('r1', 'Rectangle');
         model.geom(inp.GeomName).feature('r1').setIndex('size', 'ElecLength', 0);  % Width
-        model.geom(inp.GeomName).feature('r1').setIndex('size', 'ElecDist', 1);  % Height
+        model.geom(inp.GeomName).feature('r1').setIndex('size', 'DischGap', 1);  % Height
 
         % Build and finalize geometry
         model.geom(inp.GeomName).runAll;
