@@ -2,8 +2,8 @@ function obj = ReadJSON(file)
     %
     % ReadJSON function reads json data from file and returns json object
     % which can be accessed using usual dot notation.
-    % %
-    % :param JSON file: the first input
+    % 
+    % :param JSON file: input
     % :returns: ``obj`` json object
 
     outputFile = 'temp.json';  % New JSON file (temporary)
