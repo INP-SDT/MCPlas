@@ -97,25 +97,19 @@ Boundary conditions for the electron density and mean electron energy balance eq
         \label{eq:boundary_eps}
 
 where :math:`\boldsymbol{\nu}` represents the normal vector pointing toward the plasma boundaries, and :math:`r_\mathrm{e}`, :math:`\gamma`, :math:`u_\mathrm{e}^\gamma` and :math:`\mathbf{\Gamma}_i` denote the electron reflection coefficient, the secondary electron emission coefficient, mean energy of secondary electrons and the ion fluxes at the boundaries, respectively. 
-The vector of electron drift velocity :math:`\mathbf{v}_{\mathrm{dr},\mathrm{e}}`, the thermal velocity of electron :math:`v_{\mathrm{th},\mathrm{e}}`, the vector of electron energy drift velocity :math:`\tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}}`, and the thermal velocity of electron energy :math:`\tilde{v}_{\mathrm{th}, \mathrm{e}}` are given by
+In the case of the conventional drift-diffusion approximation (option ``DDAc``) and its simplified form (option ``DDA53``) the vector of electron drift velocity :math:`\mathbf{v}_{\mathrm{dr},\mathrm{e}}`, the thermal velocity of electron :math:`v_{\mathrm{th},\mathrm{e}}`, the vector of electron energy drift velocity :math:`\tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}}`, and the thermal velocity of electron energy :math:`\tilde{v}_{\mathrm{th}, \mathrm{e}}` are defined as in (*M. Stankov, M. M. Becker, R. Bansemer, K.-D. Weltmann, D. Loffhagen, Plasma Sources Sci. Technol. 29 (12)
+(2020) 125009*). 
+For the improved drift-diffusion approximation (option ``DDAn``), :math:`\mathbf{v}_{\mathrm{dr},\mathrm{e}}` and :math:`\tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}}` are defined differently, taking the following expressions
 
     .. math::
         \mathbf{v}_{\mathrm{dr},\mathrm{e}} 
         = -\frac{e_0}{m_\mathrm{e}\nu_\mathrm{e}} \mathbf{E}\, ,
         \qquad
         %\\
-        v_{\mathrm{th},\mathrm{e}} 
-        = \sqrt{\frac{8 k_\mathrm{B} T_\mathrm{e}}{\pi m_\mathrm{e}}}\, ,\\
          \tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}} 
         = -\frac{e_0u_\mathrm{e}}{m_\mathrm{e}\tilde{\nu}_\mathrm{e}}\Bigl(\frac{5}{3}
-        + \frac{2}{3}\frac{\xi_2}{\xi_0}\Bigr) \mathbf{E}\, ,
-        \qquad
-        %\\
-        \tilde{v}_{\mathrm{th},\mathrm{e}}
-        = 2 k_\mathrm{B} T_\mathrm{e}\sqrt{\frac{8 k_\mathrm{B} T_\mathrm{e}}{\pi m_\mathrm{e}}}\, .      
-
-Here, :math:`T_\mathrm{e} = 2u_\mathrm{e}/(3k_\mathrm{B})` is the temperature of electrons and :math:`k_\mathrm{B}` is the Boltzmann constant. 
-
+        + \frac{2}{3}\frac{\xi_2}{\xi_0}\Bigr) \mathbf{E}\, .
+   
 The boundary condition for heavy particles balance equation has the following form
 
     .. math::
@@ -128,8 +122,7 @@ The boundary condition for heavy particles balance equation has the following fo
        
 
 where the variables and coefficients associated to heavy particles are defined in a manner analogous to that of the electrons. 
-It should be noted that in the case of dielectric boundaries, the accumulation of surface charges is additionaly taken into account, as described e.g. in (*M. Stankov, M. M. Becker, R. Bansemer, K.-D. Weltmann, D. Loffhagen, Plasma Sources Sci. Technol. 29 (12)
-(2020) 125009*).
+It should be noted that in the case of dielectric boundaries, the accumulation of surface charges is additionaly taken into account, as described in the above mentioned manuscript.
 
 The source terms :math:`S_j` and :math:`\tilde{S}_\mathrm{e}` in balance equations are defined as 
 

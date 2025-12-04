@@ -24,63 +24,23 @@ The code directory has the following structure:
 ..  code-block:: none
         
     MCPlas
-    ├── MCPlas.m
+    ├── applications
     │  
-    ├── Toolbox
+    ├── docs
     │   
-    ├── Application
+    ├── plasma
     │ 
-    └── Plasma
+    ├── schemas
+    │   
+    ├── toolbox
+    │ 
+    └── MCPlas.m	
 
 
 .. toctree::
    :maxdepth: 2
 
-MCPlas.m
-*********
-This script serves as the core file of the MCPlas toolbox. 
-It begins by loading user-defined chemistry and general model settings from JSON files, parsing them into structured input objects. 
-After initializing the COMSOL environment and defining the working path, it systematically calls MATLAB functions to establish parameters, geometry, physical constants, variables, transport and reaction coefficients, and model equations. 
-It configures electrical conditions, surface effects, and postprocessing elements like probes and plots. 
-Meshing and solver settings are finalized before the complete model is saved as a .mph file. 
-
-.. function:: MCPlas.MCPlas
-
-Toolbox
-*********
-The Toolbox folder in the MCPlas toolbox contains a collection of MATLAB functions essential for building a COMSOL model using the MATLAB LiveLink module.  
-These functions automate model generation by systematically calling COMSOL-specific commands to define all essential features of the model.
-By organizing model-building tasks into modular scripts, the folder ensures clarity, maintainability, and flexibility of the model building process.
-  
-.. toctree::
-   :maxdepth: 3
-   
-   manual_rst_toolbox/ReadJSON.rst
-   manual_rst_toolbox/InpRKM.rst
-   manual_rst_toolbox/InpGeneral.rst
-   manual_rst_toolbox/SetParameters.rst
-   manual_rst_toolbox/SetConstants.rst
-   manual_rst_toolbox/SetVariables.rst
-   manual_rst_toolbox/SetTransportCoefficients.rst
-   manual_rst_toolbox/SetRateCoefficients.rst
-   manual_rst_toolbox/SetEnergyRateCoefficients.rst
-   manual_rst_toolbox/SetRates.rst
-   manual_rst_toolbox/SetEnergyRates.rst
-   manual_rst_toolbox/SetFluxes.rst
-   manual_rst_toolbox/SetSources.rst
-   manual_rst_toolbox/SetProbesAndGraphs.rst
-   manual_rst_toolbox/AddSurfaceChargeAccumulation.rst
-   manual_rst_toolbox/AddPoissonEquation.rst
-   manual_rst_toolbox/AddFluidEquations.rst
-   manual_rst_toolbox/SetElectrical
-   manual_rst_toolbox/SetSelection.rst
-   manual_rst_toolbox/msg.rst
-   manual_rst_toolbox/num2strcell.rst
-   manual_rst_toolbox/IsModelMember.rst
-   manual_rst_toolbox/ActivatePlasma.rst
-   
-   
-Application
+application
 ************
 The Application folder in the MCPlas toolbox serves as the central location for organizing geometry-specific modeling cases.
 It contains subfolders such as Generic1D, Generic1p5D, Generic2D, and Generic2p5D, each corresponding to a particular modelling geometry. 
@@ -175,8 +135,11 @@ The dimensions and positions of both rectangular and circular electrodes must be
    manual_rst_application/Generic2p5D/SetProject.rst
    manual_rst_application/Generic2p5D/Generic2p5D.rst
 
-   
-Plasma
+docs
+****
+This folder contains all the necessary files for the MCPlas Toolbox documentation.
+  
+plasma
 *******
 
 .. include:: manual_rst_plasma/plasma_introduction.rst
@@ -193,8 +156,63 @@ Plasma
    
    manual_rst_plasma/Ar_Becker_2009.rst
    manual_rst_plasma/Ar_Stankov_2022.rst
+   
+schemas
+*******
+This folder contains the JSON schema used to define general input data via the Adamant web tool. 
+Further details can be found in the *Preparation of general input data* section.
 
-Preparation of General input data
+.. toctree::
+   :maxdepth: 3
+   
+   manual_rst_schemas/General_JSON_schema.rst
+
+toolbox
+********
+The Toolbox folder in the MCPlas toolbox contains a collection of MATLAB functions essential for building a COMSOL model using the MATLAB LiveLink module.  
+These functions automate model generation by systematically calling COMSOL-specific commands to define all essential features of the model.
+By organizing model-building tasks into modular scripts, the folder ensures clarity, maintainability, and flexibility of the model building process.
+  
+.. toctree::
+   :maxdepth: 3
+   
+   manual_rst_toolbox/ReadJSON.rst
+   manual_rst_toolbox/InpRKM.rst
+   manual_rst_toolbox/InpGeneral.rst
+   manual_rst_toolbox/SetParameters.rst
+   manual_rst_toolbox/SetConstants.rst
+   manual_rst_toolbox/SetVariables.rst
+   manual_rst_toolbox/SetTransportCoefficients.rst
+   manual_rst_toolbox/SetRateCoefficients.rst
+   manual_rst_toolbox/SetEnergyRateCoefficients.rst
+   manual_rst_toolbox/SetRates.rst
+   manual_rst_toolbox/SetEnergyRates.rst
+   manual_rst_toolbox/SetFluxes.rst
+   manual_rst_toolbox/SetSources.rst
+   manual_rst_toolbox/SetProbesAndGraphs.rst
+   manual_rst_toolbox/AddSurfaceChargeAccumulation.rst
+   manual_rst_toolbox/AddPoissonEquation.rst
+   manual_rst_toolbox/AddFluidEquations.rst
+   manual_rst_toolbox/SetElectrical
+   manual_rst_toolbox/SetSelection.rst
+   manual_rst_toolbox/msg.rst
+   manual_rst_toolbox/num2strcell.rst
+   manual_rst_toolbox/IsModelMember.rst
+   manual_rst_toolbox/ActivatePlasma.rst
+
+
+MCPlas.m
+*********
+This script serves as the core file of the MCPlas toolbox. 
+It begins by loading user-defined chemistry and general model settings from JSON files, parsing them into structured input objects. 
+After initializing the COMSOL environment and defining the working path, it systematically calls MATLAB functions to establish parameters, geometry, physical constants, variables, transport and reaction coefficients, and model equations. 
+It configures electrical conditions, surface effects, and postprocessing elements like probes and plots. 
+Meshing and solver settings are finalized before the complete model is saved as a .mph file. 
+
+.. function:: MCPlas.MCPlas
+
+
+Preparation of general input data
 ---------------------------------
 
 In addition to input data containing information on the RKM and species transport properties, some general input data are required to build the model. 
@@ -240,5 +258,4 @@ Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`

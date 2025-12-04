@@ -35,7 +35,7 @@
 
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ReadJSON" href="manual_rst_toolbox/ReadJSON.html" /> 
+    <link rel="next" title="SetGeometry" href="manual_rst_application/Generic1D/SetGeometry.html" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
   </head><body>
     <div class="relbar-top">
@@ -47,7 +47,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="manual_rst_toolbox/ReadJSON.html" title="ReadJSON"
+          <a href="manual_rst_application/Generic1D/SetGeometry.html" title="SetGeometry"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
     <li><a href="#">MATLAB Sphinx Documentation Test  documentation</a> &#187;</li>
 
@@ -163,24 +163,19 @@ Considering the accuracy improvements relative to the drift–diffusion approxim
 \label{eq:boundary_eps}\end{split}\]</div>
 </div></blockquote>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{\nu}\)</span> represents the normal vector pointing toward the plasma boundaries, and <span class="math notranslate nohighlight">\(r_\mathrm{e}\)</span>, <span class="math notranslate nohighlight">\(\gamma\)</span>, <span class="math notranslate nohighlight">\(u_\mathrm{e}^\gamma\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Gamma}_i\)</span> denote the electron reflection coefficient, the secondary electron emission coefficient, mean energy of secondary electrons and the ion fluxes at the boundaries, respectively.
-The vector of electron drift velocity <span class="math notranslate nohighlight">\(\mathbf{v}_{\mathrm{dr},\mathrm{e}}\)</span>, the thermal velocity of electron <span class="math notranslate nohighlight">\(v_{\mathrm{th},\mathrm{e}}\)</span>, the vector of electron energy drift velocity <span class="math notranslate nohighlight">\(\tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}}\)</span>, and the thermal velocity of electron energy <span class="math notranslate nohighlight">\(\tilde{v}_{\mathrm{th}, \mathrm{e}}\)</span> are given by</p>
+In the case of the conventional drift-diffusion approximation (option <code class="docutils literal notranslate"><span class="pre">DDAc</span></code>) and its simplified form (option <code class="docutils literal notranslate"><span class="pre">DDA53</span></code>) the vector of electron drift velocity <span class="math notranslate nohighlight">\(\mathbf{v}_{\mathrm{dr},\mathrm{e}}\)</span>, the thermal velocity of electron <span class="math notranslate nohighlight">\(v_{\mathrm{th},\mathrm{e}}\)</span>, the vector of electron energy drift velocity <span class="math notranslate nohighlight">\(\tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}}\)</span>, and the thermal velocity of electron energy <span class="math notranslate nohighlight">\(\tilde{v}_{\mathrm{th}, \mathrm{e}}\)</span> are defined as in (<em>M. Stankov, M. M. Becker, R. Bansemer, K.-D. Weltmann, D. Loffhagen, Plasma Sources Sci. Technol. 29 (12)
+(2020) 125009</em>).
+For the improved drift-diffusion approximation (option <code class="docutils literal notranslate"><span class="pre">DDAn</span></code>), <span class="math notranslate nohighlight">\(\mathbf{v}_{\mathrm{dr},\mathrm{e}}\)</span> and <span class="math notranslate nohighlight">\(\tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}}\)</span> are defined differently, taking the following expressions</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\begin{split}\mathbf{v}_{\mathrm{dr},\mathrm{e}}
 = -\frac{e_0}{m_\mathrm{e}\nu_\mathrm{e}} \mathbf{E}\, ,
 \qquad
 %\\
-v_{\mathrm{th},\mathrm{e}}
-= \sqrt{\frac{8 k_\mathrm{B} T_\mathrm{e}}{\pi m_\mathrm{e}}}\, ,\\
  \tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}}
 = -\frac{e_0u_\mathrm{e}}{m_\mathrm{e}\tilde{\nu}_\mathrm{e}}\Bigl(\frac{5}{3}
-+ \frac{2}{3}\frac{\xi_2}{\xi_0}\Bigr) \mathbf{E}\, ,
-\qquad
-%\\
-\tilde{v}_{\mathrm{th},\mathrm{e}}
-= 2 k_\mathrm{B} T_\mathrm{e}\sqrt{\frac{8 k_\mathrm{B} T_\mathrm{e}}{\pi m_\mathrm{e}}}\, .\end{split}\]</div>
++ \frac{2}{3}\frac{\xi_2}{\xi_0}\Bigr) \mathbf{E}\, .\end{split}\]</div>
 </div></blockquote>
-<p>Here, <span class="math notranslate nohighlight">\(T_\mathrm{e} = 2u_\mathrm{e}/(3k_\mathrm{B})\)</span> is the temperature of electrons and <span class="math notranslate nohighlight">\(k_\mathrm{B}\)</span> is the Boltzmann constant.</p>
 <p>The boundary condition for heavy particles balance equation has the following form</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
@@ -192,8 +187,7 @@ n_\mathrm{h} \mathbf{v}_{\mathrm{dr},\mathrm{h}}  \right|
 \label{eq:boundary_heavy}\\\end{split}\]</div>
 </div></blockquote>
 <p>where the variables and coefficients associated to heavy particles are defined in a manner analogous to that of the electrons.
-It should be noted that in the case of dielectric boundaries, the accumulation of surface charges is additionaly taken into account, as described e.g. in (<em>M. Stankov, M. M. Becker, R. Bansemer, K.-D. Weltmann, D. Loffhagen, Plasma Sources Sci. Technol. 29 (12)
-(2020) 125009</em>).</p>
+It should be noted that in the case of dielectric boundaries, the accumulation of surface charges is additionaly taken into account, as described in the above mentioned manuscript.</p>
 <p>The source terms <span class="math notranslate nohighlight">\(S_j\)</span> and <span class="math notranslate nohighlight">\(\tilde{S}_\mathrm{e}\)</span> in balance equations are defined as</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
@@ -224,65 +218,23 @@ It acts as a buffer at very low particle number densities, preventing the appear
 <h2>Structure<a class="headerlink" href="#structure" title="Link to this heading">¶</a></h2>
 <p>The code directory has the following structure:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>MCPlas
-├── MCPlas.m
+├── applications
 │
-├── Toolbox
+├── docs
 │
-├── Application
+├── plasma
 │
-└── Plasma
+├── schemas
+│
+├── toolbox
+│
+└── MCPlas.m
 </pre></div>
 </div>
 <div class="toctree-wrapper compound">
 </div>
-<section id="mcplas-m">
-<h3>MCPlas.m<a class="headerlink" href="#mcplas-m" title="Link to this heading">¶</a></h3>
-<p>This script serves as the core file of the MCPlas toolbox.
-It begins by loading user-defined chemistry and general model settings from JSON files, parsing them into structured input objects.
-After initializing the COMSOL environment and defining the working path, it systematically calls MATLAB functions to establish parameters, geometry, physical constants, variables, transport and reaction coefficients, and model equations.
-It configures electrical conditions, surface effects, and postprocessing elements like probes and plots.
-Meshing and solver settings are finalized before the complete model is saved as a .mph file.</p>
-<dl class="mat function">
-<dt class="sig sig-object mat" id="MCPlas.MCPlas">
-<span class="sig-prename descclassname"><span class="pre">MCPlas.</span></span><span class="sig-name descname"><span class="pre">MCPlas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MCPlas.MCPlas" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="toolbox">
-<h3>Toolbox<a class="headerlink" href="#toolbox" title="Link to this heading">¶</a></h3>
-<p>The Toolbox folder in the MCPlas toolbox contains a collection of MATLAB functions essential for building a COMSOL model using the MATLAB LiveLink module.
-These functions automate model generation by systematically calling COMSOL-specific commands to define all essential features of the model.
-By organizing model-building tasks into modular scripts, the folder ensures clarity, maintainability, and flexibility of the model building process.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/ReadJSON.html">ReadJSON</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/InpRKM.html">InpRKM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/InpGeneral.html">InpGeneral</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetParameters.html">SetParameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetConstants.html">SetConstants</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetVariables.html">SetVariables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetTransportCoefficients.html">SetTransportCoefficients</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetRateCoefficients.html">SetRateCoefficients</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetEnergyRateCoefficients.html">SetEnergyRateCoefficients</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetRates.html">SetRates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetEnergyRates.html">SetEnergyRates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetFluxes.html">SetFluxes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetSources.html">SetSources</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetProbesAndGraphs.html">SetProbesAndGraphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/AddSurfaceChargeAccumulation.html">AddSurfaceChargeAccumulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/AddPoissonEquation.html">AddPoissonEquation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/AddFluidEquations.html">AddFluidEquations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetElectrical.html">SetElectrical</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetSelection.html">SetSelection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/msg.html">msg</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/num2strcell.html">num2strcell</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/IsModelMember.html">IsModelMember</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/ActivatePlasma.html">ActivatePlasma</a></li>
-</ul>
-</div>
-</section>
 <section id="application">
-<h3>Application<a class="headerlink" href="#application" title="Link to this heading">¶</a></h3>
+<h3>application<a class="headerlink" href="#application" title="Link to this heading">¶</a></h3>
 <p>The Application folder in the MCPlas toolbox serves as the central location for organizing geometry-specific modeling cases.
 It contains subfolders such as Generic1D, Generic1p5D, Generic2D, and Generic2p5D, each corresponding to a particular modelling geometry.
 Within each subfolder, there are dedicated MATLAB scripts responsible for defining the geometry, generating the mesh, and configuring project-specific properties such as solvers and study steps.
@@ -373,8 +325,12 @@ The dimensions and positions of both rectangular and circular electrodes must be
 </div>
 </section>
 </section>
+<section id="docs">
+<h3>docs<a class="headerlink" href="#docs" title="Link to this heading">¶</a></h3>
+<p>This folder contains all the necessary files for the MCPlas Toolbox documentation.</p>
+</section>
 <section id="plasma">
-<h3>Plasma<a class="headerlink" href="#plasma" title="Link to this heading">¶</a></h3>
+<h3>plasma<a class="headerlink" href="#plasma" title="Link to this heading">¶</a></h3>
 <p>The input data necessary for running MCPlas includes information about the RKM, transport properties of the particle species, as well as general information about the modelling geometry, operating conditions, properties of the plasma source and fluid model properties.
 These data represent a heterogeneous data set that requires a standardised schema to be verified.
 MCPlas adopts an extended version of the format proposed by the LXCat platform(open-source) (<em>E. Carbone, W. Graef, G. Hagelaar, D. Boer, M. M. Hopkins, J. C. Stephens, B. T. Yee, S. Pancheshnyi, J. van Dijk, L. Pitchford,  Atoms 9 (1) (2021) 1</em>, <em>D. Boer, S. Verhoeven, S. Ali, W. Graef, J. van Dijk, LXCat. URL https://github.com/LXCat-project/LXCat</em>).
@@ -400,9 +356,65 @@ The development of MCPlas has contributed to the extension of the existing elect
 </ul>
 </div>
 </section>
+<section id="schemas">
+<h3>schemas<a class="headerlink" href="#schemas" title="Link to this heading">¶</a></h3>
+<p>This folder contains the JSON schema used to define general input data via the Adamant web tool.
+Further details can be found in the <em>Preparation of general input data</em> section.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_schemas/General_JSON_schema.html">General_JSON_schema</a></li>
+</ul>
+</div>
+</section>
+<section id="toolbox">
+<h3>toolbox<a class="headerlink" href="#toolbox" title="Link to this heading">¶</a></h3>
+<p>The Toolbox folder in the MCPlas toolbox contains a collection of MATLAB functions essential for building a COMSOL model using the MATLAB LiveLink module.
+These functions automate model generation by systematically calling COMSOL-specific commands to define all essential features of the model.
+By organizing model-building tasks into modular scripts, the folder ensures clarity, maintainability, and flexibility of the model building process.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/ReadJSON.html">ReadJSON</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/InpRKM.html">InpRKM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/InpGeneral.html">InpGeneral</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetParameters.html">SetParameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetConstants.html">SetConstants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetVariables.html">SetVariables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetTransportCoefficients.html">SetTransportCoefficients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetRateCoefficients.html">SetRateCoefficients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetEnergyRateCoefficients.html">SetEnergyRateCoefficients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetRates.html">SetRates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetEnergyRates.html">SetEnergyRates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetFluxes.html">SetFluxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetSources.html">SetSources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetProbesAndGraphs.html">SetProbesAndGraphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/AddSurfaceChargeAccumulation.html">AddSurfaceChargeAccumulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/AddPoissonEquation.html">AddPoissonEquation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/AddFluidEquations.html">AddFluidEquations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetElectrical.html">SetElectrical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/SetSelection.html">SetSelection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/msg.html">msg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/num2strcell.html">num2strcell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/IsModelMember.html">IsModelMember</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual_rst_toolbox/ActivatePlasma.html">ActivatePlasma</a></li>
+</ul>
+</div>
+</section>
+<section id="mcplas-m">
+<h3>MCPlas.m<a class="headerlink" href="#mcplas-m" title="Link to this heading">¶</a></h3>
+<p>This script serves as the core file of the MCPlas toolbox.
+It begins by loading user-defined chemistry and general model settings from JSON files, parsing them into structured input objects.
+After initializing the COMSOL environment and defining the working path, it systematically calls MATLAB functions to establish parameters, geometry, physical constants, variables, transport and reaction coefficients, and model equations.
+It configures electrical conditions, surface effects, and postprocessing elements like probes and plots.
+Meshing and solver settings are finalized before the complete model is saved as a .mph file.</p>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="MCPlas.MCPlas">
+<span class="sig-prename descclassname"><span class="pre">MCPlas.</span></span><span class="sig-name descname"><span class="pre">MCPlas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MCPlas.MCPlas" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
 </section>
 <section id="preparation-of-general-input-data">
-<h2>Preparation of General input data<a class="headerlink" href="#preparation-of-general-input-data" title="Link to this heading">¶</a></h2>
+<h2>Preparation of general input data<a class="headerlink" href="#preparation-of-general-input-data" title="Link to this heading">¶</a></h2>
 <p>In addition to input data containing information on the RKM and species transport properties, some general input data are required to build the model.
 For the preparation of these data in JSON data format employing of the Adamant web-tool (<a class="reference external" href="https://plasma-mds.github.io/adamant/">https://plasma-mds.github.io/adamant/</a>) is proposed.
 This tool is primarily intended to facilitate the implementation of digital research data management processes in small laboratories by enabling easy compilation and creation of metadata and metadata schemas based on JSON schema standards.
@@ -429,7 +441,7 @@ If the user wants to make a modelling analysis with changed general input data, 
 At the beginning of the MCPlas workflow, as a first step, all input data necessary for setting up the model must be provided.
 This considers general input data and plasma chemistry prepared in JSON data format.
 The second step of the MCPlas workflow involves setting up the model by executing the main MATLAB script, MCPlas.m.
-This script systematically calls MATLAB functions (listed in section Toolbox) specifically designed for the toolbox.
+This script systematically calls MATLAB functions (listed in section <em>toolbox</em>) specifically designed for the toolbox.
 The second and third steps automatically execute after running the MCPlas code, and they are not the user’s concern.</p>
 <figure class="align-center" id="id6">
 <a class="reference internal image-reference" href="_images/MCPlas_workflow.png"><img alt="_images/MCPlas_workflow.png" src="_images/MCPlas_workflow.png" style="width: 75%;" /></a>
@@ -449,7 +461,6 @@ The demo covers everything from the initial toolbox setup to generating and runn
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
 </section>
@@ -466,19 +477,21 @@ The demo covers everything from the initial toolbox setup to generating and runn
 <li><a class="reference internal" href="#">Welcome to MCPlas toolbox!</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction:</a></li>
 <li><a class="reference internal" href="#structure">Structure</a><ul>
-<li><a class="reference internal" href="#mcplas-m">MCPlas.m</a></li>
-<li><a class="reference internal" href="#toolbox">Toolbox</a></li>
-<li><a class="reference internal" href="#application">Application</a><ul>
+<li><a class="reference internal" href="#application">application</a><ul>
 <li><a class="reference internal" href="#generic1d">Generic1D</a></li>
 <li><a class="reference internal" href="#generic1p5d">Generic1p5D</a></li>
 <li><a class="reference internal" href="#generic2d">Generic2D</a></li>
 <li><a class="reference internal" href="#generic2p5d">Generic2p5D</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#plasma">Plasma</a></li>
+<li><a class="reference internal" href="#docs">docs</a></li>
+<li><a class="reference internal" href="#plasma">plasma</a></li>
+<li><a class="reference internal" href="#schemas">schemas</a></li>
+<li><a class="reference internal" href="#toolbox">toolbox</a></li>
+<li><a class="reference internal" href="#mcplas-m">MCPlas.m</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#preparation-of-general-input-data">Preparation of General input data</a></li>
+<li><a class="reference internal" href="#preparation-of-general-input-data">Preparation of general input data</a></li>
 <li><a class="reference internal" href="#how-to-use-it">How to use it</a><ul>
 <li><a class="reference internal" href="#mcplas-workflow">MCPlas workflow</a></li>
 <li><a class="reference internal" href="#step-by-step-tutorial">Step-by-step tutorial</a></li>
@@ -492,8 +505,8 @@ The demo covers everything from the initial toolbox setup to generating and runn
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="manual_rst_toolbox/ReadJSON.html"
-                          title="Next page">&rarr; ReadJSON</a></p>
+    <p class="topless"><a href="manual_rst_application/Generic1D/SetGeometry.html"
+                          title="Next page">&rarr; SetGeometry</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -542,7 +555,7 @@ The demo covers everything from the initial toolbox setup to generating and runn
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="manual_rst_toolbox/ReadJSON.html" title="ReadJSON"
+          <a href="manual_rst_application/Generic1D/SetGeometry.html" title="SetGeometry"
              >next</a> &nbsp; &nbsp;</li>
     <li><a href="#">MATLAB Sphinx Documentation Test  documentation</a> &#187;</li>
 

@@ -1,0 +1,774 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>General_JSON_schema &#8212; MATLAB Sphinx Documentation Test  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/cloud.css?v=f9ae72be" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
+    
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+
+    
+    
+     
+        <script src="../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script src="../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script src="../_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ReadJSON" href="../manual_rst_toolbox/ReadJSON.html" />
+    <link rel="prev" title="Ar_Stankov_2022" href="../manual_rst_plasma/Ar_Stankov_2022.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../manual_rst_toolbox/ReadJSON.html" title="ReadJSON"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../manual_rst_plasma/Ar_Stankov_2022.html" title="Ar_Stankov_2022"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">MATLAB Sphinx Documentation Test  documentation</a> &#187;</li>
+
+        <li class="nav-item nav-item-this"><a href="">General_JSON_schema</a></li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="general-json-schema">
+<h1>General_JSON_schema<a class="headerlink" href="#general-json-schema" title="Link to this heading">¶</a></h1>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">General_JSON_schema</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="p">{</span>
+<span class="linenos">  2</span><span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-04/schema#&quot;</span><span class="p">,</span>
+<span class="linenos">  3</span><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MCPlas general input dataset schema&quot;</span><span class="p">,</span>
+<span class="linenos">  4</span><span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A schema for defining general input data for building a COMSOL model via the MCPlas toolbox.&quot;</span><span class="p">,</span>
+<span class="linenos">  5</span><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="linenos">  6</span><span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">  7</span><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">  8</span><span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UUID&quot;</span><span class="p">,</span>
+<span class="linenos">  9</span><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;System UUID for object identification.&quot;</span><span class="p">,</span>
+<span class="linenos"> 10</span><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="linenos"> 11</span><span class="w">    </span><span class="p">},</span>
+<span class="linenos"> 12</span><span class="w">    </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 13</span><span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;URL&quot;</span><span class="p">,</span>
+<span class="linenos"> 14</span><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Landing page (URL) of the dataset.&quot;</span><span class="p">,</span>
+<span class="linenos"> 15</span><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="linenos"> 16</span><span class="w">    </span><span class="p">},</span>
+<span class="linenos"> 17</span><span class="w">    </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 18</span><span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Plasma Source&quot;</span><span class="p">,</span>
+<span class="linenos"> 19</span><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Device which creates the plasma in a given medium.&quot;</span><span class="p">,</span>
+<span class="linenos"> 20</span><span class="w">      </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos"> 21</span><span class="w">        </span><span class="s2">&quot;properties&quot;</span>
+<span class="linenos"> 22</span><span class="w">      </span><span class="p">],</span>
+<span class="linenos"> 23</span><span class="w">      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 24</span><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 25</span><span class="w">          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Source Name&quot;</span><span class="p">,</span>
+<span class="linenos"> 26</span><span class="w">          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Name and/or type of the plasma source used in the study. Examples: kINPen, COST Jet, CCP.&quot;</span><span class="p">,</span>
+<span class="linenos"> 27</span><span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="linenos"> 28</span><span class="w">        </span><span class="p">},</span>
+<span class="linenos"> 29</span><span class="w">        </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 30</span><span class="w">          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Source Properties&quot;</span><span class="p">,</span>
+<span class="linenos"> 31</span><span class="w">          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Properties of the plasma source.&quot;</span><span class="p">,</span>
+<span class="linenos"> 32</span><span class="w">          </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 33</span><span class="w">            </span><span class="nt">&quot;geometry_settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 34</span><span class="w">              </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Geometry settings&quot;</span><span class="p">,</span>
+<span class="linenos"> 35</span><span class="w">              </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Object including all attributes defining the configuration of the plasma setup such as the type of plasma device used (e.g., DBD, plasma jet, corona discharge, etc.), its physical shape, structure, dimensions, and materials.&quot;</span><span class="p">,</span>
+<span class="linenos"> 36</span><span class="w">              </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos"> 37</span><span class="w">                </span><span class="s2">&quot;gap_distance&quot;</span><span class="p">,</span>
+<span class="linenos"> 38</span><span class="w">                </span><span class="s2">&quot;diel_thickness_powered&quot;</span><span class="p">,</span>
+<span class="linenos"> 39</span><span class="w">                </span><span class="s2">&quot;diel_thickness_grounded&quot;</span><span class="p">,</span>
+<span class="linenos"> 40</span><span class="w">                </span><span class="s2">&quot;rect_electode&quot;</span><span class="p">,</span>
+<span class="linenos"> 41</span><span class="w">                </span><span class="s2">&quot;circ_electrode&quot;</span><span class="p">,</span>
+<span class="linenos"> 42</span><span class="w">                </span><span class="s2">&quot;coax_eletrode&quot;</span>
+<span class="linenos"> 43</span><span class="w">              </span><span class="p">],</span>
+<span class="linenos"> 44</span><span class="w">              </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 45</span><span class="w">                </span><span class="nt">&quot;geometry_description&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 46</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="linenos"> 47</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Geometry description&quot;</span><span class="p">,</span>
+<span class="linenos"> 48</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Free text description of the source geometry and materials.&quot;</span>
+<span class="linenos"> 49</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos"> 50</span><span class="w">                </span><span class="nt">&quot;gap_distance&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 51</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Gap distance [m]&quot;</span><span class="p">,</span>
+<span class="linenos"> 52</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This term refers to the effective space in which plasma formation occurs.&quot;</span><span class="p">,</span>
+<span class="linenos"> 53</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos"> 54</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos"> 55</span><span class="w">                </span><span class="nt">&quot;diel_thickness_powered&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 56</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Thickness of the dielectric layer on the powered electrode [m]&quot;</span><span class="p">,</span>
+<span class="linenos"> 57</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the powered electrode has no dielectric layer, the value in this field should be set to zero.&quot;</span><span class="p">,</span>
+<span class="linenos"> 58</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos"> 59</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos"> 60</span><span class="w">                </span><span class="nt">&quot;diel_thickness_grounded&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 61</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Thickness of the dielectric layer on the grounded electrode [m]&quot;</span><span class="p">,</span>
+<span class="linenos"> 62</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the grounded electrode has no dielectric layer, the value in this field should be set to zero.&quot;</span><span class="p">,</span>
+<span class="linenos"> 63</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos"> 64</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos"> 65</span><span class="w">                </span><span class="nt">&quot;rect_electode&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 66</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rectangular electrodes&quot;</span><span class="p">,</span>
+<span class="linenos"> 67</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Electrode dimensions in the case of a rectangular shape. If the electrodes are not rectangular, all values in this section should be set to zero.&quot;</span><span class="p">,</span>
+<span class="linenos"> 68</span><span class="w">                  </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos"> 69</span><span class="w">                    </span><span class="s2">&quot;ele_length&quot;</span><span class="p">,</span>
+<span class="linenos"> 70</span><span class="w">                    </span><span class="s2">&quot;ele_width&quot;</span>
+<span class="linenos"> 71</span><span class="w">                  </span><span class="p">],</span>
+<span class="linenos"> 72</span><span class="w">                  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 73</span><span class="w">                    </span><span class="nt">&quot;ele_length&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 74</span><span class="w">                      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Electrode length [m]&quot;</span><span class="p">,</span>
+<span class="linenos"> 75</span><span class="w">                      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos"> 76</span><span class="w">                      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos"> 77</span><span class="w">                    </span><span class="p">},</span>
+<span class="linenos"> 78</span><span class="w">                    </span><span class="nt">&quot;ele_width&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 79</span><span class="w">                      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Electrode width [m]&quot;</span><span class="p">,</span>
+<span class="linenos"> 80</span><span class="w">                      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos"> 81</span><span class="w">                      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos"> 82</span><span class="w">                    </span><span class="p">}</span>
+<span class="linenos"> 83</span><span class="w">                  </span><span class="p">},</span>
+<span class="linenos"> 84</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="linenos"> 85</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos"> 86</span><span class="w">                </span><span class="nt">&quot;circ_electrode&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 87</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Circular electrodes&quot;</span><span class="p">,</span>
+<span class="linenos"> 88</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Electrode dimensions in the case of a circular shape. If the electrodes are not circular, all values in this section should be set to zero.&quot;</span><span class="p">,</span>
+<span class="linenos"> 89</span><span class="w">                  </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos"> 90</span><span class="w">                    </span><span class="s2">&quot;ele_radius&quot;</span>
+<span class="linenos"> 91</span><span class="w">                  </span><span class="p">],</span>
+<span class="linenos"> 92</span><span class="w">                  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 93</span><span class="w">                    </span><span class="nt">&quot;ele_radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 94</span><span class="w">                      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos"> 95</span><span class="w">                      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Electrode radius [m]&quot;</span><span class="p">,</span>
+<span class="linenos"> 96</span><span class="w">                      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="linenos"> 97</span><span class="w">                    </span><span class="p">}</span>
+<span class="linenos"> 98</span><span class="w">                  </span><span class="p">},</span>
+<span class="linenos"> 99</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="linenos">100</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos">101</span><span class="w">                </span><span class="nt">&quot;coax_eletrode&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">102</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Coaxial electrodes&quot;</span><span class="p">,</span>
+<span class="linenos">103</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Electrode dimensions in the case of a coaxial configuration. If the configuration of the electrodes is not coaxial, all values in this section should be set to zero.&quot;</span><span class="p">,</span>
+<span class="linenos">104</span><span class="w">                  </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">105</span><span class="w">                    </span><span class="s2">&quot;outer_ele_radius&quot;</span><span class="p">,</span>
+<span class="linenos">106</span><span class="w">                    </span><span class="s2">&quot;ele_length&quot;</span><span class="p">,</span>
+<span class="linenos">107</span><span class="w">                    </span><span class="s2">&quot;inner_ele_radius&quot;</span>
+<span class="linenos">108</span><span class="w">                  </span><span class="p">],</span>
+<span class="linenos">109</span><span class="w">                  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">110</span><span class="w">                    </span><span class="nt">&quot;inner_ele_radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">111</span><span class="w">                      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Radius of inner electrode [m]&quot;</span><span class="p">,</span>
+<span class="linenos">112</span><span class="w">                      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the electrode is not a rod, but a tube, the value in this field should represent the outer radius of the tube.&quot;</span><span class="p">,</span>
+<span class="linenos">113</span><span class="w">                      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos">114</span><span class="w">                    </span><span class="p">},</span>
+<span class="linenos">115</span><span class="w">                    </span><span class="nt">&quot;outer_ele_radius&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">116</span><span class="w">                      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Inner radius of outer electrode [m]&quot;</span><span class="p">,</span>
+<span class="linenos">117</span><span class="w">                      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">118</span><span class="w">                      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos">119</span><span class="w">                    </span><span class="p">},</span>
+<span class="linenos">120</span><span class="w">                    </span><span class="nt">&quot;ele_length&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">121</span><span class="w">                      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Electrode length [m]&quot;</span><span class="p">,</span>
+<span class="linenos">122</span><span class="w">                      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">123</span><span class="w">                      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos">124</span><span class="w">                    </span><span class="p">}</span>
+<span class="linenos">125</span><span class="w">                  </span><span class="p">},</span>
+<span class="linenos">126</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="linenos">127</span><span class="w">                </span><span class="p">}</span>
+<span class="linenos">128</span><span class="w">              </span><span class="p">},</span>
+<span class="linenos">129</span><span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="linenos">130</span><span class="w">            </span><span class="p">},</span>
+<span class="linenos">131</span><span class="w">            </span><span class="nt">&quot;source_settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">132</span><span class="w">              </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Source settings&quot;</span><span class="p">,</span>
+<span class="linenos">133</span><span class="w">              </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Object including all attributes of the plasma source used to generate the desired plasma.&quot;</span><span class="p">,</span>
+<span class="linenos">134</span><span class="w">              </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">135</span><span class="w">                </span><span class="nt">&quot;elec_prop&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">136</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Electrical properties&quot;</span><span class="p">,</span>
+<span class="linenos">137</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">138</span><span class="w">                  </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">139</span><span class="w">                    </span><span class="s2">&quot;applied_voltage&quot;</span><span class="p">,</span>
+<span class="linenos">140</span><span class="w">                    </span><span class="s2">&quot;voltage_frequency&quot;</span>
+<span class="linenos">141</span><span class="w">                  </span><span class="p">],</span>
+<span class="linenos">142</span><span class="w">                  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">143</span><span class="w">                    </span><span class="nt">&quot;applied_voltage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">144</span><span class="w">                      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Applied voltage [V]&quot;</span><span class="p">,</span>
+<span class="linenos">145</span><span class="w">                      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;In the case of DC discharge, this field defines the value of constant voltage applied on a powered electrode. In the case of RF discharge, this field defines the amplitude of the applied voltage on a powered electrode.&quot;</span><span class="p">,</span>
+<span class="linenos">146</span><span class="w">                      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos">147</span><span class="w">                    </span><span class="p">},</span>
+<span class="linenos">148</span><span class="w">                    </span><span class="nt">&quot;voltage_frequency&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">149</span><span class="w">                      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Frequency of applied voltage [Hz]&quot;</span><span class="p">,</span>
+<span class="linenos">150</span><span class="w">                      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Frequency of the applied voltage. In the case of DC discharge, the value in this field should be zero.&quot;</span><span class="p">,</span>
+<span class="linenos">151</span><span class="w">                      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos">152</span><span class="w">                    </span><span class="p">},</span>
+<span class="linenos">153</span><span class="w">                    </span><span class="nt">&quot;discharge_current&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">154</span><span class="w">                      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">155</span><span class="w">                      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Discharge current [A]&quot;</span><span class="p">,</span>
+<span class="linenos">156</span><span class="w">                      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Current passing through the plasma discharge.&quot;</span>
+<span class="linenos">157</span><span class="w">                    </span><span class="p">},</span>
+<span class="linenos">158</span><span class="w">                    </span><span class="nt">&quot;dissipated_power&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">159</span><span class="w">                      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">160</span><span class="w">                      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Dissipated power [W]&quot;</span><span class="p">,</span>
+<span class="linenos">161</span><span class="w">                      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Power actually used by the plasma discharge, excluding losses.&quot;</span>
+<span class="linenos">162</span><span class="w">                    </span><span class="p">}</span>
+<span class="linenos">163</span><span class="w">                  </span><span class="p">},</span>
+<span class="linenos">164</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="linenos">165</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos">166</span><span class="w">                </span><span class="nt">&quot;mat_prop&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">167</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Material properties&quot;</span><span class="p">,</span>
+<span class="linenos">168</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">169</span><span class="w">                  </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">170</span><span class="w">                    </span><span class="s2">&quot;perm_diel_powered&quot;</span><span class="p">,</span>
+<span class="linenos">171</span><span class="w">                    </span><span class="s2">&quot;perm_diel_grounded&quot;</span>
+<span class="linenos">172</span><span class="w">                  </span><span class="p">],</span>
+<span class="linenos">173</span><span class="w">                  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">174</span><span class="w">                    </span><span class="nt">&quot;perm_diel_powered&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">175</span><span class="w">                      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Relative permitivity of dielectric on powered electrode&quot;</span><span class="p">,</span>
+<span class="linenos">176</span><span class="w">                      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the powered electrode has no dielectric layer, the value in this field should be set to zero.&quot;</span><span class="p">,</span>
+<span class="linenos">177</span><span class="w">                      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos">178</span><span class="w">                    </span><span class="p">},</span>
+<span class="linenos">179</span><span class="w">                    </span><span class="nt">&quot;perm_diel_grounded&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">180</span><span class="w">                      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Relative permitivity of dielectric on grounded electrode&quot;</span><span class="p">,</span>
+<span class="linenos">181</span><span class="w">                      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the grounded electrode has no dielectric layer, the value in this field should be set to zero.&quot;</span><span class="p">,</span>
+<span class="linenos">182</span><span class="w">                      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos">183</span><span class="w">                    </span><span class="p">}</span>
+<span class="linenos">184</span><span class="w">                  </span><span class="p">},</span>
+<span class="linenos">185</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="linenos">186</span><span class="w">                </span><span class="p">}</span>
+<span class="linenos">187</span><span class="w">              </span><span class="p">},</span>
+<span class="linenos">188</span><span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="linenos">189</span><span class="w">              </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">190</span><span class="w">                </span><span class="s2">&quot;elec_prop&quot;</span><span class="p">,</span>
+<span class="linenos">191</span><span class="w">                </span><span class="s2">&quot;mat_prop&quot;</span>
+<span class="linenos">192</span><span class="w">              </span><span class="p">]</span>
+<span class="linenos">193</span><span class="w">            </span><span class="p">}</span>
+<span class="linenos">194</span><span class="w">          </span><span class="p">},</span>
+<span class="linenos">195</span><span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="linenos">196</span><span class="w">          </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">197</span><span class="w">            </span><span class="s2">&quot;geometry_settings&quot;</span><span class="p">,</span>
+<span class="linenos">198</span><span class="w">            </span><span class="s2">&quot;source_settings&quot;</span>
+<span class="linenos">199</span><span class="w">          </span><span class="p">]</span>
+<span class="linenos">200</span><span class="w">        </span><span class="p">},</span>
+<span class="linenos">201</span><span class="w">        </span><span class="nt">&quot;procedure&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">202</span><span class="w">          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Source Procedure&quot;</span><span class="p">,</span>
+<span class="linenos">203</span><span class="w">          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Procedure to prepare and use the plasma source.&quot;</span><span class="p">,</span>
+<span class="linenos">204</span><span class="w">          </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="linenos">205</span><span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="linenos">206</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">207</span><span class="w">      </span><span class="p">},</span>
+<span class="linenos">208</span><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="linenos">209</span><span class="w">    </span><span class="p">},</span>
+<span class="linenos">210</span><span class="w">    </span><span class="nt">&quot;medium&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">211</span><span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Plasma Medium&quot;</span><span class="p">,</span>
+<span class="linenos">212</span><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Gas, mixture of gases, or other substance, which is either (partially) ionized or otherwise activated by a source device.&quot;</span><span class="p">,</span>
+<span class="linenos">213</span><span class="w">      </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">214</span><span class="w">        </span><span class="s2">&quot;properties&quot;</span><span class="p">,</span>
+<span class="linenos">215</span><span class="w">        </span><span class="s2">&quot;name&quot;</span>
+<span class="linenos">216</span><span class="w">      </span><span class="p">],</span>
+<span class="linenos">217</span><span class="w">      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">218</span><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">219</span><span class="w">          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Medium Name&quot;</span><span class="p">,</span>
+<span class="linenos">220</span><span class="w">          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Name of the medium the plasma source is operated in. Examples: dry air, Ar, CO2, water.&quot;</span><span class="p">,</span>
+<span class="linenos">221</span><span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="linenos">222</span><span class="w">        </span><span class="p">},</span>
+<span class="linenos">223</span><span class="w">        </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">224</span><span class="w">          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Medium Properties&quot;</span><span class="p">,</span>
+<span class="linenos">225</span><span class="w">          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Properties of the medium.&quot;</span><span class="p">,</span>
+<span class="linenos">226</span><span class="w">          </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">227</span><span class="w">            </span><span class="nt">&quot;gas_properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">228</span><span class="w">              </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Gas properties&quot;</span><span class="p">,</span>
+<span class="linenos">229</span><span class="w">              </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Object including all attributes defining the carrier gas.&quot;</span><span class="p">,</span>
+<span class="linenos">230</span><span class="w">              </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">231</span><span class="w">                </span><span class="s2">&quot;pressure&quot;</span><span class="p">,</span>
+<span class="linenos">232</span><span class="w">                </span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span>
+<span class="linenos">233</span><span class="w">                </span><span class="s2">&quot;carrier_gas_composition&quot;</span>
+<span class="linenos">234</span><span class="w">              </span><span class="p">],</span>
+<span class="linenos">235</span><span class="w">              </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">236</span><span class="w">                </span><span class="nt">&quot;gas_description&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">237</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="linenos">238</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Gas description&quot;</span><span class="p">,</span>
+<span class="linenos">239</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Free text description of the carrier gas.&quot;</span>
+<span class="linenos">240</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos">241</span><span class="w">                </span><span class="nt">&quot;pressure&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">242</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pressure [Pa]&quot;</span><span class="p">,</span>
+<span class="linenos">243</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pressure of the carrier gas during plasma operation.&quot;</span><span class="p">,</span>
+<span class="linenos">244</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos">245</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos">246</span><span class="w">                </span><span class="nt">&quot;carrier_gas_composition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">247</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Carrier gas composition&quot;</span><span class="p">,</span>
+<span class="linenos">248</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Free text about composition of the gas mixture used in the plasma (e.g., 90% N₂, 10% O₂).&quot;</span><span class="p">,</span>
+<span class="linenos">249</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="linenos">250</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos">251</span><span class="w">                </span><span class="nt">&quot;temperature&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">252</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Temperature [K]&quot;</span><span class="p">,</span>
+<span class="linenos">253</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Temperature of the gas during plasma operation.&quot;</span><span class="p">,</span>
+<span class="linenos">254</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos">255</span><span class="w">                </span><span class="p">}</span>
+<span class="linenos">256</span><span class="w">              </span><span class="p">},</span>
+<span class="linenos">257</span><span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="linenos">258</span><span class="w">            </span><span class="p">},</span>
+<span class="linenos">259</span><span class="w">            </span><span class="nt">&quot;spec_prop&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">260</span><span class="w">              </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Species_properties&quot;</span><span class="p">,</span>
+<span class="linenos">261</span><span class="w">              </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">262</span><span class="w">              </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">263</span><span class="w">                </span><span class="s2">&quot;background_gas&quot;</span><span class="p">,</span>
+<span class="linenos">264</span><span class="w">                </span><span class="s2">&quot;electron&quot;</span>
+<span class="linenos">265</span><span class="w">              </span><span class="p">],</span>
+<span class="linenos">266</span><span class="w">              </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">267</span><span class="w">                </span><span class="nt">&quot;electron&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">268</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Electron&quot;</span><span class="p">,</span>
+<span class="linenos">269</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">270</span><span class="w">                  </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">271</span><span class="w">                    </span><span class="s2">&quot;sec_emiss_coeff&quot;</span><span class="p">,</span>
+<span class="linenos">272</span><span class="w">                    </span><span class="s2">&quot;sec_ele_energy&quot;</span><span class="p">,</span>
+<span class="linenos">273</span><span class="w">                    </span><span class="s2">&quot;refl_coeff&quot;</span><span class="p">,</span>
+<span class="linenos">274</span><span class="w">                    </span><span class="s2">&quot;init_dens&quot;</span><span class="p">,</span>
+<span class="linenos">275</span><span class="w">                    </span><span class="s2">&quot;init_ene&quot;</span>
+<span class="linenos">276</span><span class="w">                  </span><span class="p">],</span>
+<span class="linenos">277</span><span class="w">                  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">278</span><span class="w">                    </span><span class="nt">&quot;sec_emiss_coeff&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">279</span><span class="w">                      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Secondary electron emission coefficient&quot;</span><span class="p">,</span>
+<span class="linenos">280</span><span class="w">                      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Secondary electron emission coefficient at different surfaces&quot;</span><span class="p">,</span>
+<span class="linenos">281</span><span class="w">                      </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">282</span><span class="w">                        </span><span class="s2">&quot;ele_powered&quot;</span><span class="p">,</span>
+<span class="linenos">283</span><span class="w">                        </span><span class="s2">&quot;ele_grounded&quot;</span><span class="p">,</span>
+<span class="linenos">284</span><span class="w">                        </span><span class="s2">&quot;diel_powered&quot;</span><span class="p">,</span>
+<span class="linenos">285</span><span class="w">                        </span><span class="s2">&quot;diel_grounded&quot;</span>
+<span class="linenos">286</span><span class="w">                      </span><span class="p">],</span>
+<span class="linenos">287</span><span class="w">                      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">288</span><span class="w">                        </span><span class="nt">&quot;ele_powered&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">289</span><span class="w">                          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;At powered electrode&quot;</span><span class="p">,</span>
+<span class="linenos">290</span><span class="w">                          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the powered electrode is covered by dielectric layer, the value in this field should be set to zero. &quot;</span><span class="p">,</span>
+<span class="linenos">291</span><span class="w">                          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">292</span><span class="w">                          </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="linenos">293</span><span class="w">                          </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos">294</span><span class="w">                        </span><span class="p">},</span>
+<span class="linenos">295</span><span class="w">                        </span><span class="nt">&quot;ele_grounded&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">296</span><span class="w">                          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;At grounded electrode&quot;</span><span class="p">,</span>
+<span class="linenos">297</span><span class="w">                          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the grounded electrode is covered by dielectric layer, the value in this field should be set to zero. &quot;</span><span class="p">,</span>
+<span class="linenos">298</span><span class="w">                          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">299</span><span class="w">                          </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="linenos">300</span><span class="w">                          </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos">301</span><span class="w">                        </span><span class="p">},</span>
+<span class="linenos">302</span><span class="w">                        </span><span class="nt">&quot;diel_powered&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">303</span><span class="w">                          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;At dielectric on powered electrode&quot;</span><span class="p">,</span>
+<span class="linenos">304</span><span class="w">                          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the powered electrode has no dielectric layer, the value in this field should be set to zero.&quot;</span><span class="p">,</span>
+<span class="linenos">305</span><span class="w">                          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">306</span><span class="w">                          </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="linenos">307</span><span class="w">                          </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos">308</span><span class="w">                        </span><span class="p">},</span>
+<span class="linenos">309</span><span class="w">                        </span><span class="nt">&quot;diel_grounded&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">310</span><span class="w">                          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;At dielectric on grounded electrode&quot;</span><span class="p">,</span>
+<span class="linenos">311</span><span class="w">                          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the grounded electrode has no dielectric layer, the value in this field should be set to zero.&quot;</span><span class="p">,</span>
+<span class="linenos">312</span><span class="w">                          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">313</span><span class="w">                          </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="linenos">314</span><span class="w">                          </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos">315</span><span class="w">                        </span><span class="p">}</span>
+<span class="linenos">316</span><span class="w">                      </span><span class="p">},</span>
+<span class="linenos">317</span><span class="w">                      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="linenos">318</span><span class="w">                    </span><span class="p">},</span>
+<span class="linenos">319</span><span class="w">                    </span><span class="nt">&quot;sec_ele_energy&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">320</span><span class="w">                      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Energy of secondary electrons&quot;</span><span class="p">,</span>
+<span class="linenos">321</span><span class="w">                      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Energy of secondary electrons emitted from different surfaces&quot;</span><span class="p">,</span>
+<span class="linenos">322</span><span class="w">                      </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">323</span><span class="w">                        </span><span class="s2">&quot;ele_powered&quot;</span><span class="p">,</span>
+<span class="linenos">324</span><span class="w">                        </span><span class="s2">&quot;ele_grounded&quot;</span><span class="p">,</span>
+<span class="linenos">325</span><span class="w">                        </span><span class="s2">&quot;diel_powered&quot;</span><span class="p">,</span>
+<span class="linenos">326</span><span class="w">                        </span><span class="s2">&quot;diel_grounded&quot;</span>
+<span class="linenos">327</span><span class="w">                      </span><span class="p">],</span>
+<span class="linenos">328</span><span class="w">                      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">329</span><span class="w">                        </span><span class="nt">&quot;ele_powered&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">330</span><span class="w">                          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;At powered electrode [eV]&quot;</span><span class="p">,</span>
+<span class="linenos">331</span><span class="w">                          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the powered electrode is covered by dielectric layer, the value in this field should be set to zero. &quot;</span><span class="p">,</span>
+<span class="linenos">332</span><span class="w">                          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos">333</span><span class="w">                        </span><span class="p">},</span>
+<span class="linenos">334</span><span class="w">                        </span><span class="nt">&quot;ele_grounded&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">335</span><span class="w">                          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;At grounded electrode [eV]&quot;</span><span class="p">,</span>
+<span class="linenos">336</span><span class="w">                          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the grounded electrode is covered by dielectric layer, the value in this field should be set to zero. &quot;</span><span class="p">,</span>
+<span class="linenos">337</span><span class="w">                          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos">338</span><span class="w">                        </span><span class="p">},</span>
+<span class="linenos">339</span><span class="w">                        </span><span class="nt">&quot;diel_powered&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">340</span><span class="w">                          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;At dielectric on powered electrode [eV]&quot;</span><span class="p">,</span>
+<span class="linenos">341</span><span class="w">                          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the powered electrode has no dielectric layer, the value in this field should be set to zero.&quot;</span><span class="p">,</span>
+<span class="linenos">342</span><span class="w">                          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">343</span><span class="w">                          </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="linenos">344</span><span class="w">                          </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos">345</span><span class="w">                        </span><span class="p">},</span>
+<span class="linenos">346</span><span class="w">                        </span><span class="nt">&quot;diel_grounded&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">347</span><span class="w">                          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;At dielectric on grounded electrode [eV]&quot;</span><span class="p">,</span>
+<span class="linenos">348</span><span class="w">                          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the grounded electrode has no dielectric layer, the value in this field should be set to zero.&quot;</span><span class="p">,</span>
+<span class="linenos">349</span><span class="w">                          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">350</span><span class="w">                          </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="linenos">351</span><span class="w">                          </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos">352</span><span class="w">                        </span><span class="p">}</span>
+<span class="linenos">353</span><span class="w">                      </span><span class="p">},</span>
+<span class="linenos">354</span><span class="w">                      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="linenos">355</span><span class="w">                    </span><span class="p">},</span>
+<span class="linenos">356</span><span class="w">                    </span><span class="nt">&quot;refl_coeff&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">357</span><span class="w">                      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Reflection coefficient&quot;</span><span class="p">,</span>
+<span class="linenos">358</span><span class="w">                      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Reflection coefficient at different surfaces&quot;</span><span class="p">,</span>
+<span class="linenos">359</span><span class="w">                      </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">360</span><span class="w">                        </span><span class="s2">&quot;ele_powered&quot;</span><span class="p">,</span>
+<span class="linenos">361</span><span class="w">                        </span><span class="s2">&quot;ele_grounded&quot;</span><span class="p">,</span>
+<span class="linenos">362</span><span class="w">                        </span><span class="s2">&quot;diel_powered&quot;</span><span class="p">,</span>
+<span class="linenos">363</span><span class="w">                        </span><span class="s2">&quot;diel_grounded&quot;</span>
+<span class="linenos">364</span><span class="w">                      </span><span class="p">],</span>
+<span class="linenos">365</span><span class="w">                      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">366</span><span class="w">                        </span><span class="nt">&quot;ele_powered&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">367</span><span class="w">                          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;At powered electrode&quot;</span><span class="p">,</span>
+<span class="linenos">368</span><span class="w">                          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the powered electrode is covered by dielectric layer, the value in this field should be set to zero. &quot;</span><span class="p">,</span>
+<span class="linenos">369</span><span class="w">                          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">370</span><span class="w">                          </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="linenos">371</span><span class="w">                          </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos">372</span><span class="w">                        </span><span class="p">},</span>
+<span class="linenos">373</span><span class="w">                        </span><span class="nt">&quot;ele_grounded&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">374</span><span class="w">                          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;At grounded electrode&quot;</span><span class="p">,</span>
+<span class="linenos">375</span><span class="w">                          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the grounded electrode is covered by dielectric layer, the value in this field should be set to zero. &quot;</span><span class="p">,</span>
+<span class="linenos">376</span><span class="w">                          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">377</span><span class="w">                          </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="linenos">378</span><span class="w">                          </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos">379</span><span class="w">                        </span><span class="p">},</span>
+<span class="linenos">380</span><span class="w">                        </span><span class="nt">&quot;diel_powered&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">381</span><span class="w">                          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;At dielectric on powered electrode&quot;</span><span class="p">,</span>
+<span class="linenos">382</span><span class="w">                          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the powered electrode has no dielectric layer, the value in this field should be set to zero.&quot;</span><span class="p">,</span>
+<span class="linenos">383</span><span class="w">                          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">384</span><span class="w">                          </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="linenos">385</span><span class="w">                          </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos">386</span><span class="w">                        </span><span class="p">},</span>
+<span class="linenos">387</span><span class="w">                        </span><span class="nt">&quot;diel_grounded&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">388</span><span class="w">                          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;At dielectric on gronded electrode&quot;</span><span class="p">,</span>
+<span class="linenos">389</span><span class="w">                          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the grounded electrode has no dielectric layer, the value in this field should be set to zero.&quot;</span><span class="p">,</span>
+<span class="linenos">390</span><span class="w">                          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">391</span><span class="w">                          </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="linenos">392</span><span class="w">                          </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos">393</span><span class="w">                        </span><span class="p">}</span>
+<span class="linenos">394</span><span class="w">                      </span><span class="p">},</span>
+<span class="linenos">395</span><span class="w">                      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="linenos">396</span><span class="w">                    </span><span class="p">},</span>
+<span class="linenos">397</span><span class="w">                    </span><span class="nt">&quot;init_dens&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">398</span><span class="w">                      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Initial number density [1/m^3]&quot;</span><span class="p">,</span>
+<span class="linenos">399</span><span class="w">                      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This field defines initial number density of electrons necessary for the plasma source modelling.&quot;</span><span class="p">,</span>
+<span class="linenos">400</span><span class="w">                      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos">401</span><span class="w">                    </span><span class="p">},</span>
+<span class="linenos">402</span><span class="w">                    </span><span class="nt">&quot;init_ene&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">403</span><span class="w">                      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Initial mean electron energy [eV]&quot;</span><span class="p">,</span>
+<span class="linenos">404</span><span class="w">                      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This field defines initial mean electron energy necessary for the plasma source modelling.&quot;</span><span class="p">,</span>
+<span class="linenos">405</span><span class="w">                      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">406</span><span class="w">                      </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="linenos">407</span><span class="w">                      </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="linenos">408</span><span class="w">                    </span><span class="p">}</span>
+<span class="linenos">409</span><span class="w">                  </span><span class="p">},</span>
+<span class="linenos">410</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="linenos">411</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos">412</span><span class="w">                </span><span class="nt">&quot;background_gas&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">413</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Background gas species&quot;</span><span class="p">,</span>
+<span class="linenos">414</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">415</span><span class="w">                  </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">416</span><span class="w">                    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Species 1&quot;</span><span class="p">,</span>
+<span class="linenos">417</span><span class="w">                    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">418</span><span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="linenos">419</span><span class="w">                    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">420</span><span class="w">                      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">421</span><span class="w">                        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="linenos">422</span><span class="w">                        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Species name&quot;</span><span class="p">,</span>
+<span class="linenos">423</span><span class="w">                        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Definition of species name. The name must be one of those defined in the JSON file containing the reaction kinetic model data.&quot;</span>
+<span class="linenos">424</span><span class="w">                      </span><span class="p">},</span>
+<span class="linenos">425</span><span class="w">                      </span><span class="nt">&quot;background&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">426</span><span class="w">                        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">427</span><span class="w">                        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Content percentage in background gas  [%]&quot;</span><span class="p">,</span>
+<span class="linenos">428</span><span class="w">                        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This field defines the value of the species fraction in the background gas.&quot;</span>
+<span class="linenos">429</span><span class="w">                      </span><span class="p">}</span>
+<span class="linenos">430</span><span class="w">                    </span><span class="p">},</span>
+<span class="linenos">431</span><span class="w">                    </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">432</span><span class="w">                      </span><span class="s2">&quot;name&quot;</span><span class="p">,</span>
+<span class="linenos">433</span><span class="w">                      </span><span class="s2">&quot;background&quot;</span>
+<span class="linenos">434</span><span class="w">                    </span><span class="p">]</span>
+<span class="linenos">435</span><span class="w">                  </span><span class="p">},</span>
+<span class="linenos">436</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span>
+<span class="linenos">437</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos">438</span><span class="w">                </span><span class="nt">&quot;heavy_spec&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">439</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Heavy species&quot;</span><span class="p">,</span>
+<span class="linenos">440</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">441</span><span class="w">                  </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">442</span><span class="w">                    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Species 1&quot;</span><span class="p">,</span>
+<span class="linenos">443</span><span class="w">                    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">444</span><span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="linenos">445</span><span class="w">                    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">446</span><span class="w">                      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">447</span><span class="w">                        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="linenos">448</span><span class="w">                        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Species name&quot;</span><span class="p">,</span>
+<span class="linenos">449</span><span class="w">                        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Definition of species name. The name must be one of those defined in the JSON file containing the reaction kinetic model data.&quot;</span>
+<span class="linenos">450</span><span class="w">                      </span><span class="p">},</span>
+<span class="linenos">451</span><span class="w">                      </span><span class="nt">&quot;refl_ele_powered&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">452</span><span class="w">                        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Reflection coefficient at powered electrode&quot;</span><span class="p">,</span>
+<span class="linenos">453</span><span class="w">                        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">454</span><span class="w">                        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">455</span><span class="w">                        </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="linenos">456</span><span class="w">                        </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos">457</span><span class="w">                      </span><span class="p">},</span>
+<span class="linenos">458</span><span class="w">                      </span><span class="nt">&quot;refl_ele_grounded&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">459</span><span class="w">                        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">460</span><span class="w">                        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Reflection coefficient at grounded electrode&quot;</span><span class="p">,</span>
+<span class="linenos">461</span><span class="w">                        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">462</span><span class="w">                        </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="linenos">463</span><span class="w">                        </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos">464</span><span class="w">                      </span><span class="p">},</span>
+<span class="linenos">465</span><span class="w">                      </span><span class="nt">&quot;refl_diel_powered&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">466</span><span class="w">                        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Reflection coefficient at dielectric on powered electrode&quot;</span><span class="p">,</span>
+<span class="linenos">467</span><span class="w">                        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the powered electrode has no dielectric layer, the value in this field should be set to zero.&quot;</span><span class="p">,</span>
+<span class="linenos">468</span><span class="w">                        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">469</span><span class="w">                        </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="linenos">470</span><span class="w">                        </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos">471</span><span class="w">                      </span><span class="p">},</span>
+<span class="linenos">472</span><span class="w">                      </span><span class="nt">&quot;refl_diel_grounded&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">473</span><span class="w">                        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Reflection coefficient at dielectric on grounded electrode&quot;</span><span class="p">,</span>
+<span class="linenos">474</span><span class="w">                        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If the grounded electrode has no dielectric layer, the value in this field should be set to zero.&quot;</span><span class="p">,</span>
+<span class="linenos">475</span><span class="w">                        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">476</span><span class="w">                        </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="linenos">477</span><span class="w">                        </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos">478</span><span class="w">                      </span><span class="p">},</span>
+<span class="linenos">479</span><span class="w">                      </span><span class="nt">&quot;int_dens&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">480</span><span class="w">                        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">481</span><span class="w">                        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Initial number density [1/m^3]&quot;</span><span class="p">,</span>
+<span class="linenos">482</span><span class="w">                        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This field defines initial number density necessary for the plasma source modelling.&quot;</span>
+<span class="linenos">483</span><span class="w">                      </span><span class="p">}</span>
+<span class="linenos">484</span><span class="w">                    </span><span class="p">},</span>
+<span class="linenos">485</span><span class="w">                    </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">486</span><span class="w">                      </span><span class="s2">&quot;name&quot;</span><span class="p">,</span>
+<span class="linenos">487</span><span class="w">                      </span><span class="s2">&quot;refl_ele_powered&quot;</span><span class="p">,</span>
+<span class="linenos">488</span><span class="w">                      </span><span class="s2">&quot;refl_ele_grounded&quot;</span><span class="p">,</span>
+<span class="linenos">489</span><span class="w">                      </span><span class="s2">&quot;refl_diel_powered&quot;</span><span class="p">,</span>
+<span class="linenos">490</span><span class="w">                      </span><span class="s2">&quot;refl_diel_grounded&quot;</span><span class="p">,</span>
+<span class="linenos">491</span><span class="w">                      </span><span class="s2">&quot;int_dens&quot;</span>
+<span class="linenos">492</span><span class="w">                    </span><span class="p">]</span>
+<span class="linenos">493</span><span class="w">                  </span><span class="p">},</span>
+<span class="linenos">494</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span>
+<span class="linenos">495</span><span class="w">                </span><span class="p">}</span>
+<span class="linenos">496</span><span class="w">              </span><span class="p">},</span>
+<span class="linenos">497</span><span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="linenos">498</span><span class="w">            </span><span class="p">}</span>
+<span class="linenos">499</span><span class="w">          </span><span class="p">},</span>
+<span class="linenos">500</span><span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="linenos">501</span><span class="w">          </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">502</span><span class="w">            </span><span class="s2">&quot;gas_properties&quot;</span><span class="p">,</span>
+<span class="linenos">503</span><span class="w">            </span><span class="s2">&quot;spec_prop&quot;</span>
+<span class="linenos">504</span><span class="w">          </span><span class="p">]</span>
+<span class="linenos">505</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">506</span><span class="w">      </span><span class="p">},</span>
+<span class="linenos">507</span><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="linenos">508</span><span class="w">    </span><span class="p">},</span>
+<span class="linenos">509</span><span class="w">    </span><span class="nt">&quot;diagnostics&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">510</span><span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Diagnostics&quot;</span><span class="p">,</span>
+<span class="linenos">511</span><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Measurement, modeling, or simulation method used to produce the digital resource.&quot;</span><span class="p">,</span>
+<span class="linenos">512</span><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="linenos">513</span><span class="w">      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">514</span><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">515</span><span class="w">          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Diagnostics Name&quot;</span><span class="p">,</span>
+<span class="linenos">516</span><span class="w">          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Name of the applied diagnostics and/or modelling/simulation methods. Examples: OES, SEM, PIC-MCC.&quot;</span><span class="p">,</span>
+<span class="linenos">517</span><span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="linenos">518</span><span class="w">        </span><span class="p">},</span>
+<span class="linenos">519</span><span class="w">        </span><span class="nt">&quot;diagnostic_properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">520</span><span class="w">          </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Diagnostics Properties&quot;</span><span class="p">,</span>
+<span class="linenos">521</span><span class="w">          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Details of the applied diagnostics.&quot;</span><span class="p">,</span>
+<span class="linenos">522</span><span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="linenos">523</span><span class="w">          </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">524</span><span class="w">            </span><span class="nt">&quot;diagnostic_settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">525</span><span class="w">              </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fluid-Poisson model settings&quot;</span><span class="p">,</span>
+<span class="linenos">526</span><span class="w">              </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Object include attributes necessary to setup Fluid-Poisson model via MSPlas.&quot;</span><span class="p">,</span>
+<span class="linenos">527</span><span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="linenos">528</span><span class="w">              </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">529</span><span class="w">                </span><span class="nt">&quot;spatial_dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">530</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modelling geometry&quot;</span><span class="p">,</span>
+<span class="linenos">531</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This field gives information about the spatial dimensions and coordinate types used in the model. It considers the following:\n1D - one-dimensional modelling,\n1p5D - one-dimensional modelling (polar coordinate),\n2D - two-dimensional modelling (Cartesian coordinates),\n2p5D - two-dimensional modelling (cylindrical coordinates).\n&quot;</span><span class="p">,</span>
+<span class="linenos">532</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="linenos">533</span><span class="w">                  </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1D&quot;</span><span class="p">,</span>
+<span class="linenos">534</span><span class="w">                  </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">535</span><span class="w">                    </span><span class="s2">&quot;1D&quot;</span><span class="p">,</span>
+<span class="linenos">536</span><span class="w">                    </span><span class="s2">&quot;1p5D&quot;</span><span class="p">,</span>
+<span class="linenos">537</span><span class="w">                    </span><span class="s2">&quot;2D&quot;</span><span class="p">,</span>
+<span class="linenos">538</span><span class="w">                    </span><span class="s2">&quot;2p5D&quot;</span>
+<span class="linenos">539</span><span class="w">                  </span><span class="p">]</span>
+<span class="linenos">540</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos">541</span><span class="w">                </span><span class="nt">&quot;electron_flux&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">542</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Drift-diffusion approximation&quot;</span><span class="p">,</span>
+<span class="linenos">543</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This field defines drift-diffusion approximation used in the model. For improved drift-diffusion approximation choose \&quot;DDAn\&quot;, while for drift-diffusion approximation where diffusion and mobility of electron energy are defined as 5/3UeDe and 5/3Uebe choose \&quot;DDA53\&quot;. For conventional drift-diffusion approximation choose \&quot;DDAc\&quot;. Details about mentioned approximations can be found in M. M. Becker and D. Loffhagen, AIP ADVANCES 3, 012108 (2013).\n&quot;</span><span class="p">,</span>
+<span class="linenos">544</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="linenos">545</span><span class="w">                  </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DDA53&quot;</span><span class="p">,</span>
+<span class="linenos">546</span><span class="w">                  </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">547</span><span class="w">                    </span><span class="s2">&quot;DDAn&quot;</span><span class="p">,</span>
+<span class="linenos">548</span><span class="w">                    </span><span class="s2">&quot;DDA53&quot;</span><span class="p">,</span>
+<span class="linenos">549</span><span class="w">                    </span><span class="s2">&quot;DDAc&quot;</span>
+<span class="linenos">550</span><span class="w">                  </span><span class="p">]</span>
+<span class="linenos">551</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos">552</span><span class="w">                </span><span class="nt">&quot;log_formulation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">553</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Logarithmic formulation of species density and mean electron energy&quot;</span><span class="p">,</span>
+<span class="linenos">554</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The use of logarithmic formulation is often recommended in practice, since it has been shown to improve numerical stability.&quot;</span><span class="p">,</span>
+<span class="linenos">555</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span><span class="p">,</span>
+<span class="linenos">556</span><span class="w">                  </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="linenos">557</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos">558</span><span class="w">                </span><span class="nt">&quot;stabilization&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">559</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Source term stabilization&quot;</span><span class="p">,</span>
+<span class="linenos">560</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Include source term stabilisation for species number density and mean electron energy balance equations to improve the numerical stability of simulations.&quot;</span><span class="p">,</span>
+<span class="linenos">561</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span><span class="p">,</span>
+<span class="linenos">562</span><span class="w">                  </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="linenos">563</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos">564</span><span class="w">                </span><span class="nt">&quot;nojac&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">565</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span><span class="p">,</span>
+<span class="linenos">566</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;nojac\&quot; operator&quot;</span><span class="p">,</span>
+<span class="linenos">567</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;In COMSOL Multiphysics, the \&quot;nojac\&quot; operator is used to exclude specific expressions from the Jacobian matrix computation during numerical simulations. This can lead to reduced memory usage and potentially faster computation times, as the solver avoids unnecessary calculations.&quot;</span><span class="p">,</span>
+<span class="linenos">568</span><span class="w">                  </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="linenos">569</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos">570</span><span class="w">                </span><span class="nt">&quot;element_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">571</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Number of spatial steps&quot;</span><span class="p">,</span>
+<span class="linenos">572</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This field defines a number of equidistant spatial steps in the plasma domain for 1D and 1p5D geometries. The value in this field should be set to zero for other geometries (2D and 2p5D).&quot;</span><span class="p">,</span>
+<span class="linenos">573</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">574</span><span class="w">                  </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span>
+<span class="linenos">575</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos">576</span><span class="w">                </span><span class="nt">&quot;element_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">577</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Maximum element size in triangular mesh [m]&quot;</span><span class="p">,</span>
+<span class="linenos">578</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This field defines the maximum size of triangular elements in the plasma domain for 2D and 2p5D geometries. The value in this field should be set to zero for other geometries (1D and 1p5D).&quot;</span><span class="p">,</span>
+<span class="linenos">579</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos">580</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos">581</span><span class="w">                </span><span class="nt">&quot;start_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">582</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Start output time [s]&quot;</span><span class="p">,</span>
+<span class="linenos">583</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;First time point for output &quot;</span><span class="p">,</span>
+<span class="linenos">584</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">585</span><span class="w">                  </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="linenos">586</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos">587</span><span class="w">                </span><span class="nt">&quot;end_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">588</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;End output time [s]&quot;</span><span class="p">,</span>
+<span class="linenos">589</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Last time point for output &quot;</span><span class="p">,</span>
+<span class="linenos">590</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="linenos">591</span><span class="w">                </span><span class="p">},</span>
+<span class="linenos">592</span><span class="w">                </span><span class="nt">&quot;time_step&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">593</span><span class="w">                  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Time step for output [s]&quot;</span><span class="p">,</span>
+<span class="linenos">594</span><span class="w">                  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Time step for the output defines the time points between the start and end of the output time.&quot;</span><span class="p">,</span>
+<span class="linenos">595</span><span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="linenos">596</span><span class="w">                  </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="linenos">597</span><span class="w">                </span><span class="p">}</span>
+<span class="linenos">598</span><span class="w">              </span><span class="p">},</span>
+<span class="linenos">599</span><span class="w">              </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">600</span><span class="w">                </span><span class="s2">&quot;time_step&quot;</span><span class="p">,</span>
+<span class="linenos">601</span><span class="w">                </span><span class="s2">&quot;start_time&quot;</span><span class="p">,</span>
+<span class="linenos">602</span><span class="w">                </span><span class="s2">&quot;end_time&quot;</span><span class="p">,</span>
+<span class="linenos">603</span><span class="w">                </span><span class="s2">&quot;element_size&quot;</span><span class="p">,</span>
+<span class="linenos">604</span><span class="w">                </span><span class="s2">&quot;element_number&quot;</span>
+<span class="linenos">605</span><span class="w">              </span><span class="p">]</span>
+<span class="linenos">606</span><span class="w">            </span><span class="p">}</span>
+<span class="linenos">607</span><span class="w">          </span><span class="p">}</span>
+<span class="linenos">608</span><span class="w">        </span><span class="p">}</span>
+<span class="linenos">609</span><span class="w">      </span><span class="p">}</span>
+<span class="linenos">610</span><span class="w">    </span><span class="p">}</span>
+<span class="linenos">611</span><span class="w">  </span><span class="p">},</span>
+<span class="linenos">612</span><span class="w">  </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos">613</span><span class="w">    </span><span class="s2">&quot;medium&quot;</span>
+<span class="linenos">614</span><span class="w">  </span><span class="p">]</span>
+<span class="linenos">615</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="../manual_rst_plasma/Ar_Stankov_2022.html"
+                          title="Previous page">&larr; Ar_Stankov_2022</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="../manual_rst_toolbox/ReadJSON.html"
+                          title="Next page">&rarr; ReadJSON</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/manual_rst_schemas/General_JSON_schema.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../manual_rst_toolbox/ReadJSON.html" title="ReadJSON"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="../manual_rst_plasma/Ar_Stankov_2022.html" title="Ar_Stankov_2022"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../index.html">MATLAB Sphinx Documentation Test  documentation</a> &#187;</li>
+
+        <li class="nav-item nav-item-this"><a href="">General_JSON_schema</a></li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2014, Mark Mikofski.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
