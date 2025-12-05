@@ -287,7 +287,7 @@ These inputs determine the plasma domain and boundary conditions essential for c
 <section id="generic2d">
 <h4>Generic2D<a class="headerlink" href="#generic2d" title="Link to this heading">¶</a></h4>
 <p>The Generic2D subfolder is dedicated to application of two-dimensional, time-dependent plasma modeling in Cartesian coordinates.
-It contains MATLAB scripts responsible for setting up the geometry, mesh, and project configuration for rectangular electrodes (see figure).
+It contains MATLAB scripts responsible for setting up the geometry, mesh, and project configuration for rectangular electrodes (figure 3).
 The dimensions and positions of the rectangular electrodes must be properly specified in the associated General JSON input file.</p>
 <figure class="align-center" id="id3">
 <a class="reference internal image-reference" href="_images/2D.svg"><img alt="_images/2D.svg" src="_images/2D.svg" width="75%" /></a>
@@ -306,7 +306,7 @@ The dimensions and positions of the rectangular electrodes must be properly spec
 </section>
 <section id="generic2p5d">
 <h4>Generic2p5D<a class="headerlink" href="#generic2p5d" title="Link to this heading">¶</a></h4>
-<p>The Generic2p5D subfolder is dedicated to the application of two-dimensional, time-dependent plasma modeling in cylindrical coordinates.
+<p>The Generic2p5D subfolder is dedicated to the application of two-dimensional, time-dependent plasma modeling in cylindrical coordinates (figure 4).
 It contains MATLAB scripts responsible for setting up the geometry, mesh, and project configuration for plasma sources with rectangular or circular electrode shapes.
 The dimensions and positions of both rectangular and circular electrodes must be properly specified in the associated General JSON input file, as they directly affect domain generation and boundary condition assignment.</p>
 <figure class="align-center" id="id4">
@@ -334,7 +334,7 @@ The dimensions and positions of both rectangular and circular electrodes must be
 <p>The input data necessary for running MCPlas includes information about the RKM, transport properties of the particle species, as well as general information about the modelling geometry, operating conditions, properties of the plasma source and fluid model properties.
 These data represent a heterogeneous data set that requires a standardised schema to be verified.
 MCPlas adopts an extended version of the format proposed by the LXCat platform(open-source) (<em>E. Carbone, W. Graef, G. Hagelaar, D. Boer, M. M. Hopkins, J. C. Stephens, B. T. Yee, S. Pancheshnyi, J. van Dijk, L. Pitchford,  Atoms 9 (1) (2021) 1</em>, <em>D. Boer, S. Verhoeven, S. Ali, W. Graef, J. van Dijk, LXCat. URL https://github.com/LXCat-project/LXCat</em>).
-The basic, top-level structure of the JSON data describing an RKM is shown in figure 1.
+The basic, top-level structure of the JSON data describing an RKM is shown in figure 5.
 It comprises three main properties: <em>references</em>; an object storing the references from which included data are extracted, <em>states</em>; an object listing all the states of the particle species considered, and <em>processes</em>; an array of process objects that provide information on the reaction equations and corresponding data.
 Each individual element of the JSON document is accurately defined by a corresponding JSON schema definition.
 The exact definition of the LXCat schemas can be found in the LXCat GitHub repository (<em>D. Boer, S. Verhoeven, S. Ali, W. Graef, J. van Dijk, LXCat. URL https://github.com/LXCat-project/LXCat</em>).
@@ -437,7 +437,7 @@ If the user wants to make a modelling analysis with changed general input data, 
 <h2>How to use it<a class="headerlink" href="#how-to-use-it" title="Link to this heading">¶</a></h2>
 <section id="mcplas-workflow">
 <h3>MCPlas workflow<a class="headerlink" href="#mcplas-workflow" title="Link to this heading">¶</a></h3>
-<p>The general concept of the MCPlas toolbox is given by the workflow presented in figure 2.
+<p>The general concept of the MCPlas toolbox is given by the workflow presented in figure 6.
 At the beginning of the MCPlas workflow, as a first step, all input data necessary for setting up the model must be provided.
 This considers general input data and plasma chemistry prepared in JSON data format.
 The second step of the MCPlas workflow involves setting up the model by executing the main MATLAB script, MCPlas.m.

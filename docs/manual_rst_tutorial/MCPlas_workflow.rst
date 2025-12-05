@@ -1,7 +1,7 @@
 MCPlas workflow
 ****************
    
-The general concept of the MCPlas toolbox is given by the workflow presented in figure 2. 
+The general concept of the MCPlas toolbox is given by the workflow presented in figure 6. 
 At the beginning of the MCPlas workflow, as a first step, all input data necessary for setting up the model must be provided. 
 This considers general input data and plasma chemistry prepared in JSON data format.
 The second step of the MCPlas workflow involves setting up the model by executing the main MATLAB script, MCPlas.m. 

@@ -98,7 +98,7 @@ Generic2D
 ^^^^^^^^^^
 
 The Generic2D subfolder is dedicated to application of two-dimensional, time-dependent plasma modeling in Cartesian coordinates. 
-It contains MATLAB scripts responsible for setting up the geometry, mesh, and project configuration for rectangular electrodes (see figure). 
+It contains MATLAB scripts responsible for setting up the geometry, mesh, and project configuration for rectangular electrodes (figure 3). 
 The dimensions and positions of the rectangular electrodes must be properly specified in the associated General JSON input file.
 
 .. figure:: images/2D.svg
@@ -118,7 +118,7 @@ The dimensions and positions of the rectangular electrodes must be properly spec
 Generic2p5D
 ^^^^^^^^^^^^
 
-The Generic2p5D subfolder is dedicated to the application of two-dimensional, time-dependent plasma modeling in cylindrical coordinates.
+The Generic2p5D subfolder is dedicated to the application of two-dimensional, time-dependent plasma modeling in cylindrical coordinates (figure 4).
 It contains MATLAB scripts responsible for setting up the geometry, mesh, and project configuration for plasma sources with rectangular or circular electrode shapes.
 The dimensions and positions of both rectangular and circular electrodes must be properly specified in the associated General JSON input file, as they directly affect domain generation and boundary condition assignment.  
 
