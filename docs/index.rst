@@ -11,8 +11,8 @@ Welcome to MCPlas toolbox!
    :align: center
   
 
-Introduction:
---------------
+Introduction
+-------------
 
 .. include:: manual_rst_introduction/introduction.rst
    
