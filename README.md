@@ -1,3 +1,1 @@
-# MCPlas
-
-Matlab-COMSOL-Plasma toolbox for automated implementation of fluid-Poisson models in COMSOL Multiphysics.
+# <img src="./docs/images/logo.jpg" width="30" height="30"> triellipt
