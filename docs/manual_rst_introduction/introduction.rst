@@ -17,13 +17,11 @@ The plasma description provided by MCPlas is based on the equations of fluid-Poi
         %
         -\nabla \cdot(\varepsilon_\mathrm{r}\varepsilon_0\nabla\phi)
         = \sum_j q_j n_j,
-        \label{eq:poisson}		
+        \label{eq:poisson}
 
-where the first and second relations represent balance equations for the particle number densities :math:`n_j` of species of kind :math:`j`
-with charge :math:`q_j` and energy density :math:`w_\mathrm{e}=n_\mathrm{e}u_\mathrm{e}` of electrons with density :math:`n_\mathrm{e}` and mean energy :math:`u_\mathrm{e}`, respectively. 
-Third equation is Poisson's equation for the self-consistent determination of the electric potential :math:`\phi` and the electric field :math:`\mathbf{E}=-\nabla\phi`. 
-In the second equation, :math:`e_0` and :math:`P_\mathrm{e}` determine the elementary charge and the loss of electron energy in collision processes and in the third, :math:`\varepsilon_\mathrm{r}` and :math:`\varepsilon_\mathrm{0}` are
-the relative and vacuum permittivity.
+where the first equation represents the balance equations for the particle number densities :math:`n_j` of species with index :math:`j` (electrons, ions, neutrals),
+charge :math:`q_j` and particle flux :math:`\mathbf{\Gamma}_j`. The second equation is the balance equation for the energy density :math:`w_\mathrm{e}=n_\mathrm{e}u_\mathrm{e}` of electrons (:math:`j = \mathrm{e}`) with the mean electron energy :math:`u_\mathrm{e}` and energy flux :math:`\mathbf{Q}_\mathrm{e}`. The third equation represents the Poisson equation for the self-consistent determination of the electric potential :math:`\phi` and electric field :math:`\mathbf{E}=-\nabla\phi`. 		
+The elementary charge, the relative permittivity of the medium and the vacuum permittivity are denoted by :math:`e_0`, :math:`\varepsilon_\mathrm{r}` and :math:`\varepsilon_0`, respectively.
 The source terms :math:`S_j` describe the gain and loss of particles due to collision and radiation processes, and :math:`\tilde{S}_\mathrm{e}` accounts for the corresponding gain and loss of electron energy. 
 All variables (:math:`n_j`, :math:`w_\mathrm{e}`, :math:`\mathbf{\Gamma}_j`, :math:`\mathbf{Q}_\mathrm{e}`, :math:`S_j`,  :math:`\tilde{S}_\mathrm{e}` and :math:`\mathbf{E}`) are space- and time-dependent quantities. 
 To improve clarity and readability, the explicit notation of their dependence on :math:`(\mathbf{r},t)` is suppressed in the text. 

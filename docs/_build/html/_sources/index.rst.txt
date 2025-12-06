@@ -11,14 +11,14 @@ Welcome to MCPlas toolbox!
    :align: center
   
 
-Introduction:
---------------
+Introduction
+------------
 
 .. include:: manual_rst_introduction/introduction.rst
    
    
 Structure
------------------
+----------
 The code directory has the following structure:
 
 ..  code-block:: none
@@ -42,7 +42,7 @@ The code directory has the following structure:
 
 application
 ************
-The Application folder in the MCPlas toolbox serves as the central location for organizing geometry-specific modeling cases.
+This folder serves as the central location for organizing geometry-specific modeling cases.
 It contains subfolders such as Generic1D, Generic1p5D, Generic2D, and Generic2p5D, each corresponding to a particular modelling geometry. 
 Within each subfolder, there are dedicated MATLAB scripts responsible for defining the geometry, generating the mesh, and configuring project-specific properties such as solvers and study steps. 
 Each case also includes a General JSON input file that provides essential settings tailored to that specific geometry (options ``1D``, ``1p5D``, ``2D``, ``2p5D``).
@@ -70,7 +70,9 @@ The correct specification of electrode dimensions is crucial and must be provide
    manual_rst_application/Generic1D/SetGeometry.rst
    manual_rst_application/Generic1D/SetMesh.rst
    manual_rst_application/Generic1D/SetProject.rst
-   manual_rst_application/Generic1D/Generic1D.rst
+* **Generic1D.mph**
+* **General_input_data.json**
+
    
 Generic1p5D
 ^^^^^^^^^^^^
@@ -92,7 +94,9 @@ These inputs determine the plasma domain and boundary conditions essential for c
    manual_rst_application/Generic1p5D/SetGeometry.rst
    manual_rst_application/Generic1p5D/SetMesh.rst
    manual_rst_application/Generic1p5D/SetProject.rst
-   manual_rst_application/Generic1p5D/Generic1p5D.rst   
+
+* **Generic1p5D.mph**
+* **General_input_data.json**   
 
 Generic2D
 ^^^^^^^^^^
@@ -113,13 +117,15 @@ The dimensions and positions of the rectangular electrodes must be properly spec
    manual_rst_application/Generic2D/SetGeometry.rst
    manual_rst_application/Generic2D/SetMesh.rst
    manual_rst_application/Generic2D/SetProject.rst
-   manual_rst_application/Generic2D/Generic2D.rst
+
+* **Generic2D.mph**
+* **General_input_data.json**
    
 Generic2p5D
 ^^^^^^^^^^^^
 
-The Generic2p5D subfolder is dedicated to the application of two-dimensional, time-dependent plasma modeling in cylindrical coordinates (figure 4).
-It contains MATLAB scripts responsible for setting up the geometry, mesh, and project configuration for plasma sources with rectangular or circular electrode shapes.
+The Generic2p5D subfolder is dedicated to the application of two-dimensional, time-dependent plasma modeling in cylindrical coordinates.
+It contains MATLAB scripts responsible for setting up the geometry, mesh, and project configuration for plasma sources with rectangular or circular electrode shapes (figure 4).
 The dimensions and positions of both rectangular and circular electrodes must be properly specified in the associated General JSON input file, as they directly affect domain generation and boundary condition assignment.  
 
 .. figure:: images/2p5D.svg
@@ -133,11 +139,13 @@ The dimensions and positions of both rectangular and circular electrodes must be
    manual_rst_application/Generic2p5D/SetGeometry.rst
    manual_rst_application/Generic2p5D/SetMesh.rst
    manual_rst_application/Generic2p5D/SetProject.rst
-   manual_rst_application/Generic2p5D/Generic2p5D.rst
+
+* **Generic2p5D.mph**
+* **General_input_data.json**
 
 docs
 ****
-This folder contains all the necessary files for the MCPlas Toolbox documentation.
+All the necessary files for the MCPlas Toolbox documentation are stored in this folder. 
   
 plasma
 *******
@@ -159,8 +167,8 @@ plasma
    
 schemas
 *******
-This folder contains the JSON schema used to define general input data via the Adamant web tool. 
-Further details can be found in the *Preparation of general input data* section.
+Inside this folder, you will find the JSON schema used to define general input data via the Adamant web tool. 
+Further details about this file can be found in the *Preparation of general input data* section.
 
 .. toctree::
    :maxdepth: 3
@@ -169,7 +177,7 @@ Further details can be found in the *Preparation of general input data* section.
 
 toolbox
 ********
-The Toolbox folder in the MCPlas toolbox contains a collection of MATLAB functions essential for building a COMSOL model using the MATLAB LiveLink module.  
+This folder in the MCPlas toolbox contains a collection of MATLAB functions essential for building a COMSOL model using the MATLAB LiveLink module.  
 These functions automate model generation by systematically calling COMSOL-specific commands to define all essential features of the model.
 By organizing model-building tasks into modular scripts, the folder ensures clarity, maintainability, and flexibility of the model building process.
   
@@ -209,7 +217,10 @@ After initializing the COMSOL environment and defining the working path, it syst
 It configures electrical conditions, surface effects, and postprocessing elements like probes and plots. 
 Meshing and solver settings are finalized before the complete model is saved as a .mph file. 
 
-.. function:: MCPlas.MCPlas
+.. toctree::
+   :maxdepth: 3
+   
+   manual_rst_MCPlas/MCPlas.rst
 
 
 Preparation of general input data
