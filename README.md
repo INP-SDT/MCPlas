@@ -10,13 +10,8 @@ MCPlas toolbox represents a collection of MATLAB functions for the automated gen
 
 ## How to use?
 
-Watch a live demonstration of generating a COMSOL model using MCPlas. The demo covers everything from the initial toolbox setup to generating and running the resulting COMSOL file, with detailed steps and explanations throughout.
+[Watch](docs/_build/html/_images/my_video.mp4) a live demonstration of generating a COMSOL model using MCPlas. The demo covers everything from the initial toolbox setup to generating and running the resulting COMSOL file, with detailed steps and explanations throughout.
 
-.. raw:: html
-
-    <video width="640" controls>
-        <source src="../_images/my_video.mp4" type="video/mp4">
-    </video>
 
 ## Documentation
 
