@@ -16,7 +16,6 @@ MCPlas toolbox represents a collection of MATLAB functions for the automated gen
 ## Documentation
 
 - ✅ Check the live documentation [here](https://inp-sdt.github.io/MCPlas/).
-- 💾 Offline HTML documentation is available by opening `docs/index.html`.
 
 ## Build status
 
