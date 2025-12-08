@@ -44,7 +44,7 @@ MCPlas is open source code developed under LGPLv3 (GNU Lesser General Public Lic
 
 ## Acknowledgment
 
-The development of the MCPlas is funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation)—project number ..... The authors wish to thank the users of [FEniCS forum](https://fenicsproject.discourse.group) for useful information and discussion. Finally, the authors are grateful to Dr. Peter Hill and Dr. Liam Pattinson of the PlasmaFAIR project for carrying out the health check, and proposing and implementing significant improvements to the code. This support of PlasmaFAIR, funded by EPSRC (grant no. EP/V051822/1), is gratefully acknowledged.
+The development of the MCPlas is funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation)—project number ..... The authors wish to thank the users of
 
 ## Citation
 
