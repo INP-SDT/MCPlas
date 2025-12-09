@@ -10,8 +10,7 @@ MCPlas toolbox represents a collection of MATLAB functions for the automated gen
 
 ## How to use?
 
-[Watch](docs/_build/html/_images/my_video.mp4) a live demonstration of generating a COMSOL model using MCPlas. The demo covers everything from the initial toolbox setup to generating and running the resulting COMSOL file, with detailed steps and explanations throughout.
-
+[Here](docs/video) you can find a live demonstration of generating a COMSOL model using MCPlas. The demo covers everything from the initial toolbox setup to generating and running the resulting COMSOL file, with detailed steps and explanations throughout.
 
 ## Documentation
 
@@ -44,7 +43,7 @@ MCPlas is open source code developed under LGPLv3 (GNU Lesser General Public Lic
 
 ## Acknowledgment
 
-The development of the MCPlas is funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation)—project number ..... The authors wish to thank the users of
+The development of the MCPlas is funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation)—project number ..... 
 
 ## Citation
 
