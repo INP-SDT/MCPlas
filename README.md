@@ -39,7 +39,7 @@ In any case, communicating with the authors will make it easier to incorporate y
 
 ## License
 
-MCPlas is open source code developed under LGPLv3 (GNU Lesser General Public License version 3).
+MCPlas is open source code developed under MIT License.
 
 ## Acknowledgment
 
