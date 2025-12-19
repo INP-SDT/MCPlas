@@ -18,7 +18,7 @@
 clear inp flags model GeomName ModPath;  % Clear previous data
 
 inp.cfg_RKM_file = 'plasma/Ar_Becker_2009.json'; % Define path for reaction kinetic input file
-inp.cfg_General_file = 'applications/Generic1D/General_input_data.json';  % Define path for general model
+inp.cfg_General_file = 'applications/Generic2p5D/General_input_data.json';  % Define path for general model
                                                                              % settings input file
 
 addpath('toolbox');  % Add a path to make the "Toolbox" folder accessible

@@ -93,7 +93,7 @@
     "diagnostic_properties": {
       "diagnostic_settings": {
         "spatial_dimensions": "2p5D",
-        "electron_flux": "DDA53",
+        "electron_flux": "DDAn",
         "log_formulation": true,
         "stabilization": false,
         "nojac": false,
