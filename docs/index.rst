@@ -238,7 +238,7 @@ For the preparation of the general input data in JSON data format, employing the
 This tool is primarily intended to facilitate the implementation of digital research data management processes by enabling easy compilation and creation of metadata and metadata schemas based on JSON schema standards. All the features of the Adamant are very convenient for generating the JSON data format containing all general input data necessary for model building.
 In general, Adamant can generate JSON data files based on the included JSON schema. 
 The JSON schema can be included in three ways: (i) selecting one of the existing schemas, (ii) uploading a schema already prepared by the user, or (iii) creating a schema from scratch directly on the platform. 
-The MCPlas toolbox comes with a prepared JSON schema to collect the required general input data based on Plasma-MDS~(*S. Franke, L. Paulet, J. Sch¨afer, D. O’Connell, M. M. Becker, Sci. Data (2020) 439*), a metadata schema for plasma science.
+The MCPlas toolbox comes with a prepared JSON schema to collect the required general input data based on Plasma-MDS (*S. Franke, L. Paulet, J. Sch¨afer, D. O’Connell, M. M. Becker, Sci. Data (2020) 439*), a metadata schema for plasma science.
 The user has to upload the provided JSON schema to the Adamant platform and start the rendering process. 
 Subsequently, Adamant automatically generates an interactive web-form, whose elements correspond to the general input data that the user has to complete.
 Compiling the fully defined web-form generates a JSON data file containing all general input data needed for the model building with MCPlas. 
