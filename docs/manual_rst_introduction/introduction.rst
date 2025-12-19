@@ -1,7 +1,7 @@
-The presented toolbox is developed in MATLAB for the automated build-up of an equation-based fluid-Poisson model in Comsol using linking between Matlab and Comsol provided by the Comsol Live link *for* MATLAB module. 
-This Matlab-Comsol toolbox (MCPlas) aims easy and fast generation of models for the spatio-temporal modelling of non-thermal plasmas based on the input data containing all information about considered reaction kinetic model. 
-The generated models are ready to be used without Comsol's Plasma Module or any additional Comsol modules. 
-Depending on the user's needs, model equations can be solved in either Cartesian, polar or cylindrical coordinates using numerical solvers provided by Comsol.
+The MCPlas toolbox represents a collection of MATLAB functions for the automated generation of an equation-based fluid-Poisson model for non-thermal plasmas in the multiphysics simulation software COMSOL. 
+Following the development of the new generation of the LXCat platform, all input data are prepared in a structured and interoperable JSON format and can be supplied and validated using existing JSON schemas. 
+The toolbox includes fully transparent, editable MATLAB source code and offers an advanced description of electron transport in addition to commonly used approaches in the plasma modelling community. 
+It supports one-dimensional and two-dimensional modelling geometries employing Cartesian, polar and cylindrical coordinate systems.
 
 The plasma description provided by MCPlas is based on the equations of fluid-Poisson model
 
@@ -74,73 +74,107 @@ and includes the momentum and energy flux dissipation frequencies :math:`\nu_\ma
 It should be emphasized that this approximation is unique to the MCPlas toolbox, as to our knowledge it is not part of any other modelling tool.
 Considering the accuracy improvements relative to the drift–diffusion approximation at low and atmospheric pressures (*M. Baeva, D. Loffhagen, M. M. Becker, D. Uhrlandt Plasma Chem. Plasma Process. 39 (4) (2019) 949–968*), it represents a highly significant feature of the toolbox.
 
+
 Boundary conditions for the electron density and mean electron energy balance equations are included in MCPlas in accordance with the study given by Hagelaar *et al.* (*G. J. M. Hagelaar, F. J. de Hoog, G. M. W. Kroesen, Phys. Rev. E 62 (1) (2000) 1452*) and read
 
     .. math::
         \mathbf{\Gamma}_\mathrm{e}\cdot\boldsymbol{\nu}
         = \frac{1-r_\mathrm{e}}{1+r_\mathrm{e}}
-        \Bigl(\left|n_\mathrm{e} \mathbf{v}_{\mathrm{dr},\mathrm{e}} \right|
+        \Bigl(\left|n_\mathrm{e} \mathbf{v}_{\mathrm{d},\mathrm{e}}\cdot\boldsymbol{\nu} \right|
         +\frac{1}{2}n_\mathrm{e} v_{\mathrm{th},\mathrm{e}}\Bigr)
         -\frac{2}{1+r_\mathrm{e}}\gamma\sum_i\max(\mathbf{\Gamma}_i\cdot\boldsymbol{\nu},0)
         \label{eq:boundary_e}\,,\\
         %
         \mathbf{Q}_\mathrm{e}\cdot\boldsymbol{\nu}
         = \frac{1-r_\mathrm{e}}{1+r_\mathrm{e}}
-        \Bigl(\left| n_\mathrm{e} \tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}} \right|
-        +\frac{1}{2} n_\mathrm{e} \tilde{v}_{\mathrm{th},\mathrm{e}} 
+        \Bigl(\left| w_\mathrm{e} \tilde{\mathbf{v}}_{\mathrm{d},\mathrm{e}}\cdot\boldsymbol{\nu} \right|
+        +\frac{2}{3} w_\mathrm{e} v_{\mathrm{th},\mathrm{e}} 
         \Bigr) 
         -\frac{2}{1+r_\mathrm{e}}
         \gamma u_\mathrm{e}^\gamma
         \sum_i\max(\mathbf{\Gamma}_i\cdot\boldsymbol{\nu},0)\,,
-        \label{eq:boundary_eps}
 
 where :math:`\boldsymbol{\nu}` represents the normal vector pointing toward the plasma boundaries, and :math:`r_\mathrm{e}`, :math:`\gamma`, :math:`u_\mathrm{e}^\gamma` and :math:`\mathbf{\Gamma}_i` denote the electron reflection coefficient, the secondary electron emission coefficient, mean energy of secondary electrons and the ion fluxes at the boundaries, respectively. 
-In the case of the conventional drift-diffusion approximation (option ``DDAc``) and its simplified form (option ``DDA53``) the vector of electron drift velocity :math:`\mathbf{v}_{\mathrm{dr},\mathrm{e}}`, the thermal velocity of electron :math:`v_{\mathrm{th},\mathrm{e}}`, the vector of electron energy drift velocity :math:`\tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}}`, and the thermal velocity of electron energy :math:`\tilde{v}_{\mathrm{th}, \mathrm{e}}` are defined as in (*M. Stankov, M. M. Becker, R. Bansemer, K.-D. Weltmann, D. Loffhagen, Plasma Sources Sci. Technol. 29 (12)
-(2020) 125009*). 
-For the improved drift-diffusion approximation (option ``DDAn``), :math:`\mathbf{v}_{\mathrm{dr},\mathrm{e}}` and :math:`\tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}}` are defined differently, taking the following expressions
+The vector of electron drift velocity :math:`\mathbf{v}_{\mathrm{d},\mathrm{e}}`, the thermal velocity of electron :math:`v_{\mathrm{th},\mathrm{e}}`, and the vector of electron energy drift velocity :math:`\tilde{\mathbf{v}}_{\mathrm{d},\mathrm{e}}` in the case of the conventional drift-diffusion approximation (option ``DDAc``) are defined as
 
     .. math::
-        \mathbf{v}_{\mathrm{dr},\mathrm{e}} 
+        \mathbf{v}_{\mathrm{d},\mathrm{e}} 
+        = -b_\mathrm{e} \mathbf{E}\, ,
+        \qquad
+        %
+        v_{\mathrm{th},\mathrm{e}} 
+        = \sqrt{\frac{8 k_\mathrm{B} T_\mathrm{e}}{\pi m_\mathrm{e}}}\, ,
+        \qquad
+        %
+        \tilde{\mathbf{v}}_{\mathrm{d},\mathrm{e}} 
+        = -\tilde{b}_\mathrm{e} \mathbf{E}\, ,
+
+while in the case of commonly used drift-diffusion approximation (option ``DDA53``) the vector of electron energy drift velocity :math:`\tilde{\mathbf{v}}_{\mathrm{d},\mathrm{e}}` is equal to :math:`-\frac{5}{3}b_\mathrm{e}\mathbf{E}`. For the improved drift-diffusion approximation (option ``DDAn``), :math:`\mathbf{v}_{\mathrm{d},\mathrm{e}}` and :math:`\tilde{\mathbf{v}}_{\mathrm{d},\mathrm{e}}` are defined differently, taking the expressions
+    .. math::
+        \mathbf{v}_{\mathrm{d},\mathrm{e}} 
         = -\frac{e_0}{m_\mathrm{e}\nu_\mathrm{e}} \mathbf{E}\, ,
         \qquad
         %\\
-         \tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}} 
-        = -\frac{e_0u_\mathrm{e}}{m_\mathrm{e}\tilde{\nu}_\mathrm{e}}\Bigl(\frac{5}{3}
+        \tilde{\mathbf{v}}_{\mathrm{d},\mathrm{e}} 
+        = -\frac{e_0}{m_\mathrm{e}\tilde{\nu}_\mathrm{e}}\Bigl(\frac{5}{3}
         + \frac{2}{3}\frac{\xi_2}{\xi_0}\Bigr) \mathbf{E}\, .
-   
-The boundary condition for heavy particles balance equation has the following form
+        \qquad
+
+In above relations, :math:`T_\mathrm{e} = 2u_\mathrm{e}/(3k_\mathrm{B})` is the temperature of electrons and :math:`k_\mathrm{B}` is the Boltzmann constant. 
+
+The boundary condition for the balance equation of  heavy particle densities has the following form
 
     .. math::
         \mathbf{\Gamma}_\mathrm{h}\cdot\boldsymbol{\nu}
         = \frac{1-r_\mathrm{h}}{1+r_\mathrm{h}}
         \Bigl(\left|\mathrm{sgn}(q_\mathrm{h}) 
-        n_\mathrm{h} \mathbf{v}_{\mathrm{dr},\mathrm{h}}  \right|
+        n_\mathrm{h} \mathbf{v}_{\mathrm{d},\mathrm{h}}  \cdot\boldsymbol{\nu}\right|
         +\frac{1}{2} n_\mathrm{h} {v}_{\mathrm{th},\mathrm{h}} \Bigr),     
-        \label{eq:boundary_heavy}\\
-       
+        %       
 
 where the variables and coefficients associated to heavy particles are defined in a manner analogous to that of the electrons. 
-It should be noted that in the case of dielectric boundaries, the accumulation of surface charges is additionaly taken into account, as described in the above mentioned manuscript.
 
-The source terms :math:`S_j` and :math:`\tilde{S}_\mathrm{e}` in balance equations are defined as 
+For the Poisson equation, the boundary conditions are defined by setting the applied voltage :math:`U_\mathrm{a}` at the powered electrode and zero potential at the grounded electrode.
+The accumulation of surface charges is additionally taken into account in the case of dielectric boundaries using the interface condition
+
+    .. math::
+        - \varepsilon_\mathrm{r}
+        \varepsilon_0
+        \mathbf{E} \cdot \boldsymbol{\nu} 
+        =
+        \sigma.
+
+Here, :math:`\varepsilon_\mathrm{r}` is 1 in the plasma region, while in the dielectric region it has a value characteristic of the considered dielectric. The surface charge density :math:`\sigma` is determined from the charged particle currents coming
+onto the dielectric via equation
+
+    .. math::
+        \frac{\partial \sigma}{\partial t}
+        =
+        \sum_{j}q_j
+        \mathbf{\Gamma}_j \cdot \boldsymbol{\nu}.
+
+The source terms :math:`S_j` of the electron density balance equations is defined as 
 
     .. math::
         S_j = \sum_{l=1}^{N_\mathrm{r}} (G_{jl} - L_{jl}) R_l, 
-        \label{eq:S_j}\,\\
-        \tilde{S}_\mathrm{e} = \sum_{l=1}^{N_\mathrm{r}} \Delta \varepsilon_l R_l,
-        \label{eq:S_e}\,
-         
+        \label{eq:S_j}\,
+
 where :math:`R_l` is the reaction rate of reaction :math:`l`, given by
 
     .. math::
         R_l = k_l \prod_{i=1}^{N_\mathrm{s}} n_i^{\beta_{il}}.
-        \label{eq:R_l}
 
-Here, :math:`\beta_{il}`, :math:`k_l`, and :math:`\Delta \varepsilon_l` denote the partial reaction order of species :math:`i`, the rate coefficient, and the net electron energy change (gain or loss), respectively, for reaction :math:`l`.
-:math:`N_\mathrm{r}` denotes the number of reactions, and :math:`N_\mathrm{s}` is the number of species considered in the model. 
-:math:`G_{jl}` and :math:`L_{jl}` represent the gain and loss matrix elements, respectively. 
-They are defined by the stoichiometric coefficients for the given species and reactions. 
-MCPlas automatically generates these matrices from the reaction kinetic model (RKM) input data, which facilitates effortless switching between models with different levels of complexity.
+Here, :math:`\beta_{il}` and :math:`k_l` denote the partial reaction order of species :math:`i` and the rate coefficient for reaction :math:`l`. :math:`N_\mathrm{r}` represents the number of reactions, while :math:`N_\mathrm{s}` is the number of species considered in the model.
+:math:`G_{jl}` and :math:`L_{jl}` are the gain and loss matrix elements, respectively, defined by the stoichiometric coefficients for the given species and reactions. MCPlas automatically generates these matrices from the RKM input data, which facilitates effortless switching between models with different levels of complexity.
+
+The source terms :math:`\tilde{S}_\mathrm{e}` of the electron energy balance equation is defined as 
+
+    .. math::        
+        \tilde{S}_\mathrm{e} = \sum_{l=1}^{N_\mathrm{r}} \tilde{R}_l,
+
+where :math:`\tilde{R}_l` is the electron energy rate for reaction :math:`l`, which is usually defined as reaction rate :math:`R_l` multiplied by the net electron energy change (gain or loss) :math:`\Delta\varepsilon_l`. 
+In the case where electron energy rate coefficient :math:`\tilde{k}_l` is defined, e.g.\ for elastic collision, :math:`\tilde{R}_l` is determined as :math:`\tilde{k}_l \prod_{i=1}^{N_\mathrm{s}} n_i^{\beta_{il}}`. 
+For reactions in which electrons do not participate :math:`\tilde{R}_l` is equal to zero.
 
 To ensure numerical stability and obtain consistent solutions, MCPlas uses some stabilisation techniques. 
 One such approach involves the logarithmic transformation of the densities of particle species and the mean electron energy.  

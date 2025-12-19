@@ -67,10 +67,10 @@
 <a class="reference internal image-reference" href="_images/Logo_version_2.jpg"><img alt="_images/Logo_version_2.jpg" class="align-center" src="_images/Logo_version_2.jpg" style="width: 256.75px; height: 221.75px;" /></a>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
-<p>The presented toolbox is developed in MATLAB for the automated build-up of an equation-based fluid-Poisson model in Comsol using linking between Matlab and Comsol provided by the Comsol Live link <em>for</em> MATLAB module.
-This Matlab-Comsol toolbox (MCPlas) aims easy and fast generation of models for the spatio-temporal modelling of non-thermal plasmas based on the input data containing all information about considered reaction kinetic model.
-The generated models are ready to be used without Comsol’s Plasma Module or any additional Comsol modules.
-Depending on the user’s needs, model equations can be solved in either Cartesian, polar or cylindrical coordinates using numerical solvers provided by Comsol.</p>
+<p>The MCPlas toolbox represents a collection of MATLAB functions for the automated generation of an equation-based fluid-Poisson model for non-thermal plasmas in the multiphysics simulation software COMSOL.
+Following the development of the new generation of the LXCat platform, all input data are prepared in a structured and interoperable JSON format and can be supplied and validated using existing JSON schemas.
+The toolbox includes fully transparent, editable MATLAB source code and offers an advanced description of electron transport in addition to commonly used approaches in the plasma modelling community.
+It supports one-dimensional and two-dimensional modelling geometries employing Cartesian, polar and cylindrical coordinate systems.</p>
 <p>The plasma description provided by MCPlas is based on the equations of fluid-Poisson model</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
@@ -145,66 +145,99 @@ Considering the accuracy improvements relative to the drift–diffusion approxim
 <div><div class="math notranslate nohighlight">
 \[\begin{split}\mathbf{\Gamma}_\mathrm{e}\cdot\boldsymbol{\nu}
 = \frac{1-r_\mathrm{e}}{1+r_\mathrm{e}}
-\Bigl(\left|n_\mathrm{e} \mathbf{v}_{\mathrm{dr},\mathrm{e}} \right|
+\Bigl(\left|n_\mathrm{e} \mathbf{v}_{\mathrm{d},\mathrm{e}}\cdot\boldsymbol{\nu} \right|
 +\frac{1}{2}n_\mathrm{e} v_{\mathrm{th},\mathrm{e}}\Bigr)
 -\frac{2}{1+r_\mathrm{e}}\gamma\sum_i\max(\mathbf{\Gamma}_i\cdot\boldsymbol{\nu},0)
 \label{eq:boundary_e}\,,\\
 %
 \mathbf{Q}_\mathrm{e}\cdot\boldsymbol{\nu}
 = \frac{1-r_\mathrm{e}}{1+r_\mathrm{e}}
-\Bigl(\left| n_\mathrm{e} \tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}} \right|
-+\frac{1}{2} n_\mathrm{e} \tilde{v}_{\mathrm{th},\mathrm{e}}
+\Bigl(\left| w_\mathrm{e} \tilde{\mathbf{v}}_{\mathrm{d},\mathrm{e}}\cdot\boldsymbol{\nu} \right|
++\frac{2}{3} w_\mathrm{e} v_{\mathrm{th},\mathrm{e}}
 \Bigr)
 -\frac{2}{1+r_\mathrm{e}}
 \gamma u_\mathrm{e}^\gamma
-\sum_i\max(\mathbf{\Gamma}_i\cdot\boldsymbol{\nu},0)\,,
-\label{eq:boundary_eps}\end{split}\]</div>
+\sum_i\max(\mathbf{\Gamma}_i\cdot\boldsymbol{\nu},0)\,,\end{split}\]</div>
 </div></blockquote>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{\nu}\)</span> represents the normal vector pointing toward the plasma boundaries, and <span class="math notranslate nohighlight">\(r_\mathrm{e}\)</span>, <span class="math notranslate nohighlight">\(\gamma\)</span>, <span class="math notranslate nohighlight">\(u_\mathrm{e}^\gamma\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Gamma}_i\)</span> denote the electron reflection coefficient, the secondary electron emission coefficient, mean energy of secondary electrons and the ion fluxes at the boundaries, respectively.
-In the case of the conventional drift-diffusion approximation (option <code class="docutils literal notranslate"><span class="pre">DDAc</span></code>) and its simplified form (option <code class="docutils literal notranslate"><span class="pre">DDA53</span></code>) the vector of electron drift velocity <span class="math notranslate nohighlight">\(\mathbf{v}_{\mathrm{dr},\mathrm{e}}\)</span>, the thermal velocity of electron <span class="math notranslate nohighlight">\(v_{\mathrm{th},\mathrm{e}}\)</span>, the vector of electron energy drift velocity <span class="math notranslate nohighlight">\(\tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}}\)</span>, and the thermal velocity of electron energy <span class="math notranslate nohighlight">\(\tilde{v}_{\mathrm{th}, \mathrm{e}}\)</span> are defined as in (<em>M. Stankov, M. M. Becker, R. Bansemer, K.-D. Weltmann, D. Loffhagen, Plasma Sources Sci. Technol. 29 (12)
-(2020) 125009</em>).
-For the improved drift-diffusion approximation (option <code class="docutils literal notranslate"><span class="pre">DDAn</span></code>), <span class="math notranslate nohighlight">\(\mathbf{v}_{\mathrm{dr},\mathrm{e}}\)</span> and <span class="math notranslate nohighlight">\(\tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}}\)</span> are defined differently, taking the following expressions</p>
+The vector of electron drift velocity <span class="math notranslate nohighlight">\(\mathbf{v}_{\mathrm{d},\mathrm{e}}\)</span>, the thermal velocity of electron <span class="math notranslate nohighlight">\(v_{\mathrm{th},\mathrm{e}}\)</span>, and the vector of electron energy drift velocity <span class="math notranslate nohighlight">\(\tilde{\mathbf{v}}_{\mathrm{d},\mathrm{e}}\)</span> in the case of the conventional drift-diffusion approximation (option <code class="docutils literal notranslate"><span class="pre">DDAc</span></code>) are defined as</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[\begin{split}\mathbf{v}_{\mathrm{dr},\mathrm{e}}
+\[\mathbf{v}_{\mathrm{d},\mathrm{e}}
+= -b_\mathrm{e} \mathbf{E}\, ,
+\qquad
+%
+v_{\mathrm{th},\mathrm{e}}
+= \sqrt{\frac{8 k_\mathrm{B} T_\mathrm{e}}{\pi m_\mathrm{e}}}\, ,
+\qquad
+%
+\tilde{\mathbf{v}}_{\mathrm{d},\mathrm{e}}
+= -\tilde{b}_\mathrm{e} \mathbf{E}\, ,\]</div>
+</div></blockquote>
+<dl>
+<dt>while in the case of commonly used drift-diffusion approximation (option <code class="docutils literal notranslate"><span class="pre">DDA53</span></code>) the vector of electron energy drift velocity <span class="math notranslate nohighlight">\(\tilde{\mathbf{v}}_{\mathrm{d},\mathrm{e}}\)</span> is equal to <span class="math notranslate nohighlight">\(-\frac{5}{3}b_\mathrm{e}\mathbf{E}\)</span>. For the improved drift-diffusion approximation (option <code class="docutils literal notranslate"><span class="pre">DDAn</span></code>), <span class="math notranslate nohighlight">\(\mathbf{v}_{\mathrm{d},\mathrm{e}}\)</span> and <span class="math notranslate nohighlight">\(\tilde{\mathbf{v}}_{\mathrm{d},\mathrm{e}}\)</span> are defined differently, taking the expressions</dt><dd><div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{v}_{\mathrm{d},\mathrm{e}}
 = -\frac{e_0}{m_\mathrm{e}\nu_\mathrm{e}} \mathbf{E}\, ,
 \qquad
 %\\
- \tilde{\mathbf{v}}_{\mathrm{dr},\mathrm{e}}
-= -\frac{e_0u_\mathrm{e}}{m_\mathrm{e}\tilde{\nu}_\mathrm{e}}\Bigl(\frac{5}{3}
-+ \frac{2}{3}\frac{\xi_2}{\xi_0}\Bigr) \mathbf{E}\, .\end{split}\]</div>
-</div></blockquote>
-<p>The boundary condition for heavy particles balance equation has the following form</p>
+\tilde{\mathbf{v}}_{\mathrm{d},\mathrm{e}}
+= -\frac{e_0}{m_\mathrm{e}\tilde{\nu}_\mathrm{e}}\Bigl(\frac{5}{3}
++ \frac{2}{3}\frac{\xi_2}{\xi_0}\Bigr) \mathbf{E}\, .
+\qquad\end{split}\]</div>
+</dd>
+</dl>
+<p>In above relations, <span class="math notranslate nohighlight">\(T_\mathrm{e} = 2u_\mathrm{e}/(3k_\mathrm{B})\)</span> is the temperature of electrons and <span class="math notranslate nohighlight">\(k_\mathrm{B}\)</span> is the Boltzmann constant.</p>
+<p>The boundary condition for the balance equation of  heavy particle densities has the following form</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[\begin{split}\mathbf{\Gamma}_\mathrm{h}\cdot\boldsymbol{\nu}
+\[\mathbf{\Gamma}_\mathrm{h}\cdot\boldsymbol{\nu}
 = \frac{1-r_\mathrm{h}}{1+r_\mathrm{h}}
 \Bigl(\left|\mathrm{sgn}(q_\mathrm{h})
-n_\mathrm{h} \mathbf{v}_{\mathrm{dr},\mathrm{h}}  \right|
+n_\mathrm{h} \mathbf{v}_{\mathrm{d},\mathrm{h}}  \cdot\boldsymbol{\nu}\right|
 +\frac{1}{2} n_\mathrm{h} {v}_{\mathrm{th},\mathrm{h}} \Bigr),
-\label{eq:boundary_heavy}\\\end{split}\]</div>
+%\]</div>
 </div></blockquote>
-<p>where the variables and coefficients associated to heavy particles are defined in a manner analogous to that of the electrons.
-It should be noted that in the case of dielectric boundaries, the accumulation of surface charges is additionaly taken into account, as described in the above mentioned manuscript.</p>
-<p>The source terms <span class="math notranslate nohighlight">\(S_j\)</span> and <span class="math notranslate nohighlight">\(\tilde{S}_\mathrm{e}\)</span> in balance equations are defined as</p>
+<p>where the variables and coefficients associated to heavy particles are defined in a manner analogous to that of the electrons.</p>
+<p>For the Poisson equation, the boundary conditions are defined by setting the applied voltage <span class="math notranslate nohighlight">\(U_\mathrm{a}\)</span> at the powered electrode and zero potential at the grounded electrode.
+The accumulation of surface charges is additionally taken into account in the case of dielectric boundaries using the interface condition</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[\begin{split}S_j = \sum_{l=1}^{N_\mathrm{r}} (G_{jl} - L_{jl}) R_l,
-\label{eq:S_j}\,\\
-\tilde{S}_\mathrm{e} = \sum_{l=1}^{N_\mathrm{r}} \Delta \varepsilon_l R_l,
-\label{eq:S_e}\,\end{split}\]</div>
+\[- \varepsilon_\mathrm{r}
+\varepsilon_0
+\mathbf{E} \cdot \boldsymbol{\nu}
+=
+\sigma.\]</div>
+</div></blockquote>
+<p>Here, <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{r}\)</span> is 1 in the plasma region, while in the dielectric region it has a value characteristic of the considered dielectric. The surface charge density <span class="math notranslate nohighlight">\(\sigma\)</span> is determined from the charged particle currents coming
+onto the dielectric via equation</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\frac{\partial \sigma}{\partial t}
+=
+\sum_{j}q_j
+\mathbf{\Gamma}_j \cdot \boldsymbol{\nu}.\]</div>
+</div></blockquote>
+<p>The source terms <span class="math notranslate nohighlight">\(S_j\)</span> of the electron density balance equations is defined as</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[S_j = \sum_{l=1}^{N_\mathrm{r}} (G_{jl} - L_{jl}) R_l,
+\label{eq:S_j}\,\]</div>
 </div></blockquote>
 <p>where <span class="math notranslate nohighlight">\(R_l\)</span> is the reaction rate of reaction <span class="math notranslate nohighlight">\(l\)</span>, given by</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[R_l = k_l \prod_{i=1}^{N_\mathrm{s}} n_i^{\beta_{il}}.
-\label{eq:R_l}\]</div>
+\[R_l = k_l \prod_{i=1}^{N_\mathrm{s}} n_i^{\beta_{il}}.\]</div>
 </div></blockquote>
-<p>Here, <span class="math notranslate nohighlight">\(\beta_{il}\)</span>, <span class="math notranslate nohighlight">\(k_l\)</span>, and <span class="math notranslate nohighlight">\(\Delta \varepsilon_l\)</span> denote the partial reaction order of species <span class="math notranslate nohighlight">\(i\)</span>, the rate coefficient, and the net electron energy change (gain or loss), respectively, for reaction <span class="math notranslate nohighlight">\(l\)</span>.
-<span class="math notranslate nohighlight">\(N_\mathrm{r}\)</span> denotes the number of reactions, and <span class="math notranslate nohighlight">\(N_\mathrm{s}\)</span> is the number of species considered in the model.
-<span class="math notranslate nohighlight">\(G_{jl}\)</span> and <span class="math notranslate nohighlight">\(L_{jl}\)</span> represent the gain and loss matrix elements, respectively.
-They are defined by the stoichiometric coefficients for the given species and reactions.
-MCPlas automatically generates these matrices from the reaction kinetic model (RKM) input data, which facilitates effortless switching between models with different levels of complexity.</p>
+<p>Here, <span class="math notranslate nohighlight">\(\beta_{il}\)</span> and <span class="math notranslate nohighlight">\(k_l\)</span> denote the partial reaction order of species <span class="math notranslate nohighlight">\(i\)</span> and the rate coefficient for reaction <span class="math notranslate nohighlight">\(l\)</span>. <span class="math notranslate nohighlight">\(N_\mathrm{r}\)</span> represents the number of reactions, while <span class="math notranslate nohighlight">\(N_\mathrm{s}\)</span> is the number of species considered in the model.
+<span class="math notranslate nohighlight">\(G_{jl}\)</span> and <span class="math notranslate nohighlight">\(L_{jl}\)</span> are the gain and loss matrix elements, respectively, defined by the stoichiometric coefficients for the given species and reactions. MCPlas automatically generates these matrices from the RKM input data, which facilitates effortless switching between models with different levels of complexity.</p>
+<p>The source terms <span class="math notranslate nohighlight">\(\tilde{S}_\mathrm{e}\)</span> of the electron energy balance equation is defined as</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\tilde{S}_\mathrm{e} = \sum_{l=1}^{N_\mathrm{r}} \tilde{R}_l,\]</div>
+</div></blockquote>
+<p>where <span class="math notranslate nohighlight">\(\tilde{R}_l\)</span> is the electron energy rate for reaction <span class="math notranslate nohighlight">\(l\)</span>, which is usually defined as reaction rate <span class="math notranslate nohighlight">\(R_l\)</span> multiplied by the net electron energy change (gain or loss) <span class="math notranslate nohighlight">\(\Delta\varepsilon_l\)</span>.
+In the case where electron energy rate coefficient <span class="math notranslate nohighlight">\(\tilde{k}_l\)</span> is defined, e.g.for elastic collision, <span class="math notranslate nohighlight">\(\tilde{R}_l\)</span> is determined as <span class="math notranslate nohighlight">\(\tilde{k}_l \prod_{i=1}^{N_\mathrm{s}} n_i^{\beta_{il}}\)</span>.
+For reactions in which electrons do not participate <span class="math notranslate nohighlight">\(\tilde{R}_l\)</span> is equal to zero.</p>
 <p>To ensure numerical stability and obtain consistent solutions, MCPlas uses some stabilisation techniques.
 One such approach involves the logarithmic transformation of the densities of particle species and the mean electron energy.
 This inherently enforces positivity and suppresses oscillations in regions with steep gradients or low concentrations
@@ -351,7 +384,7 @@ The exact definition of the LXCat schemas can be found in the LXCat GitHub repos
 These schemas can also be used to validate incoming documents.
 The development of MCPlas has contributed to the extension of the existing electron scattering schemas to further accommodate plasma chemistry data.</p>
 <figure class="align-center" id="id5">
-<a class="reference internal image-reference" href="_images/File_structure.jpg"><img alt="_images/File_structure.jpg" src="_images/File_structure.jpg" style="width: 75%;" /></a>
+<a class="reference internal image-reference" href="_images/File_structure.png"><img alt="_images/File_structure.png" src="_images/File_structure.png" style="width: 75%;" /></a>
 <figcaption>
 <p><span class="caption-text">Figure 5, A schematic representing the top-level structure of an LXCat JSON document for LTP input data.</span><a class="headerlink" href="#id5" title="Link to this image">¶</a></p>
 <div class="legend">
@@ -425,23 +458,22 @@ Meshing and solver settings are finalized before the complete model is saved as 
 </section>
 <section id="preparation-of-general-input-data">
 <h2>Preparation of general input data<a class="headerlink" href="#preparation-of-general-input-data" title="Link to this heading">¶</a></h2>
-<p>In addition to input data containing information on the RKM and species transport properties, some general input data are required to build the model.
-For the preparation of these data in JSON data format employing of the Adamant web-tool (<a class="reference external" href="https://plasma-mds.github.io/adamant/">https://plasma-mds.github.io/adamant/</a>) is proposed.
-This tool is primarily intended to facilitate the implementation of digital research data management processes in small laboratories by enabling easy compilation and creation of metadata and metadata schemas based on JSON schema standards.
-All the features of the Adamant are very convenient for generating the JSON data format containing all general input data necessary for model generation.</p>
-<p>In general, Adamant can generate JSON data files based on the included JSON schema.
-The JSON schema can be included in three ways: (i) selecting one of the existing schemas, (ii) uploading a schema already prepared by the user, or (iii) creating a schema from scratch directly on the platform.
-The MCPlas toolbox comes with a pre-prepared JSON schema.
-Based on Plasma-MDS~(<em>S. Franke, L. Paulet, J. Sch¨afer, D. O’Connell, M. M. Becker, Sci. Data (2020) 439</em>), a metadata schema for plasma science, the provided JSON schema is designed to promote the application of the FAIR data principles to plasma modelling.
-For the purposes of MCPlas, Plasma-MDS was specifically modified to correspond to the general input data required to set up the fluid-Poisson model in COMSOL.</p>
-<p>The user has to upload the provided JSON schema to the Adamant platform and start the rendering process.
-Subsequently, Adamant automatically generates an interactive web form schema, whose elements correspond to the general input data that the user has to complete.
-The elements are structured into three major object fields: plasma source, plasma medium, and diagnostics.
+<p>In addition to the input data specifying the RKM and the species transport properties, general input data defining the setup are required to build the model.
+These general input data are provided in the JSON format as well and include information on plasma source, plasma medium, and diagnostics method.
 The plasma source field describes the geometry, electrical, and material properties of the source.
 The plasma medium field encompasses the general characteristics of the gas under study, as well as the surface properties specific to the included species and surface materials.
-Finally, the diagnostics field contains the relevant properties of the fluid–Poisson model, which is employed here as a diagnostic tool for investigation.
-Compiling the fully defined web form schema generates a JSON data file containing all general input data needed for the model building.
-If the user wants to make a modelling analysis with changed general input data, it just needs to start the rendering process of the JSON schema again, edit the desired data in the web form schema, and generate a new JSON data file.</p>
+Finally, the diagnostics field contains the relevant properties of the fluid-Poisson model, which is employed here as a diagnostic tool for investigation.</p>
+<p>For the preparation of the general input data in JSON data format, employing the Adamant tool (<a class="reference external" href="https://plasma-mds.github.io/adamant/">https://plasma-mds.github.io/adamant/</a>) for collection of JSON schema-based metadata is proposed.
+This tool is primarily intended to facilitate the implementation of digital research data management processes by enabling easy compilation and creation of metadata and metadata schemas based on JSON schema standards. All the features of the Adamant are very convenient for generating the JSON data format containing all general input data necessary for model building.
+In general, Adamant can generate JSON data files based on the included JSON schema.
+The JSON schema can be included in three ways: (i) selecting one of the existing schemas, (ii) uploading a schema already prepared by the user, or (iii) creating a schema from scratch directly on the platform.
+The MCPlas toolbox comes with a prepared JSON schema to collect the required general input data based on Plasma-MDS~(<em>S. Franke, L. Paulet, J. Sch¨afer, D. O’Connell, M. M. Becker, Sci. Data (2020) 439</em>), a metadata schema for plasma science.
+The user has to upload the provided JSON schema to the Adamant platform and start the rendering process.
+Subsequently, Adamant automatically generates an interactive web-form, whose elements correspond to the general input data that the user has to complete.
+Compiling the fully defined web-form generates a JSON data file containing all general input data needed for the model building with MCPlas.
+If the user wants to make a modelling analysis with changed general input data, they just need to generate a modified JSON data file.
+For the purposes of MCPlas, Plasma-MDS was specifically extended to correspond to the general input data required to set up the fluid-Poisson model in COMSOL.
+With this, the procedure is designed to promote the further implementation of the FAIR data principles to plasma modelling.</p>
 </section>
 <section id="how-to-use-it">
 <h2>How to use it<a class="headerlink" href="#how-to-use-it" title="Link to this heading">¶</a></h2>

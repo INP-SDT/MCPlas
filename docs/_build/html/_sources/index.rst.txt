@@ -70,6 +70,7 @@ The correct specification of electrode dimensions is crucial and must be provide
    manual_rst_application/Generic1D/SetGeometry.rst
    manual_rst_application/Generic1D/SetMesh.rst
    manual_rst_application/Generic1D/SetProject.rst
+
 * **Generic1D.mph**
 * **General_input_data.json**
 
@@ -151,7 +152,7 @@ plasma
 *******
 
 .. include:: manual_rst_plasma/plasma_introduction.rst
-.. figure:: images/File_structure.jpg
+.. figure:: images/File_structure.png
    :width: 75%
    :align: center
 
@@ -226,25 +227,24 @@ Meshing and solver settings are finalized before the complete model is saved as 
 Preparation of general input data
 ---------------------------------
 
-In addition to input data containing information on the RKM and species transport properties, some general input data are required to build the model. 
-For the preparation of these data in JSON data format employing of the Adamant web-tool (https://plasma-mds.github.io/adamant/) is proposed. 
-This tool is primarily intended to facilitate the implementation of digital research data management processes in small laboratories by enabling easy compilation and creation of metadata and metadata schemas based on JSON schema standards. 
-All the features of the Adamant are very convenient for generating the JSON data format containing all general input data necessary for model generation. 
 
-In general, Adamant can generate JSON data files based on the included JSON schema. 
-The JSON schema can be included in three ways: (i) selecting one of the existing schemas, (ii) uploading a schema already prepared by the user, or (iii) creating a schema from scratch directly on the platform. 
-The MCPlas toolbox comes with a pre-prepared JSON schema. 
-Based on Plasma-MDS~(*S. Franke, L. Paulet, J. Sch¨afer, D. O’Connell, M. M. Becker, Sci. Data (2020) 439*), a metadata schema for plasma science, the provided JSON schema is designed to promote the application of the FAIR data principles to plasma modelling. 
-For the purposes of MCPlas, Plasma-MDS was specifically modified to correspond to the general input data required to set up the fluid-Poisson model in COMSOL.
-
-The user has to upload the provided JSON schema to the Adamant platform and start the rendering process. 
-Subsequently, Adamant automatically generates an interactive web form schema, whose elements correspond to the general input data that the user has to complete.
-The elements are structured into three major object fields: plasma source, plasma medium, and diagnostics. 
+In addition to the input data specifying the RKM and the species transport properties, general input data defining the setup are required to build the model. 
+These general input data are provided in the JSON format as well and include information on plasma source, plasma medium, and diagnostics method. 
 The plasma source field describes the geometry, electrical, and material properties of the source. 
 The plasma medium field encompasses the general characteristics of the gas under study, as well as the surface properties specific to the included species and surface materials. 
-Finally, the diagnostics field contains the relevant properties of the fluid–Poisson model, which is employed here as a diagnostic tool for investigation.
-Compiling the fully defined web form schema generates a JSON data file containing all general input data needed for the model building. 
-If the user wants to make a modelling analysis with changed general input data, it just needs to start the rendering process of the JSON schema again, edit the desired data in the web form schema, and generate a new JSON data file.
+Finally, the diagnostics field contains the relevant properties of the fluid-Poisson model, which is employed here as a diagnostic tool for investigation.
+
+For the preparation of the general input data in JSON data format, employing the Adamant tool (https://plasma-mds.github.io/adamant/) for collection of JSON schema-based metadata is proposed. 
+This tool is primarily intended to facilitate the implementation of digital research data management processes by enabling easy compilation and creation of metadata and metadata schemas based on JSON schema standards. All the features of the Adamant are very convenient for generating the JSON data format containing all general input data necessary for model building.
+In general, Adamant can generate JSON data files based on the included JSON schema. 
+The JSON schema can be included in three ways: (i) selecting one of the existing schemas, (ii) uploading a schema already prepared by the user, or (iii) creating a schema from scratch directly on the platform. 
+The MCPlas toolbox comes with a prepared JSON schema to collect the required general input data based on Plasma-MDS~(*S. Franke, L. Paulet, J. Sch¨afer, D. O’Connell, M. M. Becker, Sci. Data (2020) 439*), a metadata schema for plasma science.
+The user has to upload the provided JSON schema to the Adamant platform and start the rendering process. 
+Subsequently, Adamant automatically generates an interactive web-form, whose elements correspond to the general input data that the user has to complete.
+Compiling the fully defined web-form generates a JSON data file containing all general input data needed for the model building with MCPlas. 
+If the user wants to make a modelling analysis with changed general input data, they just need to generate a modified JSON data file.
+For the purposes of MCPlas, Plasma-MDS was specifically extended to correspond to the general input data required to set up the fluid-Poisson model in COMSOL. 
+With this, the procedure is designed to promote the further implementation of the FAIR data principles to plasma modelling.
   
 How to use it
 -------------
