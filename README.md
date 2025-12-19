@@ -43,7 +43,7 @@ MCPlas is open source code developed under MIT License.
 
 ## Acknowledgment
 
-The development of the MCPlas is funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation)—project number ..... 
+The development of the MCPlas was partly funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation)—Project Numbers 213099267, 368502453, 407462159, 504701852, 509169873, 535827833.
 
 ## Citation
 
