@@ -376,7 +376,7 @@ The dimensions and positions of both rectangular and circular electrodes must be
 <h3>plasma<a class="headerlink" href="#plasma" title="Link to this heading">¶</a></h3>
 <p>The input data necessary for running MCPlas includes information about the RKM, transport properties of the particle species, as well as general information about the modelling geometry, operating conditions, properties of the plasma source and fluid model properties.
 These data represent a heterogeneous data set that requires a standardised schema to be verified.
-MCPlas adopts an extended version of the format proposed by the LXCat platform(open-source) (<em>E. Carbone, W. Graef, G. Hagelaar, D. Boer, M. M. Hopkins, J. C. Stephens, B. T. Yee, S. Pancheshnyi, J. van Dijk, L. Pitchford,  Atoms 9 (1) (2021) 1</em>, <em>D. Boer, S. Verhoeven, S. Ali, W. Graef, J. van Dijk, LXCat. URL https://github.com/LXCat-project/LXCat</em>).
+MCPlas adopts an extended version of the format proposed by the LXCat platform (open-source) (<em>E. Carbone, W. Graef, G. Hagelaar, D. Boer, M. M. Hopkins, J. C. Stephens, B. T. Yee, S. Pancheshnyi, J. van Dijk, L. Pitchford,  Atoms 9 (1) (2021) 1</em>, <em>D. Boer, S. Verhoeven, S. Ali, W. Graef, J. van Dijk, LXCat. URL https://github.com/LXCat-project/LXCat</em>).
 The basic, top-level structure of the JSON data describing an RKM is shown in figure 5.
 It comprises three main properties: <em>references</em>; an object storing the references from which included data are extracted, <em>states</em>; an object listing all the states of the particle species considered, and <em>processes</em>; an array of process objects that provide information on the reaction equations and corresponding data.
 Each individual element of the JSON document is accurately defined by a corresponding JSON schema definition.
@@ -467,7 +467,7 @@ Finally, the diagnostics field contains the relevant properties of the fluid-Poi
 This tool is primarily intended to facilitate the implementation of digital research data management processes by enabling easy compilation and creation of metadata and metadata schemas based on JSON schema standards. All the features of the Adamant are very convenient for generating the JSON data format containing all general input data necessary for model building.
 In general, Adamant can generate JSON data files based on the included JSON schema.
 The JSON schema can be included in three ways: (i) selecting one of the existing schemas, (ii) uploading a schema already prepared by the user, or (iii) creating a schema from scratch directly on the platform.
-The MCPlas toolbox comes with a prepared JSON schema to collect the required general input data based on Plasma-MDS (<em>S. Franke, L. Paulet, J. Sch¨afer, D. O’Connell, M. M. Becker, Sci. Data (2020) 439</em>), a metadata schema for plasma science.
+The MCPlas toolbox comes with a prepared JSON schema to collect the required general input data based on Plasma-MDS (<em>S. Franke, L. Paulet, J. Schäfer, D. O’Connell, M. M. Becker, Sci. Data (2020) 439</em>), a metadata schema for plasma science.
 The user has to upload the provided JSON schema to the Adamant platform and start the rendering process.
 Subsequently, Adamant automatically generates an interactive web-form, whose elements correspond to the general input data that the user has to complete.
 Compiling the fully defined web-form generates a JSON data file containing all general input data needed for the model building with MCPlas.
