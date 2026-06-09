@@ -1,7 +1,9 @@
 # MCPlas
 
 <div align="center">
-<img src="./docs/images/Logo_version_2.jpg" width="250" height="250">
+  <a href="https://doi.org/10.1016/j.cpc.2026.110248">
+    <img src="./docs/images/Logo_version_2.jpg" width="250" height="250" alt="logo">
+  </a>
 </div>
 
 ## Description
